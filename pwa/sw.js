@@ -3,7 +3,7 @@
    - la pagina (index.html) è "rete prima, cache se offline": una versione nuova arriva al primo avvio con rete
    - icone, immagini e manifest sono "cache prima" con aggiornamento in background
    AD OGNI PUBBLICAZIONE: incrementare CACHE (v2, v3…) insieme ad APP_VER in index.html */
-var CACHE = "parigi2027-v7";
+var CACHE = "parigi2027-v9";
 var ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-180.png", "./face_sx.webp", "./face_dx.webp", "./intro.mp4"];
 var OPTIONAL = ["./intro.mp4"]; /* se manca, l'app si installa lo stesso */
 

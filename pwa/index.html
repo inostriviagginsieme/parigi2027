@@ -516,7 +516,7 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
 /* =================================================================
    DATI DEL VIAGGIO — tutto offline, niente rete
    ================================================================= */
-var APP_VER="7 · 6 ott 2026";
+var APP_VER="9 · 6 ott 2026";
 var HOTEL = {n:"Hôtel de Castiglione", lat:48.8696, lon:2.3196};
 var INTRO_URL="https://www.instagram.com/reel/Daln1CbuaCj/embed/";
 var SECRET_AT=new Date(2027,5,18,17,0,0); /* la cena a sorpresa si svela venerdì 18 giugno alle 17:00 */
@@ -542,9 +542,9 @@ drop:{n:"Deposito bagagli in hotel", sub:"Hôtel de Castiglione · 38 rue du Fau
  desc:"Il check-in è nel pomeriggio, ma le valigie si lasciano subito alla reception. Posizione da sogno: siete sulla via più elegante di Parigi, tra la Madeleine, Place Vendôme e Concorde, a dieci minuti a piedi dalle Tuileries e dall'Orangerie, con tre linee di metro sotto casa.",
  tip:"Scrivete all'hotel qualche settimana prima: arrivo giovedì alle 10:30 con deposito bagagli e richiesta di early check-in; domenica check-out e ritiro valigie verso le 14:15. In reception chiedete anche il wi-fi e se hanno il servizio taxi a tariffa fissa per l'aeroporto, utile come piano B della domenica."},
 
-checkin:{n:"Check-in e respiro", sub:"doccia, cambio, piedi a riposo", min:60, ico:"🛏", kind:"fix",
+checkin:{n:"Check-in e respiro", sub:"doccia, cambio, piedi a riposo", min:45, ico:"🛏", kind:"fix",
  lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"—",
- desc:"Pausa vera dopo una sveglia all'alba e mezza Parigi a piedi. Doccia, cambio scarpe, dieci minuti orizzontali. Alle 20:30 vi aspetta una delle sale più belle della città e ci volete arrivare vive.",
+ desc:"Pausa vera dopo una sveglia all'alba e mezza Parigi a piedi. Doccia, cambio scarpe, dieci minuti orizzontali. Alle 20:45 vi aspetta una delle sale più belle della città e ci volete arrivare vive.",
  tip:"Dal Marais all'hotel: metro 1 da Saint-Paul a Concorde, 12 minuti, poi 6 a piedi."},
 
 pausaVen:{n:"Pausa in hotel prima della cena", sub:"doccia, cambio d'abito, gambe su", min:30, ico:"🛁", kind:"fix",
@@ -554,7 +554,7 @@ pausaVen:{n:"Pausa in hotel prima della cena", sub:"doccia, cambio d'abito, gamb
 
 checkout:{n:"Check-out e bagagli in deposito", sub:"si esce leggere", min:15, ico:"🧳", kind:"fix",
  lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"gratis",
- desc:"Check-out entro mezzogiorno, ma le valigie restano in deposito senza costi: si torna a prenderle alle 14:30, dopo pranzo.",
+ desc:"Check-out entro mezzogiorno, ma le valigie restano in deposito senza costi: si torna a prenderle alle 15:00, dopo pranzo e Galeries Lafayette.",
  tip:"Lasciate fuori una felpa leggera per l'aereo e tenete in borsa i biglietti dell'Orangerie già scaricati sul telefono."},
 
 bagagli:{n:"Ritiro bagagli in hotel", sub:"ultimo giro, poi Opéra", min:10, ico:"🧳", kind:"fix",
@@ -562,11 +562,11 @@ bagagli:{n:"Ritiro bagagli in hotel", sub:"ultimo giro, poi Opéra", min:10, ico
  desc:"Si passa a riprendere le valigie, si saluta la reception e si cammina dieci minuti fino a rue Scribe, dietro l'Opéra, dove parte il Roissybus.",
  tip:"Controllate cassaforte, caricabatterie e il cassetto del comodino: è lì che restano sempre le cose."},
 
-trasf2:{n:"Opéra → Charles de Gaulle con il Roissybus", sub:"partenza da rue Scribe · ogni 15–20 min · 60–75 min", at:"15:00", min:75, ico:"🚌", kind:"fix",
+trasf2:{n:"Opéra → Charles de Gaulle con il Roissybus", sub:"partenza da rue Scribe · ogni 15–20 min · 60–75 min", at:"15:20", min:70, ico:"🚌", kind:"fix",
  lat:48.8712, lon:2.3300, price:14, priceTxt:"14 € a testa · stesso biglietto aeroporto (verificare in app)",
  stop:"Fermata Roissybus in rue Scribe, angolo rue Auber, dietro l'Opéra Garnier",
  url:"https://www.ratp.fr/titres-et-tarifs/billet-aeroport", urlTxt:"Roissybus · info e biglietti (RATP)",
- desc:"Il Roissybus è l'autobus diretto dall'Opéra all'aeroporto Charles de Gaulle: ferma a tutti i terminal (1, 2 e 3), si sale con le valigie senza scale né cambi e in un'ora abbondante si è ai banchi check-in. Partenza alle 15:00, arrivo verso le 16:15 per un volo delle 18:00: stretto ma corretto; se il bus tarda più di dieci minuti, taxi.",
+ desc:"Il Roissybus è l'autobus diretto dall'Opéra all'aeroporto Charles de Gaulle: ferma a tutti i terminal (1, 2 e 3), si sale con le valigie senza scale né cambi e in un'ora abbondante si è ai banchi check-in. Partenza alle 15:20, arrivo verso le 16:30 per un volo delle 18:00: è il margine minimo, va bene con il solo bagaglio a mano. Con le valigie in stiva prendete il taxi a tariffa fissa dall'hotel alle 15:00 (56 € circa, 45–60 min): lo prenota la reception quando ritirate le valigie.",
  tip:"Verificate sulla carta d'imbarco il terminal (il bus lo annuncia a bordo). Piano B se piove o siete stanche: taxi a tariffa fissa dall'hotel, circa 55–60 € dalla riva destra, 45 minuti se il traffico lo consente. Niente RER B con le valigie: scale e borseggiatori."},
 
 volo2:{n:"Volo Parigi CDG → Firenze", sub:"diretto · 1h40", at:"18:00", min:100, ico:"✈️", kind:"fix",
@@ -575,26 +575,26 @@ volo2:{n:"Volo Parigi CDG → Firenze", sub:"diretto · 1h40", at:"18:00", min:1
  tip:"Al CDG i controlli possono essere lenti: due ore prima è il minimo. Ultimo souvenir sensato in aeroporto: una scatola di macarons Ladurée, ce l'hanno quasi tutti i terminal."},
 
 /* ---------- GIOVEDÌ 17 ---------- */
-faubourg:{n:"Il Faubourg Saint-Honoré, la via di casa", sub:"Élysée, Hermès, la Madeleine, Ladurée", min:45, ico:"🎩", kind:"see",
+faubourg:{n:"Il Faubourg Saint-Honoré, la via di casa", sub:"Élysée, Hermès, la Madeleine, Ladurée", min:40, ico:"🎩", kind:"see",
  lat:48.8702, lon:2.3165, price:0, priceTxt:"GRATIS",
  stop:"Si parte dalla porta dell'hotel",
  desc:"Il vostro hotel sta sulla via più elegante di Parigi. Verso ovest, al numero 55, c'è il Palazzo dell'Élysée con i gendarmi davanti al portone: ci abita il Presidente. Verso est, al 24, la casa madre di Hermès con le sue vetrine-scenografia. Si torna verso la Madeleine passando da rue Royale: Ladurée al 16 (i macarons sono nati qui nel 1930) e, in piazza, la bottega della senape Maille e la casa del tè Mariage Frères.",
- tip:"Comprate i macarons la domenica, non oggi: non reggono tre giorni. Davanti all'Élysée non ci si ferma a fotografare i gendarmi: vi fanno circolare con molta gentilezza."},
+ tip:"Comprate i macarons la domenica alle Galeries Lafayette, non oggi: non reggono tre giorni. Davanti all'Élysée non ci si ferma a fotografare i gendarmi: vi fanno circolare con molta gentilezza."},
 
 vendome:{n:"Place Vendôme", sub:"la piazza dei gioiellieri e del Ritz", min:15, ico:"💍", kind:"see",
  lat:48.8675, lon:2.3294, price:0, priceTxt:"GRATIS",
- stop:"Da rue Saint-Honoré, 5 min",
+ stop:"Da Concorde: rue Royale e rue Saint-Honoré, 10 min",
  desc:"Un ottagono perfetto del 1699 con al centro la colonna fusa con il bronzo dei cannoni di Austerlitz. Intorno, Chanel, Cartier, Boucheron, Chaumet e il Ritz, dove Coco Chanel visse 34 anni. Si attraversa, si guarda, si sogna.",
  tip:"La colonna fu abbattuta dai comunardi nel 1871 su proposta del pittore Courbet, che poi fu condannato a pagarne la ricostruzione: 323.000 franchi. Morì in esilio prima della prima rata."},
 
-palaisroyal:{n:"Palais-Royal e le colonne di Buren", sub:"il giardino segreto di Parigi", min:45, ico:"🏛", kind:"see",
+palaisroyal:{n:"Palais-Royal e le colonne di Buren", sub:"il giardino segreto di Parigi", min:35, ico:"🏛", kind:"see",
  lat:48.8650, lon:2.3372, price:0, priceTxt:"GRATIS",
  stop:"Metro 1/7 Palais Royal–Musée du Louvre · a piedi da Vendôme 10 min",
  url:"https://www.domaine-palais-royal.fr/", urlTxt:"Sito ufficiale (orari)",
  desc:"Dietro la Comédie-Française c'è un cortile con 260 colonne a righe bianche e nere, l'opera di Daniel Buren del 1986 che Parigi odiò e poi adorò: la foto giusta è in piedi su una colonna. Dietro, il giardino del Palais-Royal: tigli potati a parallelepipedo, fontane, panchine, silenzio totale a cinquanta metri dal Louvre. Sotto le arcate, le boutique più strane della città: Didier Ludot per l'alta moda vintage, i profumi di Serge Lutens, guanti, scatole da musica.",
  tip:"Il giardino è aperto dalle 7 alle 22:30 d'estate. Qui, al Café de Foy, il 12 luglio 1789 Camille Desmoulins salì su un tavolo e chiamò i parigini alle armi: due giorni dopo cadde la Bastiglia."},
 
-vivienne:{n:"Galerie Vivienne e i passages", sub:"i centri commerciali del 1823", min:35, ico:"🪞", kind:"see",
+vivienne:{n:"Galerie Vivienne e i passages", sub:"i centri commerciali del 1823", min:30, ico:"🪞", kind:"see",
  lat:48.8667, lon:2.3395, price:0, priceTxt:"GRATIS",
  stop:"Uscita nord del Palais-Royal, 3 min",
  desc:"I passages couverts sono le gallerie coperte a vetri dove la borghesia parigina faceva shopping al riparo dal fango, prima di Haussmann. La Galerie Vivienne è la più bella: mosaici a pavimento, lucernari, la libreria Jousseaume con i libri antichi, la bottega di vini Legrand. Da lì, in dieci minuti, si arriva al Passage des Panoramas (1799, il più antico, filatelici e bistrot) e ai Passages Jouffroy e Verdeau, con il Musée Grévin e i negozi di bastoni da passeggio.",
@@ -607,16 +607,16 @@ chartier:{n:"Pranzo da Bouillon Chartier", sub:"dal 1896 · senza prenotazione �
  desc:"Il bouillon originale: una sala del 1896 con specchi, portacappelli di ottone sopra i tavoli e camerieri in gilet nero che scrivono l'ordine direttamente sulla tovaglia di carta. Uovo con maionese, poulet frites, bourguignon, baba al rum: si mangia in due con 40 euro, in un posto che non è cambiato di una virgola in 130 anni.",
  tip:"È il piano B del pranzo di giovedì se Les Indécises non si riesce a prenotare: non si prenota, mai, e la fila scorre veloce a pranzo (dieci minuti, molto di più la sera). Si condivide il tavolo con sconosciuti ed è parte del gioco. Aperto 11:30–24:00 tutti i giorni."},
 
-rivoli59:{n:"59 Rivoli, la casa degli artisti", sub:"sei piani di atelier aperti · dal reel di Francesca", min:50, ico:"🎨", kind:"see",
+rivoli59:{n:"59 Rivoli, la casa degli artisti", sub:"sei piani di atelier aperti · dal reel di Francesca", min:45, ico:"🎨", kind:"see",
  lat:48.8588, lon:2.3473, price:0, priceTxt:"GRATIS (offerta libera)",
  stop:"59 rue de Rivoli, 1er · Metro Châtelet · dal pranzo: metro 8/9 Grands Boulevards → 4 Châtelet, o 20 min a piedi",
  url:"https://www.59rivoli.org/", urlTxt:"Sito del 59 Rivoli (orari e concerti)",
  desc:"Un palazzo haussmanniano abbandonato da una banca, occupato nel 1999 da tre artisti: pochi giorni dopo erano dieci, e aprirono le porte a chiunque volesse curiosare. Il Comune alla fine lo comprò e nel 2009 lo riaprì «in regola». Oggi è una scala a chiocciola dipinta da cima a fondo con trenta atelier su sei piani, i pittori che lavorano davanti a voi e vi raccontano le loro tele, odore di vernice fresca, una facciata che cambia vestito ogni mese. È il terzo luogo dell'arte contemporanea di Parigi dopo Pompidou e Jeu de Paume, ma senza vetrine.",
  tip:"Aperto da martedì a domenica, 13:00–20:00, ingresso libero con un'offerta all'uscita. Chiedete sempre prima di fotografare: è il loro posto di lavoro. Le stampe e i piccoli lavori si comprano direttamente dagli artisti: il souvenir più bello che porterete a casa. Il Centre Pompidou, a cinque minuti, è chiuso per lavori fino al 2030: quindi questo è il vostro Pompidou."},
 
-marais:{n:"Il Marais: Place des Vosges, Carnavalet, rue des Rosiers", sub:"la Parigi del Seicento e del falafel", min:90, ico:"🏘", kind:"see",
+marais:{n:"Il Marais: Place des Vosges, Carnavalet, rue des Rosiers", sub:"la Parigi del Seicento e del falafel", min:60, trMin:20, ico:"🏘", kind:"see",
  lat:48.8556, lon:2.3655, price:0, priceTxt:"GRATIS",
- stop:"Metro 1 Saint-Paul · dal 59 Rivoli 18 min a piedi lungo rue de Rivoli",
+ stop:"Dal Père-Lachaise: metro 3 → République, 8 → Saint-Sébastien-Froissart (20 min) · Metro 1 Saint-Paul",
  url:"https://www.carnavalet.paris.fr/", urlTxt:"Musée Carnavalet (gratis)",
  desc:"Si entra da rue des Francs-Bourgeois e si sbuca sulla piazza più bella di Parigi: Place des Vosges, 1612, trentasei padiglioni di mattoni rosa attorno a un giardino. Al numero 6 c'è la casa di Victor Hugo (gratis). A due passi, il Musée Carnavalet: la storia di Parigi in due palazzi aristocratici, gratuito, con la camera da letto di Proust e le insegne delle botteghe antiche. Poi rue des Rosiers, il cuore del quartiere ebraico: falafel da L'As du Fallafel, pasticcerie, boutique vintage. Chiusura al Village Saint-Paul, i cortili nascosti degli antiquari.",
  tip:"Dalla Place des Vosges, nell'angolo sud-ovest, un portone dà sul giardino dell'Hôtel de Sully: è un passaggio segreto che sbuca su rue Saint-Antoine. L'As du Fallafel (34 rue des Rosiers) è chiuso il venerdì sera e il sabato: oggi è giovedì, perfetto per uno spuntino da 9 euro mangiato in piedi."},
@@ -628,12 +628,12 @@ operanotte:{n:"Rientro per l'Opéra e Place Vendôme illuminate", sub:"dalla cen
  tip:"Se siete stanche la metro 8 arriva fino a Madeleine, a cinque minuti dall'hotel. Ma i venti minuti a piedi valgono il doppio."},
 
 /* ---------- VENERDÌ 18 ---------- */
-perelachaise:{n:"Père-Lachaise", sub:"Piaf, Chopin, Jim Morrison, Oscar Wilde", min:120, ico:"🕊", kind:"see",
- lat:48.8610, lon:2.3935, price:0, priceTxt:"GRATIS",
- stop:"Metro 8 Madeleine → République, poi 3 → Gambetta (35 min). Si entra dall'alto e si scende",
+perelachaise:{n:"Père-Lachaise, un'ora", sub:"Jim Morrison, Chopin, Abelardo ed Eloisa · dall'ingresso di Ménilmontant", min:60, ico:"🕊", kind:"see",
+ lat:48.8597, lon:2.3870, price:0, priceTxt:"GRATIS",
+ stop:"Da Les Indécises 15 min a piedi: rue Oberkampf, boulevard de Ménilmontant, ingresso principale",
  url:"https://www.paris.fr/lieux/cimetiere-du-pere-lachaise-5035", urlTxt:"Mappa e orari (Comune di Parigi)",
- desc:"Il cimitero più visitato del mondo: 44 ettari di viali alberati in collina, cappelle gotiche, gatti, e un elenco di inquilini da far girare la testa. Édith Piaf (divisione 97), Chopin con la sua musa in lacrime (11), Oscar Wilde con la sfinge coperta di baci (89), Jim Morrison con il recinto (6), Modigliani, Proust, Molière, Balzac, Delacroix, Maria Callas nel colombario. Entrando da Gambetta si è già in alto: tutto il percorso è in discesa.",
- tip:"Aperto dalle 8:00 (8:30 il sabato, 9:00 la domenica) alle 18:00. Fate uno screenshot della mappa ufficiale prima di entrare: dentro ci si perde volentieri, ma due ore passano in fretta. Il bacio sulla tomba di Wilde è vietato dal 2011 (il rossetto corrodeva la pietra): ora c'è il vetro, e i baci stanno sul vetro."},
+ desc:"Il cimitero più visitato del mondo: 44 ettari di viali alberati in collina, cappelle gotiche, gatti, e un elenco di inquilini da far girare la testa. Édith Piaf (divisione 97), Chopin con la sua musa in lacrime (11), Oscar Wilde con la sfinge coperta di baci (89), Jim Morrison con il recinto (6), Modigliani, Proust, Molière, Balzac, Delacroix, Maria Callas nel colombario. Un'ora, come avete chiesto, con un giro preciso dall'ingresso principale di boulevard de Ménilmontant: a sinistra Jim Morrison (divisione 6, il recinto con i biglietti e le bottiglie), poi Chopin con la musa in lacrime (11), la tomba gotica di Abelardo ed Eloisa (7), e ritorno per il viale centrale. Piaf, Wilde e Proust stanno in cima, a venticinque minuti in più: se vi prende, sacrificate il Marais.",
+ tip:"Aperto dalle 8:00 alle 18:00. Fate uno screenshot della mappa ufficiale prima di entrare: dentro ci si perde volentieri e un'ora passa in fretta. Dall'uscita, per il Marais: metro 3 Père Lachaise → République, poi 8 → Saint-Sébastien-Froissart (20 min), oppure il bus 69 dal boulevard. Il bacio sulla tomba di Wilde è vietato dal 2011 (il rossetto corrodeva la pietra): ora c'è il vetro, e i baci stanno sul vetro."},
 
 canal:{n:"Canal Saint-Martin e l'Hôtel du Nord", sub:"ponti girevoli, chiuse, Atmosphère", min:50, ico:"⛵️", kind:"see",
  lat:48.8722, lon:2.3658, price:0, priceTxt:"GRATIS",
@@ -710,19 +710,19 @@ tramonto:{n:"Tramonto dalle scale del Sacré-Cœur", sub:"il finale del sabato �
  tip:"La funicolare da Anvers si prende con un normale biglietto metro e sale in un minuto. Per tornare: metro 12 da Abbesses porta direttamente a Madeleine in 12 minuti, uscita Rue Royale, e siete a casa."},
 
 /* ---------- DOMENICA 20 ---------- */
-orangerie:{n:"Musée de l'Orangerie · le Ninfee", sub:"Monet in due sale ovali · nel combinato con Orsay", at:"11:45", min:60, ico:"🪷", kind:"see",
+orangerie:{n:"Musée de l'Orangerie · le Ninfee", sub:"Monet in due sale ovali · nel combinato con Orsay", at:"11:40", min:55, ico:"🪷", kind:"see",
  lat:48.8638, lon:2.3226, price:0, priceTxt:"compresa nel combinato Orsay + Orangerie · fascia oraria",
  stop:"Da Orsay 12 min a piedi: Pont de la Concorde, ingresso dalle Tuileries lato Concorde",
  url:"https://www.musee-orangerie.fr/en/node/197", urlTxt:"Biglietti e orari",
  desc:"Otto pannelli lunghi fino a diciassette metri, montati in due sale ovali illuminate dal cielo: Monet li dipinse negli ultimi anni di vita per donarli alla Francia il giorno dopo l'armistizio del 1918, come «un bouquet di fiori» per la pace. Ci si siede al centro e si resta. Sotto, la collezione Walter-Guillaume: Renoir, Cézanne, Matisse, Modigliani, Picasso, Soutine, in un'ora. Era già nel vostro piano del 2021 e non l'avete mai fatta: si rimedia.",
- tip:"Con il combinato si prenota comunque la fascia 11:45 online. Un'ora basta: le due sale ovali con calma, poi il piano di sotto a passo svelto. Alle 12:45 si esce: Concorde è a tre minuti, metro 1 fino a Châtelet e si pranza davanti alla Sainte-Chapelle."},
+ tip:"Con il combinato si prenota comunque la fascia 11:45 online. Un'ora basta: le due sale ovali con calma, poi il piano di sotto a passo svelto. Alle 12:35 si esce nel giardino delle Tuileries, che si attraversa con calma fino al Louvre."},
 
-deuxpalais:{n:"Pranzo alla Brasserie Les Deux Palais", sub:"davanti alla Sainte-Chapelle · il vostro tavolo del 2025", at:"13:00", min:75, ico:"🥂", kind:"eat",
+deuxpalais:{n:"Pranzo alla Brasserie Les Deux Palais", sub:"davanti alla Sainte-Chapelle · il vostro tavolo del 2025", at:"13:30", min:55, ico:"🥂", kind:"eat",
  lat:48.8558, lon:2.3457, price:30, priceTxt:"25–35 € a testa",
- stop:"3 boulevard du Palais, Île de la Cité · Metro 4 Cité · dall'Orangerie: metro 1 Concorde → Châtelet (8 min), poi 8 min a piedi",
+ stop:"3 boulevard du Palais, Île de la Cité · dalle Tuileries lungo la Senna 20 min, o metro 1 Louvre-Rivoli → Châtelet",
  url:"https://www.google.com/maps/search/Brasserie+Les+Deux+Palais+Paris", urlTxt:"Les Deux Palais (mappa e prenotazione)",
  desc:"La brasserie all'angolo tra il Palazzo di Giustizia e la Sainte-Chapelle, con la sala Art Nouveau, i banconi e i camerieri che servono avvocati e turisti insieme: ci siete già state nel 2025 e ci tornate, perché la Sainte-Chapelle è dall'altra parte della strada. Croque, salade, confit, un bicchiere, e alle 14:25 si attraversa.",
- tip:"Prenotare il tavolo delle 13:00 (verificare il canale online: TheFork o telefono). Con il biglietto delle 14:30 in tasca non c'è fretta a tavola, ma il controllo di sicurezza alla Sainte-Chapelle vuole dieci minuti."},
+ tip:"Prenotare il tavolo delle 13:30 (verificare il canale online: TheFork o telefono). Con il biglietto delle 14:30 in tasca non c'è fretta a tavola, ma il controllo di sicurezza alla Sainte-Chapelle vuole dieci minuti."},
 
 
 tuileries:{n:"Tuileries e la cioccolata di Angelina", sub:"il giardino, poi il chocolat chaud più famoso di Parigi", min:50, ico:"☕️", kind:"eat",
@@ -732,21 +732,21 @@ tuileries:{n:"Tuileries e la cioccolata di Angelina", sub:"il giardino, poi il c
  desc:"Si attraversa il giardino delle Tuileries dalle vasche con le sedie verdi fino all'uscita su rue de Rivoli: al 226 c'è Angelina, salone Belle Époque del 1903 dove Coco Chanel e Proust venivano per la cioccolata calda «L'Africain», così densa che si mangia col cucchiaio, e per il Mont-Blanc di castagne. La pausa dolce dell'ultimo giorno.",
  tip:"La domenica a mezzogiorno c'è fila: se supera i 15 minuti, prendete la cioccolata da asporto allo sportello accanto e bevetela sulle sedie del giardino. Il risultato è lo stesso e la vista è migliore."},
 
-cafepaix:{n:"Pranzo al Café de la Paix", sub:"prenotabile online · la terrazza davanti all'Opéra", at:"13:15", min:60, ico:"🥐", kind:"eat",
+cafepaix:{n:"Pranzo al Café de la Paix", sub:"prenotabile online · la terrazza davanti all'Opéra", at:"13:00", min:55, ico:"🥐", kind:"eat",
  lat:48.8708, lon:2.3312, price:45, priceTxt:"40–60 € a testa",
  stop:"5 place de l'Opéra · dal Louvre 15 min a piedi per avenue de l'Opéra",
  url:"https://www.cafedelapaix.fr/", urlTxt:"Prenota online",
  desc:"La brasserie del 1862 disegnata dallo stesso architetto dell'Opéra, con i soffitti dipinti e la terrazza che guarda la facciata di Garnier: ci hanno pranzato Zola, Maupassant, Hemingway e, nel 1944, De Gaulle il giorno della liberazione. Caro, sì, ma è l'ultimo pranzo e sta a due minuti dalla fermata del bus per l'aeroporto. Si finisce in bellezza e senza correre.",
- tip:"Chiedete un tavolo in terrazza, la domenica è la più ambita, e dite subito che alle 14:15 dovete uscire: alle 14:30 si ritirano le valigie in hotel (10 min) e alle 15:00 parte il Roissybus da rue Scribe, proprio dietro il ristorante. Se il pranzo va lungo, il taxi a tariffa fissa dall'hotel è il piano B."},
+ tip:"Chiedete un tavolo in terrazza, la domenica è la più ambita, e dite subito che alle 14:00 dovete uscire: mezz'ora alle Galeries Lafayette per i ricordi, alle 14:50 le valigie in hotel e alle 15:10 il Roissybus da rue Scribe, proprio dietro il ristorante. Se il pranzo va lungo, il taxi a tariffa fissa dall'hotel è il piano B."},
 
-indecises:{n:"Pranzo da Les Indécises", sub:"brasserie di quartiere anni Sessanta, rinata · rue des Trois-Bornes", at:"13:45", min:75, ico:"🍽", kind:"eat",
+indecises:{n:"Pranzo da Les Indécises", sub:"brasserie di quartiere anni Sessanta, rinata · rue des Trois-Bornes", at:"14:15", min:70, ico:"🍽", kind:"eat",
  lat:48.8668, lon:2.3745, price:28, priceTxt:"25–35 € a testa",
  stop:"2 rue des Trois-Bornes, 11e · Metro 3 Parmentier · dai passages: metro 9 Grands Boulevards → République, poi 3 → Parmentier (20 min)",
  url:"https://www.google.com/maps/search/Les+Ind%C3%A9cises+rue+des+Trois-Bornes+Paris", urlTxt:"Les Indécises (mappa, telefono, prenotazione)",
  desc:"Una brasserie d'angolo del 1960 nell'11e, con il bancone, le sedie di legno curvato e il neon, rimessa in piedi da un ragazzo del quartiere: cucina da bistrot fatta bene, piatto del giorno, vino al bicchiere, prezzi onesti. È la Parigi dei parigini, a dieci minuti a piedi dal Marais, dove si continua dopo pranzo.",
  tip:"Prenotare: il canale di prenotazione va verificato (è un bistrot piccolo, spesso si prenota per telefono o Instagram). Se non si riesce online, Bouillon Chartier resta nell'elenco delle cene come alternativa senza prenotazione."},
 
-pompidou:{n:"Centre Pompidou, da fuori", sub:"chiuso per lavori fino al 2030 · la fontana Stravinsky", min:15, ico:"🏗", kind:"see",
+pompidou:{n:"Centre Pompidou, da fuori", sub:"chiuso per lavori fino al 2030 · la fontana Stravinsky", min:10, trMin:12, ico:"🏗", kind:"see",
  lat:48.8606, lon:2.3522, price:0, priceTxt:"GRATIS",
  stop:"Place Georges-Pompidou · dal Marais 10 min a piedi",
  url:"https://www.centrepompidou.fr/en/", urlTxt:"Centre Pompidou (stato dei lavori)",
@@ -820,11 +820,11 @@ defense:{n:"La Défense e la Grande Arche", sub:"da fuori: l'asse storico visto 
  desc:"L'asse che parte dal Louvre e passa per Concorde, gli Champs e l'Arco di Trionfo finisce qui, nel cubo vuoto di Spreckelsen del 1989, alto 110 metri, con dentro Notre-Dame che ci starebbe intera. Dalla scalinata si guarda indietro tutta Parigi in linea retta fino al Louvre, dove andate subito dopo. Mezz'ora sull'esplanade tra le torri, il Pollice di César e la fontana di Agam, e si riparte.",
  tip:"Solo da fuori, come chiedevate: il tetto dell'Arche costa 16 € e non vale la fila. Linea 1 diretta da Concorde, automatica, con i vagoni panoramici: sedetevi davanti. Domenica mattina la Défense è deserta: è il momento giusto."},
 
-louvre:{n:"Louvre", sub:"biglietto con orario · Denon: Gioconda, Nike, Venere, la Grande Galerie", at:"11:00", min:110, ico:"🖼", kind:"see", trMin:25,
+louvre:{n:"Louvre", sub:"biglietto con orario · Denon: Gioconda, Nike, Venere, la Grande Galerie", at:"11:00", min:105, ico:"🖼", kind:"see", trMin:25,
  lat:48.8606, lon:2.3376, price:22, priceTxt:"22 € · fascia oraria obbligatoria online",
  stop:"Metro 1 La Défense → Palais-Royal–Musée du Louvre (25 min), ingresso dal Carrousel (sotto, meno fila) o dalla Piramide",
  url:"https://www.ticketlouvre.fr/", urlTxt:"Biglietteria ufficiale",
- desc:"Fascia delle 11:00 e un percorso secco di due ore: dalla Piramide dritte all'ala Denon, la Nike di Samotracia in cima allo scalone, la Grande Galerie con Leonardo, la sala della Gioconda (ci si entra a flusso, cinque minuti e si esce), le Nozze di Cana di fronte, poi giù alla Venere di Milo. Il resto del museo, un'altra vita: alle 12:50 si esce dal Carrousel.",
+ desc:"Fascia delle 11:00 e un percorso secco di due ore: dalla Piramide dritte all'ala Denon, la Nike di Samotracia in cima allo scalone, la Grande Galerie con Leonardo, la sala della Gioconda (ci si entra a flusso, cinque minuti e si esce), le Nozze di Cana di fronte, poi giù alla Venere di Milo. Il resto del museo, un'altra vita: alle 12:45 si esce dal Carrousel.",
  tip:"Il biglietto a orario online è obbligatorio, senza non si entra. Niente valigie: le avete lasciate in hotel. Dall'uscita del Carrousel a Place de l'Opéra sono 15 minuti a piedi per avenue de l'Opéra."},
 
 pigallemr:{n:"Pigalle e il Moulin Rouge", sub:"il boulevard delle luci rosse, il mulino, l'aperitivo prima di cena", min:30, ico:"🎠", kind:"see", trMin:35,
@@ -839,6 +839,18 @@ estrapade:{n:"Place de l'Estrapade · la piazza di Emily in Paris", sub:"la casa
  stop:"5e, dietro il Panthéon · dalla Cité: boulevard Saint-Michel in salita, 20 min · Metro 10 Cardinal Lemoine",
  desc:"La piazzetta con la fontana e i platani dove abita Emily Cooper: il portone al numero 1 è quello della serie, la Boulangerie Moderne (16 rue des Fossés-Saint-Jacques) è dove compra il pain au chocolat della prima puntata, e il ristorante Terra Nera, al 18, è «Les Deux Compères» di Gabriel. Nel 2025 ci siete già state: oggi è il ritorno, con la foto sulla panchina e il pain au chocolat in mano.",
  tip:"La boulangerie è vera e buona, aperta fino a sera: il pain au chocolat lo mangiate sul bordo della fontana. Da qui a Saint-Germain si scende per rue Soufflot, il Luxembourg a destra, e in quindici minuti si è in rue de Buci."},
+
+champs:{n:"Gli Champs-Élysées, con calma", sub:"dall'Élysée al Rond-Point, i giardini, Grand e Petit Palais, Concorde", min:50, ico:"🌳", kind:"see",
+ lat:48.8676, lon:2.3125, price:0, priceTxt:"GRATIS",
+ stop:"Dal Palazzo dell'Élysée: avenue de Marigny, 5 min, e si è sul viale",
+ desc:"Il viale fatto nel verso giusto e nel pezzo giusto: non la parte alta delle vetrine e della calca, che avete già percorso due volte, ma quella bassa, dal Rond-Point a Concorde, dove gli Champs sono ancora un giardino, come nel Seicento quando Le Nôtre li disegnò. Si scende da avenue de Marigny tra i marronnier, si passa davanti al Grand Palais con la cupola di vetro e al Petit Palais (il giardino interno con il caffè sotto il porticato è gratis e vuoto al mattino), si guarda l'Arco di Trionfo in fondo al rettilineo e si arriva a Place de la Concorde con l'obelisco: da lì rue Royale e rue Saint-Honoré riportano verso Vendôme.",
+ tip:"Alle 11 di giovedì il viale basso è quasi deserto: panchine, chioschi, i teatri Marigny e del Rond-Point. Il Petit Palais apre alle 10 ed è gratis: dieci minuti nel giardino valgono la deviazione. L'Arco di Trionfo lo vedete da lontano, apposta: ci siete già salite."},
+
+tuilerieswalk:{n:"Passeggiata alle Tuileries", sub:"dall'Orangerie al Louvre, tra le vasche e le sedie verdi", min:25, ico:"🌷", kind:"see",
+ lat:48.8635, lon:2.3275, price:0, priceTxt:"GRATIS",
+ stop:"Uscendo dall'Orangerie si è già dentro il giardino",
+ desc:"Dall'Orangerie si attraversa tutto il giardino di Le Nôtre fino alla Piramide: il grande bacino ottagonale con le sedie verdi di ferro che ognuno sposta dove vuole, i viali di tigli, le statue di Maillol tra le siepi, il piccolo bacino rotondo davanti all'Arco del Carrousel con il Louvre che chiude la prospettiva. Mezz'ora lenta, seduti un attimo sul bordo dell'acqua, prima di tornare sulla Senna.",
+ tip:"Dall'Arco del Carrousel si esce sul quai des Tuileries e si costeggia la Senna fino al Pont au Change: venti minuti piacevoli, oppure metro 1 da Louvre-Rivoli a Châtelet. Il pranzo è alle 13:30, davanti alla Sainte-Chapelle."},
 
 /* ---------- PROPOSTE DA PARCHEGGIO ---------- */
 opera:{n:"Opéra Garnier, dentro", sub:"la scala, il foyer, il soffitto di Chagall", min:75, ico:"🎭", kind:"see",
@@ -882,11 +894,12 @@ petitpalais:{n:"Petit Palais e il suo giardino", sub:"museo gratis, caffè sotto
  desc:"Il palazzo dell'Esposizione del 1900 di fronte al Grand Palais: cupole, mosaici, scalone, e collezioni gratuite (Courbet, Monet, Cézanne, la gioielleria Art Nouveau). Il giardino interno con il porticato e le palme è un caffè segreto a due passi dagli Champs.",
  tip:"Chiuso il lunedì. Perfetto per un'ora libera il giovedì o la domenica, o se piove."},
 
-lafayette:{n:"Terrazza delle Galeries Lafayette", sub:"la cupola e la vista sui tetti, gratis", min:40, ico:"🛍", kind:"see",
- lat:48.8738, lon:2.3320, price:0, priceTxt:"GRATIS",
- stop:"40 boulevard Haussmann · 8 min dall'hotel",
- desc:"Avete già fatto i grandi magazzini due volte, ma la terrazza sul tetto (7° piano, ascensore) con la vista sull'Opéra e la Tour Eiffel, e la passerella di vetro sotto la cupola Art Nouveau del 1912, sono un'altra cosa. Dieci minuti, zero euro.",
- tip:"Da infilare la domenica tra Angelina e il pranzo: il Café de la Paix è a tre minuti."},
+lafayette:{n:"Puntata finale alle Galeries Lafayette", sub:"ricordi, macarons e la cupola · 3 min dal Café de la Paix", min:30, ico:"🛍", kind:"see",
+ lat:48.8738, lon:2.3320, price:0, priceTxt:"GRATIS · più i ricordi",
+ stop:"40 boulevard Haussmann · dal Café de la Paix 3 min, dall'hotel 10",
+ url:"https://www.galerieslafayette.com/", urlTxt:"Galeries Lafayette Haussmann",
+ desc:"L'ultima mezz'ora di Parigi, dove la sapete fare: la cupola Art Nouveau del 1912 vista dalla passerella di vetro, poi i ricordi. Al piano terra i corner di Ladurée e Pierre Hermé per i macarons da portare a casa (reggono il viaggio di stasera), al Lafayette Gourmet di fronte i tè Mariage Frères, la senape Maille, i caramelli al burro salato; i foulard e le borse stanno dove li avete lasciati nel 2025. Alle 14:40 si esce con le buste.",
+ tip:"Domenica è aperto dalle 11:00. Non salite in terrazza oggi: il tempo è contato, le valigie aspettano alle 15:00 e il bus (o il taxi) subito dopo."},
 
 canalcrociera:{n:"Crociera sul Canal Saint-Martin", sub:"le chiuse, il tunnel sotto la Bastiglia", min:150, ico:"🚤", kind:"see",
  lat:48.8530, lon:2.3690, price:23, priceTxt:"~23 € · online",
@@ -904,16 +917,16 @@ samaritaine:{n:"La Samaritaine", sub:"la scala Art Nouveau e il pavone di ferro"
 
 var DAYS_DEF = [
  {id:"gio", n:"17", dow:"Giovedì", date:"2027-06-17", c:"#A76E49",
-  title:"Faubourg, passages, Marais e 59 Rivoli",
-  intro:"Si atterra alle 9:05 e alle 10:30 le valigie sono già in hotel, sulla via più elegante di Parigi. Si parte a piedi: l'Élysée e la Madeleine, Place Vendôme, il giardino del Palais-Royal con le colonne di Buren, le gallerie coperte del 1823. Pranzo da Les Indécises, la brasserie anni Sessanta dell'11e, poi il Marais a piedi, il Pompidou visto da fuori (è chiuso fino al 2030) e il 59 Rivoli, la casa degli artisti del reel, aperta fino alle 20. Check-in con calma e cena nella sala Art Nouveau del 1906 di Bouillon Julien, rientro passando dall'Opéra illuminata.",
+  title:"Faubourg, Champs-Élysées, passages, Père-Lachaise, Marais e 59 Rivoli",
+  intro:"Si atterra alle 9:05 e alle 10:30 le valigie sono già in hotel, sulla via più elegante di Parigi. Si parte a piedi: l'Élysée, gli Champs-Élysées nella parte bassa e verde fino a Concorde, Place Vendôme, il giardino del Palais-Royal con le colonne di Buren, le gallerie coperte del 1823. Pranzo da Les Indécises, la brasserie anni Sessanta dell'11e, un'ora al Père-Lachaise che è lì accanto (Morrison, Chopin, Abelardo ed Eloisa), poi il Marais a piedi, il Pompidou visto da fuori (è chiuso fino al 2030) e il 59 Rivoli, la casa degli artisti del reel, aperta fino alle 20. Check-in, doccia e alle 20:45 la cena nella sala Art Nouveau del 1906 di Bouillon Julien, rientro passando dall'Opéra illuminata. È la giornata più lunga del viaggio: si chiude verso le 23:30.",
   start:"05:30",
-  items:["volo1","trasf1","drop","faubourg","vendome","palaisroyal","vivienne","indecises","marais","pompidou","rivoli59","checkin","cenaGio","operanotte"]},
+  items:["volo1","trasf1","drop","faubourg","champs","vendome","palaisroyal","vivienne","indecises","perelachaise","marais","pompidou","rivoli59","checkin","cenaGio","operanotte"]},
 
  {id:"ven", n:"18", dow:"Venerdì", date:"2027-06-18", c:"#C9975C",
   title:"Rive Gauche: Orsay, le Ninfee, la Sainte-Chapelle, Saint-Germain",
-  intro:"La giornata della riva sinistra, tutta a piedi lungo la Senna. Orsay all'apertura con gli impressionisti al quinto piano, le Ninfee all'Orangerie con lo stesso biglietto, pranzo alla Brasserie Les Deux Palais e, dall'altra parte della strada, la Sainte-Chapelle con la fascia delle 14:30. Poi l'Île de la Cité fino al Pont Neuf, la salita a Place de l'Estrapade, la piazza di Emily in Paris, e il pomeriggio a Saint-Germain-des-Prés: Buci, il Procope, Furstenberg, la chiesa dell'anno Mille, le botteghe, l'aperitivo al Flore. Metro 12 dritta a Madeleine, doccia, vestito bello: la sera c'è una cena a sorpresa, a tre minuti di passeggiata.",
+  intro:"La giornata della riva sinistra, tutta a piedi lungo la Senna. Orsay all'apertura con gli impressionisti al quinto piano, le Ninfee all'Orangerie con lo stesso biglietto, la passeggiata alle Tuileries fino al Louvre, pranzo alla Brasserie Les Deux Palais e, dall'altra parte della strada, la Sainte-Chapelle con la fascia delle 14:30. Poi l'Île de la Cité fino al Pont Neuf, la salita a Place de l'Estrapade, la piazza di Emily in Paris, e il pomeriggio a Saint-Germain-des-Prés: Buci, il Procope, Furstenberg, la chiesa dell'anno Mille, le botteghe, l'aperitivo al Flore. Metro 12 dritta a Madeleine, doccia, vestito bello: la sera c'è una cena a sorpresa, a tre minuti di passeggiata.",
   start:"09:10",
-  items:["orsay","orangerie","deuxpalais","saintechapelle","cite","estrapade","sg1","flore","pausaVen","cenaVen"]},
+  items:["orsay","orangerie","tuilerieswalk","deuxpalais","saintechapelle","cite","estrapade","sg1","flore","pausaVen","cenaVen"]},
 
  {id:"sab", n:"19", dow:"Sabato", date:"2027-06-19", c:"#5E9BAC",
   title:"Montmartre, la Senna, la Tour Eiffel in cima e Pigalle",
@@ -922,17 +935,17 @@ var DAYS_DEF = [
   items:["mm1","mm2","deuxmoulins","pigalle","bateaux","tour","pigallemr","cenaSab","tramonto"]},
 
  {id:"dom", n:"20", dow:"Domenica", date:"2027-06-20", c:"#6E8A8E",
-  title:"La Grande Arche, il Louvre e l'ultimo pranzo",
-  intro:"L'ultimo giorno segue l'asse storico al contrario: la metro 1 fino alla Défense per vedere la Grande Arche da fuori quando la piazza è deserta, poi la stessa linea fino al Louvre con la fascia delle 11:00 e un percorso secco di due ore (Gioconda, Nike, Venere, la Grande Galerie). Pranzo in terrazza al Café de la Paix davanti all'Opéra, alle 14:30 le valigie, alle 15:00 il Roissybus da rue Scribe, alle 18:00 il volo.",
+  title:"La Grande Arche, il Louvre, l'ultimo pranzo e i ricordi",
+  intro:"L'ultimo giorno segue l'asse storico al contrario: la metro 1 fino alla Défense per vedere la Grande Arche da fuori quando la piazza è deserta, poi la stessa linea fino al Louvre con la fascia delle 11:00 e un percorso secco di due ore (Gioconda, Nike, Venere, la Grande Galerie). Pranzo in terrazza al Café de la Paix davanti all'Opéra, la puntata finale alle Galeries Lafayette per i ricordi, alle 15:00 le valigie, alle 15:20 il Roissybus da rue Scribe (in aeroporto alle 16:30: è il margine minimo, con le valigie in stiva meglio il taxi dall'hotel alle 15:00), alle 18:00 il volo.",
   start:"09:30",
-  items:["checkout","defense","louvre","cafepaix","bagagli","trasf2","volo2"]}
+  items:["checkout","defense","louvre","cafepaix","lafayette","bagagli","trasf2","volo2"]}
 ];
 
-var PARKED_DEF = ["chartier","tuileries","ilesaintlouis","puces","macocotte","perelachaise","canal","bouillonrep","jacquemart","cimmontmartre","aperimontmartre","opera","lafayette","petitpalais","samaritaine","rodin","mouffetard","catacombe","vuitton","canalcrociera"];
+var PARKED_DEF = ["chartier","tuileries","ilesaintlouis","puces","macocotte","canal","bouillonrep","jacquemart","cimmontmartre","aperimontmartre","opera","petitpalais","samaritaine","rodin","mouffetard","catacombe","vuitton","canalcrociera"];
 
 /* ============ RISTORANTI: SOLO PRENOTAZIONE ONLINE ============ */
 var CENE = [
- {id:"cenaGio", n:"Bouillon Julien", when:"Giovedì 17 · 20:30 · 2 persone · da prenotare online", ico:"🌿", av:"#E1EBDD",
+ {id:"cenaGio", n:"Bouillon Julien", when:"Giovedì 17 · 20:45 · 2 persone · da prenotare online", ico:"🌿", av:"#E1EBDD",
   zone:"16 rue du Faubourg Saint-Denis, 10e · Metro 8 Strasbourg–Saint-Denis (dal Marais: 8 da Chemin Vert, diretta)",
   kind:"Bouillon Art Nouveau del 1906, monumento storico", price:"20–30 € a testa",
   desc:"La sala più bella tra tutti i bouillon di Parigi: pannelli di vetro dipinto con le quattro stagioni, pavoni, mogano scolpito, un soffitto che è un giardino. Prezzi da bouillon: œuf mayo, terrine, bourguignon, baba, vino della casa. Monumento storico dal 1997, è il locale del secondo reel di LA TUA PARIGI: si mangia bene con 20 euro in una delle sale più fotografate della città.",
@@ -994,19 +1007,19 @@ var CENE = [
 function vt(t){return (t.secret&&!revealed())?Object.assign({},t,t.secret,{u:""}):t;}
 var TODO = [
  {id:"t1", t:"Contraste ⭐ · cena di venerdì alle 20:00", d:"Prenotare online sul sito (modulo). Aperto solo lun–ven. Se pieno: Lucas Carton.", u:"https://www.contraste.paris/en/", uTxt:"modulo di prenotazione", pri:1, secret:{t:"Cena a sorpresa di venerdì alle 20:00 🎁", d:"Tavolo già prenotato da chi la regala. Voi dovete solo portare un vestito bello."}},
- {id:"t2", t:"Bouillon Julien · cena di giovedì alle 20:30", d:"Prenotazione online sul sito ufficiale, 2 persone a nome Rosetta.", u:"https://www.bouillon-julien.com/rserver", uTxt:"prenota", pri:1},
+ {id:"t2", t:"Bouillon Julien · cena di giovedì alle 20:45", d:"Prenotazione online sul sito ufficiale, 2 persone a nome Rosetta.", u:"https://www.bouillon-julien.com/rserver", uTxt:"prenota", pri:1},
  {id:"t20", t:"Tour Eiffel · sommità, sabato 19 alle 16:30 (champagne in cima)", d:"Solo biglietteria ufficiale. I biglietti escono circa 60 giorni prima (intorno al 19 aprile 2027) e la sommità si esaurisce in giornata: segnarsi la data. ~36 € a testa.", u:"https://www.toureiffel.paris/en/rates-opening-times", uTxt:"biglietteria ufficiale", pri:1},
  {id:"t21", t:"Louvre · fascia 11:00 di domenica 20", d:"22 € a testa, biglietto a orario obbligatorio. Salvare il PDF nel Wallet.", u:"https://www.ticketlouvre.fr/", uTxt:"biglietteria ufficiale", pri:1},
- {id:"t22", t:"Orsay + Orangerie · biglietto combinato, venerdì 18: Orsay 9:30, Orangerie 11:45", d:"~24 € a testa il combinato (vale 3 mesi). Le fasce dei due musei si prenotano separatamente con lo stesso biglietto.", u:"https://www.musee-orsay.fr/en/visit/tickets-and-rates", uTxt:"biglietti Orsay", pri:1},
+ {id:"t22", t:"Orsay + Orangerie · biglietto combinato, venerdì 18: Orsay 9:30, Orangerie 11:40", d:"~24 € a testa il combinato (vale 3 mesi). Le fasce dei due musei si prenotano separatamente con lo stesso biglietto.", u:"https://www.musee-orsay.fr/en/visit/tickets-and-rates", uTxt:"biglietti Orsay", pri:1},
  {id:"t26", t:"Sainte-Chapelle · fascia 14:30 di venerdì 18", d:"13 € a testa sulla biglietteria dei Monuments Nationaux (esiste anche il biglietto doppio con la Conciergerie). Senza biglietto a orario la fila supera l'ora.", u:"https://tickets.monuments-nationaux.fr/fr-FR/produits-seances?site=2035141861660400306&famille=2129032708460404016", uTxt:"biglietteria ufficiale", pri:1},
  {id:"t23", t:"Bateaux Mouches · corsa delle 14:45 di sabato 19", d:"~19 € a testa, online sul sito ufficiale, Port de la Conférence.", u:"https://www.bateaux-mouches.fr/en", uTxt:"prenota", pri:2},
  {id:"t24", t:"Le Chat Noir · cena di sabato alle 20:00", d:"Cercare «Le Chat Noir Montmartre» su TheFork. Se non prenotabile online: Bouillon Pigalle (piano B).", u:"https://www.thefork.it/", uTxt:"TheFork", pri:2},
- {id:"t27", t:"Les Indécises · pranzo di giovedì alle 13:45", d:"2 rue des Trois-Bornes, 11e. Verificare il canale di prenotazione (sito/Instagram/telefono). Piano B senza prenotazione: Bouillon Chartier.", u:"https://www.google.com/maps/search/Les+Ind%C3%A9cises+rue+des+Trois-Bornes+Paris", uTxt:"mappa e contatti", pri:2},
- {id:"t28", t:"Les Deux Palais · pranzo di venerdì alle 13:00", d:"3 boulevard du Palais, davanti alla Sainte-Chapelle. Verificare la prenotazione online (TheFork) o telefono.", u:"https://www.google.com/maps/search/Brasserie+Les+Deux+Palais+Paris", uTxt:"mappa e contatti", pri:2},
+ {id:"t27", t:"Les Indécises · pranzo di giovedì alle 14:15", d:"2 rue des Trois-Bornes, 11e. Verificare il canale di prenotazione (sito/Instagram/telefono). Piano B senza prenotazione: Bouillon Chartier.", u:"https://www.google.com/maps/search/Les+Ind%C3%A9cises+rue+des+Trois-Bornes+Paris", uTxt:"mappa e contatti", pri:2},
+ {id:"t28", t:"Les Deux Palais · pranzo di venerdì alle 13:30", d:"3 boulevard du Palais, davanti alla Sainte-Chapelle. Verificare la prenotazione online (TheFork) o telefono.", u:"https://www.google.com/maps/search/Brasserie+Les+Deux+Palais+Paris", uTxt:"mappa e contatti", pri:2},
  {id:"t4", t:"Biglietti aeroporto nell'app Île-de-France Mobilités", d:"Due «Paris Région ◇ Aéroports» (Orly → Madeleine con la 14, giovedì) e due per il Roissybus di domenica, più un carnet di biglietti metro sul telefono di ciascuna. Verificare prezzi 2027.", u:"https://www.iledefrance-mobilites.fr/aide-et-contacts/titres-unitaires-tarifs-reduits/quels-tickets-pour-l-aeroport", uTxt:"info biglietti", pri:1},
- {id:"t5", t:"Email all'hotel: deposito bagagli giovedì 10:30, early check-in, ritiro domenica 14:30", d:"Chiedere anche la tariffa taxi fissa per CDG come piano B.", u:"https://www.hoteldecastiglione.com/", uTxt:"sito hotel", pri:2},
+ {id:"t5", t:"Email all'hotel: deposito bagagli giovedì 10:30, early check-in, ritiro domenica 15:00", d:"Chiedere anche la tariffa taxi fissa per CDG come piano B.", u:"https://www.hoteldecastiglione.com/", uTxt:"sito hotel", pri:2},
  {id:"t8", t:"Bouillon Pigalle · pranzo di sabato alle 13:00", d:"Prenotazione online sul sito del gruppo.", u:"https://bouillonlesite.com/reservation/", uTxt:"prenota", pri:2},
- {id:"t9", t:"Café de la Paix · pranzo di domenica alle 13:15", d:"Prenotazione online, chiedere la terrazza e avvisare che alle 14:15 si esce.", u:"https://www.cafedelapaix.fr/", uTxt:"prenota", pri:2},
+ {id:"t9", t:"Café de la Paix · pranzo di domenica alle 13:00", d:"Prenotazione online, chiedere la terrazza e avvisare che alle 14:00 si esce.", u:"https://www.cafedelapaix.fr/", uTxt:"prenota", pri:2},
  {id:"t12", t:"Facoltativo · Musée de Montmartre", d:"15 €, giardino di Renoir, 10:00–19:00. Si decide sul posto sabato.", u:"https://museedemontmartre.fr/", uTxt:"sito", pri:4},
  {id:"t13", t:"Facoltativo · Catacombe o Fondation Louis Vuitton", d:"Solo se si cambia il venerdì: controllare la mostra della Fondation a primavera.", u:"https://www.fondationlouisvuitton.fr/en", uTxt:"programma", pri:4}
 ];
@@ -1329,7 +1342,7 @@ var INFO_CARDS = [
  ["Uber","<a href=\"https://apps.apple.com/it/app/uber/id368677368\" target=\"_blank\" rel=\"noopener\">iPhone (App Store)</a> · <a href=\"https://play.google.com/store/apps/details?id=com.ubercab\" target=\"_blank\" rel=\"noopener\">Android (Google Play)</a>. Lo stesso account italiano funziona a Parigi. Bolt (<a href=\"https://bolt.eu/it/\" target=\"_blank\" rel=\"noopener\">bolt.eu</a>) è spesso più economico, stessa logica."],
  ["Aeroporti","Taxi a <b>tariffa fissa</b> per legge: da Parigi riva destra circa 56 € per CDG e 36 € per Orly (prezzi 2026, da verificare), bagagli inclusi, senza supplementi. Se un tassista propone un prezzo diverso, no. Per Uber il prezzo varia con l'orario."],
  ["In città","Una corsa in centro costa 12–20 €. Nelle code (Opéra, Louvre) si prende al posteggio con la luce verde accesa; in strada si ferma con la mano, come a Roma. Il memo con il numero sta in cima a ogni giornata del programma."]
-], note:"Alle 15 di domenica, se il pranzo va lungo, il taxi fisso per CDG dall'hotel è il piano B: chiedetelo alla reception alle 14:30 e parte quando scendete."},
+], note:"Alle 15 di domenica, se il pranzo o le Galeries vanno lunghi, il taxi fisso per CDG dall'hotel è il piano B: chiedetelo alla reception quando ritirate le valigie e parte subito."},
 
 {t:"Meteo e luce di giugno", ico:"🌤", h:[
  ["Temperature","Massime 23–26 °C, minime 14–16 °C. Possibili giornate calde: Parigi a giugno può fare 30."],
@@ -1380,8 +1393,8 @@ CENE.forEach(function(r){
     stop:r.zone, url:r.url, urlTxt:r.urlTxt, desc:r.desc,
     tip:(r.adv?"Quando prenotare: "+r.adv+" ":"")+(r.tips||"")};
 });
-POI.cenaGio.at="20:30"; POI.cenaGio.min=100;
-POI.cenaGio.sub="20:30 · 2 persone · prenotare online · sala Art Nouveau del 1906";
+POI.cenaGio.at="20:45"; POI.cenaGio.min=100;
+POI.cenaGio.sub="20:45 · 2 persone · prenotare online · sala Art Nouveau del 1906";
 POI.cenaGio.stop="16 rue du Faubourg Saint-Denis · dal Marais: metro 8 da Chemin Vert → Strasbourg-Saint-Denis (12 min); dall'hotel: metro 8 da Madeleine, diretta";
 POI.cenaSab.at="20:00"; POI.cenaSab.min=85;
 POI.cenaSab.sub="20:00 · 2 persone · prenotare online · brasserie davanti al Moulin Rouge";
