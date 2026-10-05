@@ -88,6 +88,8 @@ section.on{display:block}
 .btn:active{transform:scale(.98)}
 .row{display:flex;gap:8px}
 .row>*{flex:1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid2 .btn{white-space:nowrap;padding:11px 8px}
 hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
 
 /* ---------- CHIPS ---------- */
@@ -347,14 +349,13 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <div class="card" style="background:linear-gradient(160deg,#FBF3E0,#FFFDF8)">
     <h3 style="font-size:16px">Il calendario di sintesi</h3>
     <p class="muted small" style="margin-top:5px">Terza volta a Parigi: i grandi classici rifatti meglio (la Tour Eiffel fino in cima, Louvre e Orsay con il biglietto a orario e un percorso secco, la Sainte-Chapelle, i Bateaux Mouches, la Grande Arche) e in mezzo la <b>Parigi che ancora non avete visto</b>: passaggi coperti, atelier d'artista, bouillon Belle Époque, Saint-Germain nelle traverse, Montmartre di vicolo in vicolo. Tocca una tappa per <b>spostarla di giorno, cambiarne l'ordine o eliminarla</b>: orari, tragitti, costi, mappa e PDF si ricalcolano da soli. <b>Ripristina</b> riporta tutto al programma originale.</p>
-    <div class="row" style="margin-top:10px;flex-wrap:wrap">
+    <div class="grid2" style="margin-top:10px">
       <button class="btn sec" onclick="resetPlan()">↺ Ripristina</button>
       <button class="btn sec" onclick="openSearch()">🔍 Cerca</button>
       <button class="btn sec" onclick="go('s-mappa')">🗺 Mappa</button>
-      <button class="btn sec" onclick="printPdf()">🖨 PDF</button>
       <button class="btn sec" onclick="openPrintPage()">📄 Stampabile</button>
     </div>
-    <p class="muted small" style="margin:8px 0 0">🖨 PDF apre la stampa del telefono (scegli «Salva come PDF»). Se non si apre, 📄 Stampabile mostra il programma in una pagina pulita con il suo tasto di stampa.</p>
+    <p class="muted small" style="margin:8px 0 0">📄 Stampabile apre il programma in una pagina pulita: da lì il tasto «Stampa» del telefono salva anche in PDF.</p>
   </div>
   <div id="planDays"></div>
   <div class="card flat" style="background:#F1ECDF">
@@ -482,7 +483,6 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <h1>Parigi <em>2027</em></h1>
   <p>Rosetta &amp; Concetta · 17–20 giugno 2027</p>
   <button class="btn" onclick="closeIntro()">Entra nel viaggio →</button>
-  <button class="skip" onclick="closeIntro(true)">non mostrare più l'intro</button>
 </div>
 
 <div class="srch" id="srch">
@@ -516,7 +516,7 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
 /* =================================================================
    DATI DEL VIAGGIO — tutto offline, niente rete
    ================================================================= */
-var APP_VER="5 · 6 ott 2026";
+var APP_VER="7 · 6 ott 2026";
 var HOTEL = {n:"Hôtel de Castiglione", lat:48.8696, lon:2.3196};
 var INTRO_URL="https://www.instagram.com/reel/Daln1CbuaCj/embed/";
 var SECRET_AT=new Date(2027,5,18,17,0,0); /* la cena a sorpresa si svela venerdì 18 giugno alle 17:00 */
@@ -547,9 +547,9 @@ checkin:{n:"Check-in e respiro", sub:"doccia, cambio, piedi a riposo", min:60, i
  desc:"Pausa vera dopo una sveglia all'alba e mezza Parigi a piedi. Doccia, cambio scarpe, dieci minuti orizzontali. Alle 20:30 vi aspetta una delle sale più belle della città e ci volete arrivare vive.",
  tip:"Dal Marais all'hotel: metro 1 da Saint-Paul a Concorde, 12 minuti, poi 6 a piedi."},
 
-pausaVen:{n:"Pausa in hotel prima della cena", sub:"doccia, cambio d'abito, gambe su", min:45, ico:"🛁", kind:"fix",
+pausaVen:{n:"Pausa in hotel prima della cena", sub:"doccia, cambio d'abito, gambe su", min:30, ico:"🛁", kind:"fix",
  lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"—",
- desc:"Dal Flore la metro 12 porta dritta a Madeleine in dodici minuti. Tre quarti d'ora per la doccia, il cambio (stasera ci si veste bene) e un respiro. Il ristorante è a tre minuti di passeggiata.",
+ desc:"Dal Flore la metro 12 porta dritta a Madeleine in dodici minuti. Mezz'ora per la doccia, il cambio (stasera ci si veste bene) e un respiro. Il ristorante è a tre minuti di passeggiata.",
  tip:"Alle 19:55 si esce. Dress code: elegante ma senza esagerare, come a un bel compleanno."},
 
 checkout:{n:"Check-out e bagagli in deposito", sub:"si esce leggere", min:15, ico:"🧳", kind:"fix",
@@ -679,7 +679,7 @@ macocotte:{n:"Pranzo da Ma Cocotte", sub:"prenotabile online · il ristorante di
 
 mm1:{n:"Montmartre 1 · la collina dei vicoli", sub:"Lamarck, le scale di Becquerel, Sacré-Cœur dal retro, Saint-Rustique, il Tertre", min:60, ico:"🪜", kind:"see",
  lat:48.8880, lon:2.3415, price:0, priceTxt:"GRATIS",
- stop:"Dal Bouillon Pigalle: metro 12 Pigalle → Lamarck-Caulaincourt, 2 fermate (8 min)",
+ stop:"Dall'hotel: metro 12 Madeleine → Lamarck-Caulaincourt, diretta (15 min)",
  url:"https://www.instagram.com/p/DdyCGj8CBb0/", urlTxt:"Le 20 tappe di Paris la douce",
  desc:"Tre ore a Montmartre fatte bene, seguendo le venti tappe del post di Paris la douce ma dall'alto in basso, per non fare le scale in salita. Si esce dalla metro Lamarck-Caulaincourt tra le due scalinate gemelle (quella del film Amélie), si sale per rue Becquerel, si gira per rue du Chevalier-de-la-Barre, si entra nel Square Marcel-Bleustein-Blanchet, il giardino dietro il Sacré-Cœur dove non va nessuno, e si arriva alla basilica dal retro. Dentro, il mosaico del Cristo in gloria, uno dei più grandi del mondo; fuori, tutta Parigi ai piedi. Poi rue Saint-Rustique, la strada più antica della collina, senza marciapiedi, e Place du Tertre con i pittori.",
  tip:"Place du Tertre alle 15 del sabato è una calca: attraversatela, fotografate, ma la vera Montmartre è cinquanta metri più in là. Davanti al Sacré-Cœur ci sono i tizi del braccialetto di cotone che vi afferrano il polso: mani in tasca e «non, merci» deciso. La cupola della basilica (300 gradini, ~8 €) regala la vista più alta della città: solo se avete gambe da vendere."},
@@ -701,9 +701,9 @@ aperimontmartre:{n:"Aperitivo in Place des Abbesses", sub:"un bicchiere all'ombr
  lat:48.8844, lon:2.3385, price:10, priceTxt:"8–12 € a testa",
  stop:"Place des Abbesses · rue des Martyrs",
  desc:"Il quartiere intorno ad Abbesses è la Montmartre dove vivono i parigini: caffè con i tavolini fuori, rue des Martyrs piena di botteghe di formaggi e pasticcerie. Un kir o un bicchiere di bianco a un tavolino, le gambe che ringraziano, la luce lunga di giugno.",
- tip:"Il sole tramonta alle 21:57: la cena è alle 19:30 proprio perché dopo si risale per il tramonto dalle scale del Sacré-Cœur."},
+ tip:"Il sole tramonta alle 21:57: la cena è alle 20:00 e il conto per le 21:25, così si risale in tempo per il tramonto dalle scale del Sacré-Cœur."},
 
-tramonto:{n:"Tramonto dalle scale del Sacré-Cœur", sub:"il finale del sabato · sole giù alle 21:57", at:"21:15", min:55, ico:"🌇", kind:"see",
+tramonto:{n:"Tramonto dalle scale del Sacré-Cœur", sub:"il finale del sabato · sole giù alle 21:57", at:"21:30", min:45, ico:"🌇", kind:"see",
  lat:48.8862, lon:2.3430, price:0, priceTxt:"GRATIS",
  stop:"Da Le Chat Noir: metro 2 Blanche → Anvers (2 fermate) e funicolare, oppure 20 min a piedi in salita",
  desc:"Alle 21:30 le scale del Sacré-Cœur sono piene di gente seduta con una bottiglia, un chitarrista, e tutta Parigi che si accende sotto. Il sole va giù dietro la Défense alle 21:57 e per venti minuti il cielo fa quello che sa fare solo a giugno. È la foto del viaggio: voi due, le scale, la città.",
@@ -760,7 +760,7 @@ orsay:{n:"Musée d'Orsay", sub:"biglietto combinato Orsay + Orangerie · gli imp
  desc:"La stazione del 1900 con l'orologio gigante e, al quinto piano, la più grande collezione impressionista del mondo: Monet, Renoir, Degas, Van Gogh, Cézanne, Gauguin, Toulouse-Lautrec. Si sale subito in alto (ascensore), si fa il quinto piano con calma, si guarda Parigi attraverso il quadrante dell'orologio, e si scende per le sculture della navata. Due ore bastano se si evita il pianterreno.",
  tip:"Prendete il biglietto combinato Orsay + Orangerie: costa meno di due biglietti separati e copre le Ninfee subito dopo. Fascia 9:30 all'apertura, ingresso C (prenotati). Chiuso il lunedì."},
 
-cite:{n:"Île de la Cité: Notre-Dame, Place Dauphine, Pont Neuf", sub:"il cuore medievale, a piedi", min:60, ico:"⛪️", kind:"see",
+cite:{n:"Île de la Cité: Notre-Dame, Place Dauphine, Pont Neuf", sub:"il cuore medievale, a piedi", min:45, ico:"⛪️", kind:"see",
  lat:48.8565, lon:2.3440, price:0, priceTxt:"GRATIS",
  stop:"Uscendo dalla Sainte-Chapelle, tutto a piedi",
  desc:"Da boulevard du Palais si costeggia la Conciergerie con le torri tonde, si gira attorno al Palazzo di Giustizia fino a Place Dauphine, il triangolo di platani del 1607 dove non passa nessuno, e si esce sulla punta dell'isola al Pont Neuf, il ponte più vecchio di Parigi con le facce scolpite. Chi vuole rientra un attimo in Notre-Dame restaurata (gratis, fila di 20–30 minuti, la navata bianca com'era nel Duecento): nel 2025 l'avete vista, oggi decidete voi.",
@@ -773,46 +773,46 @@ saintechapelle:{n:"Sainte-Chapelle", sub:"biglietto con orario · 1.113 vetrate 
  desc:"Immancabile, come avete detto. La cappella che Luigi IX costruì in sei anni per custodire la corona di spine: la cappella bassa scura e dipinta, poi la scala a chiocciola e, di colpo, la cappella alta che è tutta vetro, quindici vetrate di quindici metri con 1.113 scene della Bibbia, dalla Genesi all'Apocalisse, lette dal basso verso l'alto e da sinistra a destra. Alle 14:30 di giugno il sole entra da sud e accende il rosso e il blu.",
  tip:"Il biglietto a orario va preso sul sito dei Monuments Nationaux: la fila senza biglietto supera l'ora. Si passa un controllo come in aeroporto (è dentro il Palazzo di Giustizia): niente coltellini né bottiglie grandi. Chiude alle 19:00 d'estate."},
 
-sg1:{n:"Saint-Germain-des-Prés", sub:"Buci, il Procope, Furstenberg, la chiesa più vecchia di Parigi", min:80, ico:"📚", kind:"see",
+sg1:{n:"Saint-Germain-des-Prés", sub:"Buci, il Procope, Furstenberg, la chiesa più vecchia di Parigi", min:70, ico:"📚", kind:"see",
  lat:48.8537, lon:2.3335, price:0, priceTxt:"GRATIS",
- stop:"Dal Pont Neuf: rue Dauphine, poi rue de Buci",
+ stop:"Da Place de l'Estrapade: rue Soufflot, Luxembourg, rue de Buci (15 min)",
  desc:"Il quartiere degli editori, di Sartre e di Juliette Gréco, fatto a piedi come si deve. Rue de Buci con il mercato e i caffè, la Cour du Commerce-Saint-André con il Procope (1686, il caffè più antico di Parigi, dove Voltaire beveva quaranta tazze al giorno e Danton abitava di fianco), rue Saint-André-des-Arts, poi la chiesa di Saint-Germain-des-Prés, l'edificio più antico della città (anno 1000, campanile romanico, interni ridipinti di blu e oro). Da lì rue Bonaparte, rue Jacob con le gallerie e gli antiquari, e Place Furstenberg, la piazzetta con i quattro paulownia e la casa-atelier di Delacroix: la più bella di Parigi, lo dicono tutti e hanno ragione.",
  tip:"Le botteghe da non saltare: la Pâtisserie Pierre Hermé (72 rue Bonaparte) per il macaron Ispahan, Debauve & Gallais (30 rue des Saints-Pères, cioccolatieri dal 1800, era la farmacia dei re), Ladurée al 21 rue Bonaparte. Nel 2025 avete già fatto il boulevard: oggi state nelle traverse."},
 
-flore:{n:"Aperitivo al Café de Flore (o Deux Magots)", sub:"il rito di Saint-Germain, in terrazza", min:40, ico:"🍸", kind:"eat",
+flore:{n:"Aperitivo al Café de Flore (o Deux Magots)", sub:"il rito di Saint-Germain, in terrazza", min:30, ico:"🍸", kind:"eat",
  lat:48.8541, lon:2.3326, price:16, priceTxt:"12–20 € a testa · senza prenotazione",
  stop:"172 boulevard Saint-Germain · poi metro 12 Saint-Germain-des-Prés → Madeleine, diretta, 12 min",
  url:"https://cafedeflore.fr/", urlTxt:"Café de Flore",
  desc:"Caro, lo sappiamo, e lo si fa lo stesso una volta: un kir o un calice in terrazza al Flore, dove Sartre e Beauvoir scrivevano al caldo durante la guerra, o ai Deux Magots dall'altra parte della piazza. Mezz'ora a guardare passare Parigi, poi la metro 12 vi riporta dritte a Madeleine per la doccia prima della cena.",
  tip:"Il conto si paga mentre si ordina, uso del posto. Alle 19:00 si parte: alle 19:15 siete in hotel, alle 20:00 a tavola a tre minuti da lì."},
 
-tour:{n:"Tour Eiffel fino in cima", sub:"ascensore fino alla sommità · biglietto con orario, da prendere appena esce", at:"09:30", min:135, ico:"🗼", kind:"see",
- lat:48.8584, lon:2.2945, price:36, priceTxt:"~36 € sommità con ascensore · fascia oraria online",
- stop:"Metro 1 Concorde → Franklin D. Roosevelt, poi 9 → Trocadéro (25 min), e si scende a piedi dal Trocadéro per il Pont d'Iéna",
+tour:{n:"Tour Eiffel fino in cima, con lo champagne", sub:"ascensore fino alla sommità · biglietto con orario, da prendere appena esce · un calice al bar in vetta", at:"16:30", min:140, ico:"🗼", kind:"see",
+ lat:48.8584, lon:2.2945, price:60, priceTxt:"~36 € sommità con ascensore + ~25 € il calice di champagne in cima · fascia oraria online",
+ stop:"Dai Bateaux Mouches 20 min a piedi lungo la Senna (quai Branly), si entra dal Champ-de-Mars",
  url:"https://www.toureiffel.paris/en/rates-opening-times", urlTxt:"Biglietteria ufficiale (unica da usare)",
- desc:"Stavolta fino in cima: 276 metri, il piano più alto, con la stanza di Gustave Eiffel ricostruita con le statuine di cera e lo champagne bar. Si arriva dal Trocadéro, che è l'unico punto da cui la torre si vede intera con la Senna davanti, si attraversa il Pont d'Iéna e si entra con il biglietto a orario. Due ascensori: fino al secondo piano, poi quello piccolo per la sommità. Mettete in conto due ore con le code ai controlli.",
- tip:"I biglietti per la sommità si esauriscono: escono online circa 60 giorni prima, cioè intorno al 19 aprile, e vanno presi quel giorno sul sito ufficiale (toureiffel.paris), mai dai rivenditori. Fascia 9:30: è la meno affollata e la luce del mattino è dalla parte giusta. Vento forte: la sommità può chiudere, in quel caso rimborsano la differenza."},
+ desc:"Stavolta fino in cima, e di pomeriggio: 276 metri, il piano più alto, con la stanza di Gustave Eiffel ricostruita con le statuine di cera e il bar dello champagne in vetta, dove si brinda con un calice (Moët, bianco o rosé, circa 25 €) guardando Parigi da sopra. Due ascensori: fino al secondo piano, poi quello piccolo per la sommità. Alle 16:30 la luce è già calda e il Trocadéro, davanti, si vede dall'alto. Mettete in conto due ore e un quarto con le code ai controlli e il brindisi.",
+ tip:"I biglietti per la sommità si esauriscono: escono online circa 60 giorni prima, cioè intorno al 19 aprile, e vanno presi quel giorno sul sito ufficiale (toureiffel.paris), mai dai rivenditori. Fascia 16:30, sommità. Il bar in cima è piccolo e in piedi: si prende il calice e ci si sposta verso il lato ovest, quello della Défense, dove il sole cala. Vento forte: la sommità può chiudere, in quel caso rimborsano la differenza."},
 
-bateaux:{n:"Bateaux Mouches", sub:"la crociera classica dal Pont de l'Alma · 70 min", at:"12:30", min:80, ico:"⛴", kind:"see",
+bateaux:{n:"Bateaux Mouches", sub:"la crociera classica dal Pont de l'Alma · 70 min", at:"14:45", min:80, ico:"⛴", kind:"see",
  lat:48.8638, lon:2.3060, price:19, priceTxt:"~19 € · orario online",
- stop:"Port de la Conférence, Pont de l'Alma (riva destra) · dalla Tour Eiffel 20 min a piedi lungo la Senna",
+ stop:"Port de la Conférence, Pont de l'Alma (riva destra) · dal Bouillon Pigalle: metro 2 Pigalle → Charles de Gaulle-Étoile, 1 → Franklin D. Roosevelt, 9 → Alma-Marceau (30 min)",
  url:"https://www.bateaux-mouches.fr/en", urlTxt:"Prenota online (sito ufficiale)",
  desc:"La crociera che avete già fatto due volte e che rifarete lo stesso, perché funziona: settanta minuti dal Pont de l'Alma fino all'Île Saint-Louis e ritorno, sotto trentuno ponti, con Notre-Dame restaurata, il Louvre, Orsay e la torre dal basso. Partenze ogni 30–45 minuti, si sale sul ponte scoperto.",
- tip:"Prenotate la corsa delle 12:30 e state in cima a prua, lato sinistro all'andata (è quello di Notre-Dame). Dalla Tour Eiffel si arriva a piedi in venti minuti lungo il quai Branly: niente metro."},
+ tip:"Prenotate la corsa delle 14:45 e state in cima a prua, lato sinistro all'andata (è quello di Notre-Dame). Allo sbarco, alle 16:00, si cammina venti minuti lungo il quai Branly fino alla torre: niente metro."},
 
-pigalle:{n:"Pranzo al Bouillon Pigalle", sub:"prenotabile online · dal reel «si mangia con 20 €»", at:"14:15", min:70, ico:"🍲", kind:"eat",
+pigalle:{n:"Pranzo al Bouillon Pigalle", sub:"prenotabile online · dal reel «si mangia con 20 €»", at:"13:00", min:70, ico:"🍲", kind:"eat",
  lat:48.8822, lon:2.3372, price:22, priceTxt:"18–25 € a testa",
- stop:"22 boulevard de Clichy, 18e · Metro 2 Pigalle · dai Bateaux Mouches: 9 Alma-Marceau → 1 Franklin D. Roosevelt → 2 Charles de Gaulle-Étoile → Pigalle (30 min)",
+ stop:"22 boulevard de Clichy, 18e · dal Café des Deux Moulins 6 min a piedi in discesa",
  url:"https://bouillonlesite.com/reservation/", urlTxt:"Prenota online (sito ufficiale)",
  desc:"Il locale che ha fatto rinascere la moda dei bouillon: tre piani, trecento posti, carta corta e prezzi inverosimili (uovo mayo 2 €, lumache 7, bourguignon 12, profiteroles 4) con una cucina dignitosissima. Rumoroso, allegro, giovane, sempre pieno. È il locale del reel «si mangia con 20 €», ai piedi della vostra Montmartre.",
- tip:"Prenotate il tavolo delle 14:15. Da qui la metro 12 porta in due fermate a Lamarck-Caulaincourt, da dove parte il giro di Montmartre in discesa."},
+ tip:"Prenotate il tavolo delle 13:00. Alle 14:15 si riparte con la metro 2 verso la Senna: il bar di Amélie e tutta Montmartre li avete già fatti la mattina, in discesa."},
 
-deuxmoulins:{n:"Merenda al Café des Deux Moulins", sub:"il bar di Amélie · 15 rue Lepic · crème brûlée obbligatoria", min:40, ico:"🍮", kind:"eat",
+deuxmoulins:{n:"Pausa al Café des Deux Moulins", sub:"il bar di Amélie · 15 rue Lepic · crème brûlée obbligatoria, anche prima di pranzo", min:35, ico:"🍮", kind:"eat",
  lat:48.8850, lon:2.3335, price:10, priceTxt:"8–12 € a testa · senza prenotazione",
  stop:"15 rue Lepic, 18e · da Place des Abbesses 3 min in discesa",
  url:"https://cafedesdeuxmoulins.fr/", urlTxt:"Café des Deux Moulins",
  desc:"Il bar dove Amélie Poulain faceva la cameriera nel film del 2001: il bancone di zinco, l'insegna rossa, il tabac in fondo, le foto di Audrey Tautou alle pareti. È rimasto un caffè di quartiere vero, non un museo, e la merenda giusta è la crème brûlée, da rompere con il cucchiaino come fa lei. Si chiama rue Lepic, non rue de Lapin: Au Lapin Agile è un'altra cosa, il cabaret in rue des Saules che avete incrociato nel giro di prima.",
- tip:"Si entra e basta, il tavolo si trova quasi sempre. Il bagno è quello del film. Da qui a Le Chat Noir sono cinque minuti in discesa per rue Lepic e boulevard de Clichy."},
+ tip:"Si entra e basta, il tavolo si trova quasi sempre. Il bagno è quello del film. Da qui al Bouillon Pigalle sono sei minuti in discesa per rue Lepic e boulevard de Clichy."},
 
 defense:{n:"La Défense e la Grande Arche", sub:"da fuori: l'asse storico visto dalla fine", min:30, ico:"🏙", kind:"see", trMin:28,
  lat:48.8925, lon:2.2360, price:0, priceTxt:"GRATIS",
@@ -826,6 +826,19 @@ louvre:{n:"Louvre", sub:"biglietto con orario · Denon: Gioconda, Nike, Venere, 
  url:"https://www.ticketlouvre.fr/", urlTxt:"Biglietteria ufficiale",
  desc:"Fascia delle 11:00 e un percorso secco di due ore: dalla Piramide dritte all'ala Denon, la Nike di Samotracia in cima allo scalone, la Grande Galerie con Leonardo, la sala della Gioconda (ci si entra a flusso, cinque minuti e si esce), le Nozze di Cana di fronte, poi giù alla Venere di Milo. Il resto del museo, un'altra vita: alle 12:50 si esce dal Carrousel.",
  tip:"Il biglietto a orario online è obbligatorio, senza non si entra. Niente valigie: le avete lasciate in hotel. Dall'uscita del Carrousel a Place de l'Opéra sono 15 minuti a piedi per avenue de l'Opéra."},
+
+pigallemr:{n:"Pigalle e il Moulin Rouge", sub:"il boulevard delle luci rosse, il mulino, l'aperitivo prima di cena", min:30, ico:"🎠", kind:"see", trMin:35,
+ lat:48.8841, lon:2.3322, price:0, priceTxt:"GRATIS",
+ stop:"Metro 2 Blanche · dalla Tour Eiffel: 6 Bir-Hakeim → Charles de Gaulle-Étoile, poi 2 → Blanche (35 min)",
+ url:"https://www.moulinrouge.fr/en/", urlTxt:"Moulin Rouge (spettacoli e orari)",
+ desc:"Il quartiere della vostra sera: boulevard de Clichy con le insegne, Place Pigalle con la fontana, e il Moulin Rouge del 1889, con le pale rosse che girano e la foto davanti, che avete già fatto nel 2025 e rifarete. Lo spettacolo dentro è un'altra serata (da 90 € in su, con cena molto di più): stasera il mulino si guarda da fuori, con un bicchiere in uno dei bar del boulevard, e si cena a cinquanta metri, da Le Chat Noir, che ha preso il nome dal cabaret del 1881 dove è nata Montmartre bohémienne.",
+ tip:"Tra Blanche e Pigalle il boulevard è vivace ma sicuro; i vicoli dietro, verso rue Frochot, un po' meno di sera: si resta sul boulevard. Le foto migliori del Moulin Rouge sono dopo le 22, con le luci accese: passateci di nuovo tornando dal tramonto."},
+
+estrapade:{n:"Place de l'Estrapade · la piazza di Emily in Paris", sub:"la casa di Emily, la boulangerie, il ristorante di Gabriel", min:25, ico:"🥐", kind:"see",
+ lat:48.8441, lon:2.3449, price:0, priceTxt:"GRATIS (pain au chocolat ~2 €)",
+ stop:"5e, dietro il Panthéon · dalla Cité: boulevard Saint-Michel in salita, 20 min · Metro 10 Cardinal Lemoine",
+ desc:"La piazzetta con la fontana e i platani dove abita Emily Cooper: il portone al numero 1 è quello della serie, la Boulangerie Moderne (16 rue des Fossés-Saint-Jacques) è dove compra il pain au chocolat della prima puntata, e il ristorante Terra Nera, al 18, è «Les Deux Compères» di Gabriel. Nel 2025 ci siete già state: oggi è il ritorno, con la foto sulla panchina e il pain au chocolat in mano.",
+ tip:"La boulangerie è vera e buona, aperta fino a sera: il pain au chocolat lo mangiate sul bordo della fontana. Da qui a Saint-Germain si scende per rue Soufflot, il Luxembourg a destra, e in quindici minuti si è in rue de Buci."},
 
 /* ---------- PROPOSTE DA PARCHEGGIO ---------- */
 opera:{n:"Opéra Garnier, dentro", sub:"la scala, il foyer, il soffitto di Chagall", min:75, ico:"🎭", kind:"see",
@@ -898,15 +911,15 @@ var DAYS_DEF = [
 
  {id:"ven", n:"18", dow:"Venerdì", date:"2027-06-18", c:"#C9975C",
   title:"Rive Gauche: Orsay, le Ninfee, la Sainte-Chapelle, Saint-Germain",
-  intro:"La giornata della riva sinistra, tutta a piedi lungo la Senna. Orsay all'apertura con gli impressionisti al quinto piano, le Ninfee all'Orangerie con lo stesso biglietto, pranzo alla Brasserie Les Deux Palais e, dall'altra parte della strada, la Sainte-Chapelle con la fascia delle 14:30. Poi l'Île de la Cité fino al Pont Neuf e tutto il pomeriggio a Saint-Germain-des-Prés: Buci, il Procope, Furstenberg, la chiesa dell'anno Mille, le botteghe, l'aperitivo al Flore. Metro 12 dritta a Madeleine, doccia, vestito bello: la sera c'è una cena a sorpresa, a tre minuti di passeggiata.",
+  intro:"La giornata della riva sinistra, tutta a piedi lungo la Senna. Orsay all'apertura con gli impressionisti al quinto piano, le Ninfee all'Orangerie con lo stesso biglietto, pranzo alla Brasserie Les Deux Palais e, dall'altra parte della strada, la Sainte-Chapelle con la fascia delle 14:30. Poi l'Île de la Cité fino al Pont Neuf, la salita a Place de l'Estrapade, la piazza di Emily in Paris, e il pomeriggio a Saint-Germain-des-Prés: Buci, il Procope, Furstenberg, la chiesa dell'anno Mille, le botteghe, l'aperitivo al Flore. Metro 12 dritta a Madeleine, doccia, vestito bello: la sera c'è una cena a sorpresa, a tre minuti di passeggiata.",
   start:"09:10",
-  items:["orsay","orangerie","deuxpalais","saintechapelle","cite","sg1","flore","pausaVen","cenaVen"]},
+  items:["orsay","orangerie","deuxpalais","saintechapelle","cite","estrapade","sg1","flore","pausaVen","cenaVen"]},
 
  {id:"sab", n:"19", dow:"Sabato", date:"2027-06-19", c:"#5E9BAC",
-  title:"La Tour Eiffel in cima, la Senna e tre ore a Montmartre",
-  intro:"Si parte dal Trocadéro e si sale fino in cima alla Tour Eiffel con la fascia delle 9:30, poi a piedi lungo la Senna fino ai Bateaux Mouches delle 12:30. Pranzo al Bouillon Pigalle da 20 euro ai piedi della collina e Montmartre fatta bene: tre ore di vicoli, scale, la vigna, la Maison Rose, Dalida, i mulini, il Bateau-Lavoir, seguendo le venti tappe del post, dall'alto in basso. Merenda al bar di Amélie in rue Lepic, cena da Le Chat Noir e risalita per il tramonto dalle scale del Sacré-Cœur alle 21:57.",
-  start:"09:00",
-  items:["tour","bateaux","pigalle","mm1","mm2","deuxmoulins","cenaSab","tramonto"]},
+  title:"Montmartre, la Senna, la Tour Eiffel in cima e Pigalle",
+  intro:"Si parte alle 9:30 con la metro 12 diretta a Montmartre, fatta bene e in discesa: la collina dei vicoli, la vigna, la Maison Rose, Dalida, i mulini, il Bateau-Lavoir, le venti tappe del post, la crème brûlée al bar di Amélie e il pranzo al Bouillon Pigalle da 20 euro. Nel pomeriggio la Senna: Bateaux Mouches alle 14:45 dal Pont de l'Alma, poi a piedi fino alla Tour Eiffel e su fino in cima con la fascia delle 16:30, calice di champagne in vetta. La sera si torna a Pigalle: il Moulin Rouge, un bicchiere sul boulevard, cena da Le Chat Noir e la risalita per il tramonto dalle scale del Sacré-Cœur alle 21:57.",
+  start:"09:30",
+  items:["mm1","mm2","deuxmoulins","pigalle","bateaux","tour","pigallemr","cenaSab","tramonto"]},
 
  {id:"dom", n:"20", dow:"Domenica", date:"2027-06-20", c:"#6E8A8E",
   title:"La Grande Arche, il Louvre e l'ultimo pranzo",
@@ -937,15 +950,15 @@ var CENE = [
   alt:"Alternativa stellata a 10 minuti: Pavyllon di Yannick Alléno (bancone con vista sul giardino dei Champs-Élysées, aperto 7/7) prende prenotazioni solo per telefono, quindi fuori criterio; Lucas Carton in Place de la Madeleine è l'altra stella a cinque minuti.",
   altUrl:"https://www.lucascarton.com/"},
 
- {id:"cenaSab", n:"Le Chat Noir", when:"Sabato 19 · 19:30 · 2 persone · da prenotare online", ico:"🐈‍⬛", av:"#DCE8EA",
+ {id:"cenaSab", n:"Le Chat Noir", when:"Sabato 19 · 20:00 · 2 persone · da prenotare online", ico:"🐈‍⬛", av:"#DCE8EA",
   zone:"68 boulevard de Clichy, 18e · tra Blanche e Pigalle, davanti al Moulin Rouge",
   kind:"Brasserie di Montmartre, il vostro ritorno", price:"30–45 € a testa",
   desc:"Ci siete già state nel 2025 ed è tornato in lista: la brasserie con il gatto nero di Steinlen sull'insegna, i tavolini sul boulevard davanti al Moulin Rouge, cucina francese da brasserie (entrecôte, confit, crème brûlée) e il caos buono del sabato sera a Pigalle. È a cinque minuti in discesa dal bar di Amélie.",
   url:"https://www.thefork.it/", urlTxt:"Prenota online (cercare «Le Chat Noir Montmartre» su TheFork)",
   adv:"2–3 settimane. Verificate che la prenotazione online sia attiva: se no, piano B Bouillon Pigalle, 400 metri più in là.",
-  tips:"Tavolo alle 19:30 e conto per le 21:00: alle 21:15 si è sulle scale del Sacré-Cœur per il tramonto. Da Blanche la metro 2 porta ad Anvers in due minuti, poi la funicolare."},
+  tips:"Tavolo alle 20:00 e conto per le 21:25: alle 21:40 si è sulle scale del Sacré-Cœur per il tramonto. Da Blanche la metro 2 porta ad Anvers in due minuti, poi la funicolare."},
 
- {id:"altPigalle", n:"Bouillon Pigalle", when:"Sabato 19 · 14:15 · pranzo · prenotare online", ico:"🍷", av:"#DCE6F0",
+ {id:"altPigalle", n:"Bouillon Pigalle", when:"Sabato 19 · 13:00 · pranzo · prenotare online", ico:"🍷", av:"#DCE6F0",
   zone:"22 boulevard de Clichy, 18e · ai piedi di Montmartre, Metro Pigalle",
   kind:"Il bouillon moderno del 2017, 300 coperti su tre piani", price:"18–25 € a testa",
   desc:"Il locale che ha fatto rinascere la moda dei bouillon: tre piani, trecento posti, carta corta e prezzi inverosimili (uovo mayo 2 €, lumache 7, bourguignon 12, profiteroles 4) con una cucina dignitosissima. È la tappa del reel «si mangia con 20 €»: nel programma sta a pranzo il sabato, prima di salire a Montmartre, ed è il piano B della cena se Le Chat Noir non prende prenotazioni online.",
@@ -982,17 +995,17 @@ function vt(t){return (t.secret&&!revealed())?Object.assign({},t,t.secret,{u:""}
 var TODO = [
  {id:"t1", t:"Contraste ⭐ · cena di venerdì alle 20:00", d:"Prenotare online sul sito (modulo). Aperto solo lun–ven. Se pieno: Lucas Carton.", u:"https://www.contraste.paris/en/", uTxt:"modulo di prenotazione", pri:1, secret:{t:"Cena a sorpresa di venerdì alle 20:00 🎁", d:"Tavolo già prenotato da chi la regala. Voi dovete solo portare un vestito bello."}},
  {id:"t2", t:"Bouillon Julien · cena di giovedì alle 20:30", d:"Prenotazione online sul sito ufficiale, 2 persone a nome Rosetta.", u:"https://www.bouillon-julien.com/rserver", uTxt:"prenota", pri:1},
- {id:"t20", t:"Tour Eiffel · sommità, sabato 19 alle 9:30", d:"Solo biglietteria ufficiale. I biglietti escono circa 60 giorni prima (intorno al 19 aprile 2027) e la sommità si esaurisce in giornata: segnarsi la data. ~36 € a testa.", u:"https://www.toureiffel.paris/en/rates-opening-times", uTxt:"biglietteria ufficiale", pri:1},
+ {id:"t20", t:"Tour Eiffel · sommità, sabato 19 alle 16:30 (champagne in cima)", d:"Solo biglietteria ufficiale. I biglietti escono circa 60 giorni prima (intorno al 19 aprile 2027) e la sommità si esaurisce in giornata: segnarsi la data. ~36 € a testa.", u:"https://www.toureiffel.paris/en/rates-opening-times", uTxt:"biglietteria ufficiale", pri:1},
  {id:"t21", t:"Louvre · fascia 11:00 di domenica 20", d:"22 € a testa, biglietto a orario obbligatorio. Salvare il PDF nel Wallet.", u:"https://www.ticketlouvre.fr/", uTxt:"biglietteria ufficiale", pri:1},
  {id:"t22", t:"Orsay + Orangerie · biglietto combinato, venerdì 18: Orsay 9:30, Orangerie 11:45", d:"~24 € a testa il combinato (vale 3 mesi). Le fasce dei due musei si prenotano separatamente con lo stesso biglietto.", u:"https://www.musee-orsay.fr/en/visit/tickets-and-rates", uTxt:"biglietti Orsay", pri:1},
  {id:"t26", t:"Sainte-Chapelle · fascia 14:30 di venerdì 18", d:"13 € a testa sulla biglietteria dei Monuments Nationaux (esiste anche il biglietto doppio con la Conciergerie). Senza biglietto a orario la fila supera l'ora.", u:"https://tickets.monuments-nationaux.fr/fr-FR/produits-seances?site=2035141861660400306&famille=2129032708460404016", uTxt:"biglietteria ufficiale", pri:1},
- {id:"t23", t:"Bateaux Mouches · corsa delle 12:30 di sabato 19", d:"~19 € a testa, online sul sito ufficiale, Port de la Conférence.", u:"https://www.bateaux-mouches.fr/en", uTxt:"prenota", pri:2},
- {id:"t24", t:"Le Chat Noir · cena di sabato alle 19:30", d:"Cercare «Le Chat Noir Montmartre» su TheFork. Se non prenotabile online: Bouillon Pigalle (piano B).", u:"https://www.thefork.it/", uTxt:"TheFork", pri:2},
+ {id:"t23", t:"Bateaux Mouches · corsa delle 14:45 di sabato 19", d:"~19 € a testa, online sul sito ufficiale, Port de la Conférence.", u:"https://www.bateaux-mouches.fr/en", uTxt:"prenota", pri:2},
+ {id:"t24", t:"Le Chat Noir · cena di sabato alle 20:00", d:"Cercare «Le Chat Noir Montmartre» su TheFork. Se non prenotabile online: Bouillon Pigalle (piano B).", u:"https://www.thefork.it/", uTxt:"TheFork", pri:2},
  {id:"t27", t:"Les Indécises · pranzo di giovedì alle 13:45", d:"2 rue des Trois-Bornes, 11e. Verificare il canale di prenotazione (sito/Instagram/telefono). Piano B senza prenotazione: Bouillon Chartier.", u:"https://www.google.com/maps/search/Les+Ind%C3%A9cises+rue+des+Trois-Bornes+Paris", uTxt:"mappa e contatti", pri:2},
  {id:"t28", t:"Les Deux Palais · pranzo di venerdì alle 13:00", d:"3 boulevard du Palais, davanti alla Sainte-Chapelle. Verificare la prenotazione online (TheFork) o telefono.", u:"https://www.google.com/maps/search/Brasserie+Les+Deux+Palais+Paris", uTxt:"mappa e contatti", pri:2},
  {id:"t4", t:"Biglietti aeroporto nell'app Île-de-France Mobilités", d:"Due «Paris Région ◇ Aéroports» (Orly → Madeleine con la 14, giovedì) e due per il Roissybus di domenica, più un carnet di biglietti metro sul telefono di ciascuna. Verificare prezzi 2027.", u:"https://www.iledefrance-mobilites.fr/aide-et-contacts/titres-unitaires-tarifs-reduits/quels-tickets-pour-l-aeroport", uTxt:"info biglietti", pri:1},
  {id:"t5", t:"Email all'hotel: deposito bagagli giovedì 10:30, early check-in, ritiro domenica 14:30", d:"Chiedere anche la tariffa taxi fissa per CDG come piano B.", u:"https://www.hoteldecastiglione.com/", uTxt:"sito hotel", pri:2},
- {id:"t8", t:"Bouillon Pigalle · pranzo di sabato alle 14:15", d:"Prenotazione online sul sito del gruppo.", u:"https://bouillonlesite.com/reservation/", uTxt:"prenota", pri:2},
+ {id:"t8", t:"Bouillon Pigalle · pranzo di sabato alle 13:00", d:"Prenotazione online sul sito del gruppo.", u:"https://bouillonlesite.com/reservation/", uTxt:"prenota", pri:2},
  {id:"t9", t:"Café de la Paix · pranzo di domenica alle 13:15", d:"Prenotazione online, chiedere la terrazza e avvisare che alle 14:15 si esce.", u:"https://www.cafedelapaix.fr/", uTxt:"prenota", pri:2},
  {id:"t12", t:"Facoltativo · Musée de Montmartre", d:"15 €, giardino di Renoir, 10:00–19:00. Si decide sul posto sabato.", u:"https://museedemontmartre.fr/", uTxt:"sito", pri:4},
  {id:"t13", t:"Facoltativo · Catacombe o Fondation Louis Vuitton", d:"Solo se si cambia il venerdì: controllare la mostra della Fondation a primavera.", u:"https://www.fondationlouisvuitton.fr/en", uTxt:"programma", pri:4}
@@ -1370,9 +1383,9 @@ CENE.forEach(function(r){
 POI.cenaGio.at="20:30"; POI.cenaGio.min=100;
 POI.cenaGio.sub="20:30 · 2 persone · prenotare online · sala Art Nouveau del 1906";
 POI.cenaGio.stop="16 rue du Faubourg Saint-Denis · dal Marais: metro 8 da Chemin Vert → Strasbourg-Saint-Denis (12 min); dall'hotel: metro 8 da Madeleine, diretta";
-POI.cenaSab.at="19:30"; POI.cenaSab.min=90;
-POI.cenaSab.sub="19:30 · 2 persone · prenotare online · brasserie davanti al Moulin Rouge";
-POI.cenaSab.stop="68 boulevard de Clichy · dal Café des Deux Moulins 5 min in discesa";
+POI.cenaSab.at="20:00"; POI.cenaSab.min=85;
+POI.cenaSab.sub="20:00 · 2 persone · prenotare online · brasserie davanti al Moulin Rouge";
+POI.cenaSab.stop="68 boulevard de Clichy · davanti al Moulin Rouge, Metro 2 Blanche";
 /* -- la cena a sorpresa -- */
 POI.cenaVen.at="20:00"; POI.cenaVen.min=150; POI.cenaVen.price=0; POI.cenaVen.secret=true;
 POI.cenaVen.priceTxt="offerta 🎁";
@@ -1516,7 +1529,7 @@ function renderWx(){
   if(!WX){el.innerHTML='<div class="card flat" style="background:#F1ECDF"><div class="muted small">🌤 Meteo di Parigi: si aggiorna appena c\'è rete.</div></div>';return;}
   var c=WX.cur, ic=WX_ICO(c.weather_code), age=Math.round((Date.now()-WX.ts)/60000);
   var h='<div class="card"><div class="wx"><div class="big">'+ic[0]+'</div><div><div class="t">'+Math.round(c.temperature_2m)+'°</div><div class="muted small">Parigi adesso · '+ic[1]+(c.wind_speed_10m>25?' · vento '+Math.round(c.wind_speed_10m)+' km/h':'')+'</div></div>'+
-    '<div style="flex:1"></div><a class="btn ghost" style="padding:7px 10px;font-size:12px" href="https://www.meteo.it/" target="_blank" rel="noopener">meteo.it ↗</a></div>';
+    '<div style="flex:1"></div><a class="btn ghost" style="padding:7px 10px;font-size:12px" href="https://www.meteo.it/meteo/parigi-1000965" target="_blank" rel="noopener">meteo.it ↗</a></div>';
   if(WX.daily&&WX.daily.time){
     var d=WX.daily, rows="";
     DAYS.forEach(function(D){var i=d.time.indexOf(D.date); if(i<0)return; var w=WX_ICO(d.weather_code[i]);
@@ -1940,7 +1953,7 @@ function renderInfo(){
        ?'<div class="pill g" style="margin-bottom:8px">Avvisi attivi su questo telefono</div><p class="small" style="margin:0 0 8px">Nei giorni del viaggio, 30 minuti prima di ogni tappa arriva un avviso con l\'orario e come arrivarci. Funziona finché l\'app è aperta o in secondo piano da poco: su Android va bene, su iPhone solo con l\'app installata sulla schermata Home.</p><button class="btn ghost full" onclick="disableNotif()">Disattiva gli avvisi</button>'
        :'<p class="small" style="margin:0 0 8px">Attivate gli avvisi e, nei giorni del viaggio, 30 minuti prima di ogni tappa il telefono vi chiama. Limite onesto: funziona quando l\'app è aperta o in secondo piano da poco (Android sì, iPhone solo con l\'app installata). Il metodo che non sbaglia mai è il calendario qui sotto.</p><button class="btn full" onclick="enableNotif()">🔔 Attiva gli avvisi su questo telefono</button>')+
      '<hr><p class="small" style="margin:0 0 8px"><b>Il metodo sicuro:</b> scaricate il programma come calendario. Ogni tappa diventa un evento con la sveglia 30 minuti prima, nel calendario del telefono (iPhone e Android, anche a telefono bloccato). Si scarica una volta per ciascuna, dopo aver sistemato il programma.</p><button class="btn sec full" onclick="exportIcs()">📅 Scarica il programma nel calendario (.ics)</button></div>';
-  h+='<div class="tt">🎬 L\'intro</div><div class="card"><p class="small" style="margin:0 0 8px">Il video di apertura (il reel «Paris 🤍» di Blanc &amp; Noir) si vede quando c\'è rete: offline parte la Tour Eiffel disegnata.</p><button class="btn sec full" onclick="openIntro(true)">▶️ Rivedi l\'intro</button></div>';
+  h+='<div class="tt">🎬 L\'intro</div><div class="card"><p class="small" style="margin:0 0 8px">Il video di apertura (il reel «Paris 🤍» di Blanc &amp; Noir) parte a ogni accesso: con il file intro.mp4 nell\'app anche offline, altrimenti dall\'embed di Instagram quando c\'è rete.</p><button class="btn sec full" onclick="openIntro(true)">▶️ Rivedi l\'intro</button></div>';
   h+='<div class="tt">📲 L\'app sul telefono</div><div class="card" id="installCard">'+installBlock()+'</div>';
   document.getElementById("infoBody").innerHTML=h;
 }
@@ -2220,7 +2233,6 @@ function exportStory(){dl(new Blob([storyText()],{type:"text/plain;charset=utf-8
 
 /* =================== INTRO =================== */
 function openIntro(force){
-  if(!force&&state.intro)return;
   var box=document.getElementById("introVid"), fb=document.getElementById("introFb");
   var old=box.querySelector("iframe"); if(old)old.remove();
   var old2=box.querySelector("video"); if(old2)old2.remove();
@@ -2244,7 +2256,7 @@ function closeIntro(never){
   document.getElementById("intro").classList.remove("on");
   var f=document.getElementById("introVid").querySelector("iframe"); if(f)f.remove();
   var v=document.getElementById("introVid").querySelector("video"); if(v){try{v.pause();}catch(e){}v.remove();}
-  if(never){state.intro=1;save();toast("L'intro non si riapre più da sola: la ritrovi in Info.");}
+  if(never){state.intro=1;save();}
 }
 
 /* =================== NAV + INIT =================== */
