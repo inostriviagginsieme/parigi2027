@@ -3,8 +3,9 @@
    - la pagina (index.html) è "rete prima, cache se offline": una versione nuova arriva al primo avvio con rete
    - icone, immagini e manifest sono "cache prima" con aggiornamento in background
    AD OGNI PUBBLICAZIONE: incrementare CACHE (v2, v3…) insieme ad APP_VER in index.html */
-var CACHE = "parigi2027-v3";
-var ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-180.png", "./face_sx.webp", "./face_dx.webp"];
+var CACHE = "parigi2027-v5";
+var ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-180.png", "./face_sx.webp", "./face_dx.webp", "./intro.mp4"];
+var OPTIONAL = ["./intro.mp4"]; /* se manca, l'app si installa lo stesso */
 
 self.addEventListener("install", function (e) {
   e.waitUntil(
@@ -13,7 +14,7 @@ self.addEventListener("install", function (e) {
         return fetch(u, { cache: "reload" }).then(function (res) {
           if (!res || !res.ok) throw new Error("fetch " + u);
           return c.put(u, res);
-        });
+        }).catch(function (err) { if (OPTIONAL.indexOf(u) < 0) throw err; });
       }));
     }).then(function () { return self.skipWaiting(); })
   );

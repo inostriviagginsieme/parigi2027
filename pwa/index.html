@@ -72,7 +72,11 @@ section.on{display:block}
 .tt:before{content:"";width:16px;height:2px;background:var(--gold);border-radius:2px;flex:none}
 .muted{color:var(--ink2);font-size:13px}
 .small{font-size:12.5px}
-.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;background:var(--linen);color:var(--ink);white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;background:var(--linen);color:var(--ink);white-space:nowrap;max-width:100%}
+.tags .pill,.met .pill,.srch .pill{white-space:normal;line-height:1.3;text-align:left}
+.it .bd .met span{min-width:0;overflow-wrap:anywhere}
+.kv span,.det .lead,.tip,.card p,.card div{overflow-wrap:anywhere}
+.btn{max-width:100%;overflow-wrap:anywhere;text-align:center}
 .pill.g{background:#E1EBDD;color:#3F5F41}.pill.y{background:#FBECC8;color:#8A6208}
 .pill.b{background:#DCE8EA;color:#3A6A75}.pill.r{background:#F3E1D3;color:#A76E49}
 .pill.free{background:#DFF0DE;color:#3D6B3A}
@@ -134,7 +138,7 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
   #printDoc .pbx{width:4.2mm;height:4.2mm;border:1pt solid #555;border-radius:1mm;flex:none;margin-top:1mm}
   #printDoc .phead{color:#555;font-size:9.5pt;margin:0 0 5mm}
 }
-.trf{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink2);padding:1px 0 1px 41px;font-weight:600}
+.trf{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink2);padding:1px 0 1px 41px;font-weight:600;flex-wrap:wrap}
 .trf i{font-style:normal}
 
 /* ---------- ADESSO ---------- */
@@ -224,7 +228,7 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
 .tip.secret b{color:var(--wine)}
 .kv{display:flex;gap:8px;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)}
 .kv:last-child{border:none}
-.kv b{flex:none;width:82px;color:var(--ink2);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+.kv b{flex:none;width:88px;color:var(--ink2);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;padding-top:1px;overflow-wrap:normal;word-break:normal}
 .kv span{flex:1}
 .say{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--linen);font-size:13px;margin-left:6px;vertical-align:middle}
 
@@ -270,7 +274,7 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
 .intro{position:fixed;inset:0;z-index:120;background:#2F3A3B;color:#F7F3EA;display:none;flex-direction:column;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top,0px)) 16px calc(18px + var(--safe))}
 .intro.on{display:flex}
 .intro .vid{width:100%;max-width:400px;aspect-ratio:9/16;max-height:62vh;border-radius:18px;overflow:hidden;background:#4B5C5D;box-shadow:0 20px 50px rgba(0,0,0,.6);position:relative}
-.intro .vid iframe{width:100%;height:100%;border:0;display:block}
+.intro .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;z-index:2;background:transparent}
 .intro .fb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(170deg,#4B5C5D,#5E9BAC 60%,#ECC5A2)}
 .intro .fb svg{width:120px;height:200px}
 .intro h1{font-size:30px;margin:16px 0 2px;text-align:center}
@@ -302,7 +306,8 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
   <path d="M60 10 l-4 0 l-2 40 c-2 26 -8 54 -20 82 c-9 20 -20 43 -40 77 l0 9 l26 0 c9 -20 20 -40 34 -40 c14 0 25 20 34 40 l26 0 l0 -9 c-20 -34 -31 -57 -40 -77 c-12 -28 -18 -56 -20 -82 z" fill="#8A5A3C" stroke="#3E2616" stroke-width="3" stroke-linejoin="round"/>
   <path d="M22 133 h72" stroke="#F6E7C8" stroke-width="5" stroke-linecap="round"/>
   <path d="M4 190 h108" stroke="#F6E7C8" stroke-width="5" stroke-linecap="round"/>
-  <path d="M38 157 q20 -26 40 0" fill="none" stroke="#3E2616" stroke-width="3"/>
+  <path d="M40 150 q18 22 36 0" fill="none" stroke="#3E2616" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="49" cy="143" r="2.6" fill="#3E2616"/><circle cx="67" cy="143" r="2.6" fill="#3E2616"/>
   <rect x="42" y="70" width="32" height="7" rx="3" fill="#F6E7C8"/>
   <circle cx="58" cy="8" r="5" fill="#FFD66B" stroke="#3E2616" stroke-width="2.5"/>
 </g>
@@ -347,7 +352,9 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
       <button class="btn sec" onclick="openSearch()">🔍 Cerca</button>
       <button class="btn sec" onclick="go('s-mappa')">🗺 Mappa</button>
       <button class="btn sec" onclick="printPdf()">🖨 PDF</button>
+      <button class="btn sec" onclick="openPrintPage()">📄 Stampabile</button>
     </div>
+    <p class="muted small" style="margin:8px 0 0">🖨 PDF apre la stampa del telefono (scegli «Salva come PDF»). Se non si apre, 📄 Stampabile mostra il programma in una pagina pulita con il suo tasto di stampa.</p>
   </div>
   <div id="planDays"></div>
   <div class="card flat" style="background:#F1ECDF">
@@ -466,14 +473,14 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
 <nav id="nav"></nav>
 
 <div class="intro" id="intro">
-  <div class="vid" id="introVid">
+  <div class="vid" id="introVid" title="Tocca il video per accendere l'audio">
     <div class="fb" id="introFb">
       <svg viewBox="0 0 116 200"><use href="#tour"/></svg>
       <div style="font-size:12px;letter-spacing:.2em;color:#F1DFA6" class="tw">PARIS, MON AMOUR</div>
     </div>
   </div>
   <h1>Parigi <em>2027</em></h1>
-  <p>Rosetta &amp; Concetta · 17–20 giugno · la terza volta è quella giusta.</p>
+  <p>Rosetta &amp; Concetta · 17–20 giugno 2027</p>
   <button class="btn" onclick="closeIntro()">Entra nel viaggio →</button>
   <button class="skip" onclick="closeIntro(true)">non mostrare più l'intro</button>
 </div>
@@ -509,7 +516,7 @@ hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
 /* =================================================================
    DATI DEL VIAGGIO — tutto offline, niente rete
    ================================================================= */
-var APP_VER="3 · 5 ott 2026";
+var APP_VER="5 · 6 ott 2026";
 var HOTEL = {n:"Hôtel de Castiglione", lat:48.8696, lon:2.3196};
 var INTRO_URL="https://www.instagram.com/reel/Daln1CbuaCj/embed/";
 var SECRET_AT=new Date(2027,5,18,17,0,0); /* la cena a sorpresa si svela venerdì 18 giugno alle 17:00 */
@@ -1080,7 +1087,7 @@ function searchIndex(){
   INFO_CARDS.forEach(function(c,ci){
     var body=c.h.map(function(r){return r[0]+": "+r[1];}).join(" · ");
     items.push({kind:"info",ico:c.ico,title:c.t,sub:body,tags:[pill("ℹ️ Info")],
-      txt:norm(c.t+" "+body+" "+(c.note||"")), strong:norm(c.t), act:"jumpTo('s-info','info-"+ci+"')"});
+      txt:norm(c.t+" "+body+" "+(c.note||"")), strong:norm(c.t), act:"jumpTo('s-info','info-"+(c.id||ci)+"')"});
   });
   allDocs().forEach(function(d){
     items.push({kind:"doc",ico:docIcon(d),title:d.name,sub:"Wallet · "+poiLabel(d.poi),tags:[pill("🎟 documento","b")],
@@ -1296,11 +1303,20 @@ var INFO_CARDS = [
 {t:"Muoversi a Parigi", ico:"🚇", h:[
  ["Biglietto metro","Un biglietto «Métro-Train-RER» vale per tutta la rete, cambi inclusi: circa <b>2,50 €</b> (prezzo 2026, in app o su carta Navigo Easy da 2 €). Sul telefono: app <b>Île-de-France Mobilités</b>, si compra e si valida avvicinando il telefono al tornello (iPhone e Android)."],
  ["Aeroporti","Biglietto «Paris Région ◇ Aéroports»: <b>14 €</b> a tratta, vale per la metro 14 da Orly e per il Roissybus verso CDG (verificare in app: il Roissybus potrebbe avere un titolo a parte)."],
- ["Quanti","Per quattro giorni bastano una decina di corse a testa: comprate un carnet di 10 nell'app. Niente pass giornalieri: il programma è quasi tutto a piedi."],
+ ["Carte Orange","Non esiste più dal 2009: oggi si chiama <b>Navigo</b>. La versione per i turisti è la Navigo Découverte settimanale (circa 32 € + 5 € di tessera con fototessera), ma vale <b>da lunedì a domenica</b>, quindi per un giovedì–domenica si pagherebbe una settimana intera: non conviene."],
+ ["Pass 4 giorni","Esiste il <b>Paris Visite</b> da 4 giorni consecutivi: zone 1–3 (tutta Parigi, senza aeroporti) circa 38–40 € a testa; zone 1–5 con gli aeroporti circa 78–80 € (prezzi 2026, da verificare in app). Si compra nell'app Île-de-France Mobilités o su carta Navigo Easy."],
+ ["Cosa conviene","Il programma è quasi tutto a piedi: una decina di corse a testa (<b>~25 €</b>) più i due biglietti aeroporto (28 €) fa <b>~53 €</b>. Il Paris Visite 1–5 costa 78–80 € e non copre il Roissybus; il Paris Visite 1–3 (38–40 €) più i due biglietti aeroporto fa 66–68 €: conviene solo se pensate di prendere la metro più di 15 volte. Verdetto: <b>biglietti singoli nell'app</b>, un carnet di 10 a testa, e si è a posto. Se preferite non pensarci più, Paris Visite 1–3: pagate 15 € in più per la libertà."],
  ["Linee utili","<b>14</b> (automatica) Orly ↔ Madeleine ↔ Saint-Ouen · <b>12</b> Madeleine ↔ Abbesses (Montmartre) · <b>8</b> Madeleine ↔ République ↔ Strasbourg-Saint-Denis · <b>1</b> Concorde ↔ Saint-Paul (Marais) · <b>2</b> e <b>3</b> per il Père-Lachaise"],
  ["Funicolare","Quella di Montmartre si prende con un biglietto metro normale."],
  ["Orari","Metro 5:30–1:15 (il sabato fino alle 2:15). Il Roissybus 5:15–0:30 ogni 15–20 min."]
 ], note:"Nei tornelli il telefono va appoggiato come una carta, senza aprire l'app. Tenete il biglietto fino all'uscita: i controlli ci sono."},
+
+{t:"Taxi, Uber e app", ico:"🚕", id:"taxi", h:[
+ ["Taxi ufficiali","<b>Taxis G7</b>, la centrale di Parigi: <a href=\"tel:+33141276699\">+33 1 41 27 66 99</a> (risposta in inglese, chiamata normale; il numero breve 3607 è a pagamento). Oppure l'<a href=\"https://www.g7.fr/en/g7-app\" target=\"_blank\" rel=\"noopener\">app G7</a>, che si prenota e si paga come Uber ma manda un taxi vero, con corsia preferenziale."],
+ ["Uber","<a href=\"https://apps.apple.com/it/app/uber/id368677368\" target=\"_blank\" rel=\"noopener\">iPhone (App Store)</a> · <a href=\"https://play.google.com/store/apps/details?id=com.ubercab\" target=\"_blank\" rel=\"noopener\">Android (Google Play)</a>. Lo stesso account italiano funziona a Parigi. Bolt (<a href=\"https://bolt.eu/it/\" target=\"_blank\" rel=\"noopener\">bolt.eu</a>) è spesso più economico, stessa logica."],
+ ["Aeroporti","Taxi a <b>tariffa fissa</b> per legge: da Parigi riva destra circa 56 € per CDG e 36 € per Orly (prezzi 2026, da verificare), bagagli inclusi, senza supplementi. Se un tassista propone un prezzo diverso, no. Per Uber il prezzo varia con l'orario."],
+ ["In città","Una corsa in centro costa 12–20 €. Nelle code (Opéra, Louvre) si prende al posteggio con la luce verde accesa; in strada si ferma con la mano, come a Roma. Il memo con il numero sta in cima a ogni giornata del programma."]
+], note:"Alle 15 di domenica, se il pranzo va lungo, il taxi fisso per CDG dall'hotel è il piano B: chiedetelo alla reception alle 14:30 e parte quando scendete."},
 
 {t:"Meteo e luce di giugno", ico:"🌤", h:[
  ["Temperature","Massime 23–26 °C, minime 14–16 °C. Possibili giornate calde: Parigi a giugno può fare 30."],
@@ -1427,16 +1443,25 @@ function schedule(D){
     if(tr){t+=tr.min; if(tr.mode==="walk")walked+=tr.d;}
     var gap=0;
     if(p.at&&toMin(p.at)>t){gap=toMin(p.at)-t;t=toMin(p.at);}
-    out.push({id:id,p:vp(id),st:t,tr:tr,gap:gap});
+    out.push({id:id,p:vp(id),st:t,tr:tr,gap:gap,from:prev?{lat:prev.lat,lon:prev.lon}:null});
     t+=p.min; cost+=(p.price||0);
     if(p.lat!=null)prev=p;
   });
   var back=null;
   if(D.id!=="dom"&&prev&&hav(prev,HOTEL)>200){back=transfer(prev,{lat:HOTEL.lat,lon:HOTEL.lon,stop:"metro fino a Madeleine"});
     if(back){t+=back.min; if(back.mode==="walk")walked+=back.d;}}
-  return {rows:out,end:t,km:walked/1000,cost:cost,back:back};
+  return {rows:out,end:t,km:walked/1000,cost:cost,back:back,last:prev};
 }
 
+/* -- link Google Maps da tappa a tappa -- */
+function gmaps(from,to,mode){return 'https://www.google.com/maps/dir/?api=1&origin='+from.lat+','+from.lon+'&destination='+to.lat+','+to.lon+'&travelmode='+(mode==="walk"?"walking":"transit");}
+function trLink(r){if(!r.tr||!r.from||r.p.lat==null)return "";return ' <a href="'+gmaps(r.from,r.p,r.tr.mode)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-weight:800;white-space:nowrap">🧭 Maps</a>';}
+function backLink(s){if(!s.back||!s.last)return "";return ' <a href="'+gmaps(s.last,HOTEL,s.back.mode)+'" target="_blank" rel="noopener" style="font-weight:800;white-space:nowrap">🧭 Maps</a>';}
+/* -- memo taxi a inizio giornata -- */
+var TAXI={n:"Taxis G7 (Parigi)",tel:"+33141276699",telTxt:"+33 1 41 27 66 99",app:"https://www.g7.fr/en/g7-app",uberIos:"https://apps.apple.com/it/app/uber/id368677368",uberAnd:"https://play.google.com/store/apps/details?id=com.ubercab",bolt:"https://bolt.eu/it/"};
+function taxiStrip(compact){
+  return '<div class="trf" style="padding:'+(compact?'4px 8px 8px':'6px 12px')+';background:#FBF3E0;border-radius:10px;margin:'+(compact?'0 0 6px':'0 0 8px')+'"><i>🚕</i><span style="flex:1">Taxi: <a href="tel:'+TAXI.tel+'" style="font-weight:800">'+TAXI.telTxt+'</a> (G7) · oppure <a href="'+TAXI.app+'" target="_blank" rel="noopener">app G7</a>, <a href="https://m.uber.com/" target="_blank" rel="noopener">Uber</a>, <a href="'+TAXI.bolt+'" target="_blank" rel="noopener">Bolt</a></span><button class="pill b" onclick="jumpTo(\'s-info\',\'info-taxi\')" style="border:0">info</button></div>';
+}
 /* -- rendering PIANO -- */
 function pill(t,c){return '<span class="pill '+(c||"")+'">'+t+'</span>';}
 function todayDay(){var now=new Date();for(var i=0;i<DAYS.length;i++){var t=new Date(DAYS[i].date+"T00:00:00");if(t.toDateString()===now.toDateString())return i;}return -1;}
@@ -1449,7 +1474,18 @@ function nowRow(){
 }
 function renderNow(){
   var el=document.getElementById("nowCard"); if(!el)return;
-  var nr=nowRow(); if(!nr){el.innerHTML="";return;}
+  var nr=nowRow();
+  if(!nr){
+    var now=new Date(), dep=new Date(2027,5,17,7,15,0), ret=new Date(2027,5,20,19,40,0);
+    if(now>ret){el.innerHTML='<div class="card now"><div class="k">💛 Ci siamo state</div><h3>Parigi 2027 è andata</h3><div class="muted small">Le foto stanno nell\'Album, il diario pure: è il momento dello zip per Journi.</div></div>';return;}
+    var dd=Math.ceil((dep-now)/86400000), rel=new Date(2027,3,19), dr=Math.ceil((rel-now)/86400000);
+    var hh='<div class="card now"><div class="k">⏳ Adesso · mancano '+dd+' giorni</div><h3>Si parte giovedì 17 giugno alle 07:15</h3>';
+    if(dr>0)hh+='<div class="muted small" style="margin-top:6px">Prossima scadenza: <b style="color:#fff">intorno al 19 aprile escono i biglietti della Tour Eiffel</b> (tra '+dr+' giorni): la sommità finisce in giornata.</div>';
+    var todo=TODO.filter(function(t){return !state.done[t.id]&&t.pri===1;}).length;
+    hh+='<div class="muted small" style="margin-top:6px">'+(todo?todo+' prenotazioni urgenti ancora da fare nella checklist.':'Tutte le prenotazioni urgenti sono spuntate.')+' Nei giorni del viaggio questa scheda mostra la tappa in corso e la prossima.</div>';
+    hh+='<div class="row" style="margin-top:10px"><button class="btn sec" onclick="jumpTo(\'s-info\',null)">✅ Checklist</button><button class="btn sec" onclick="showDay(0)">Giovedì 17</button></div></div>';
+    el.innerHTML=hh; return;
+  }
   var D=DAYS[nr.day], h='<div class="card now"><div class="k">📍 Adesso · '+D.dow+' '+D.n+' giugno</div>';
   if(nr.cur)h+='<h3>'+(nr.cur.p.ico||"")+' '+nr.cur.p.n+'</h3><div class="muted small">dalle '+hhmm(nr.cur.st)+' · '+(nr.cur.p.sub||"")+'</div>';
   else if(nr.next)h+='<h3>Prossima tappa alle '+hhmm(nr.next.st)+'</h3>';
@@ -1477,8 +1513,6 @@ function loadWx(){
 function renderWx(){
   var el=document.getElementById("wxCard"); if(!el)return;
   var today=new Date(), trip0=new Date(2027,5,17), trip1=new Date(2027,5,21);
-  var inWindow=(trip0-today)/86400000<=15; /* le previsioni coprono 16 giorni */
-  if(!inWindow){el.innerHTML="";return;}
   if(!WX){el.innerHTML='<div class="card flat" style="background:#F1ECDF"><div class="muted small">🌤 Meteo di Parigi: si aggiorna appena c\'è rete.</div></div>';return;}
   var c=WX.cur, ic=WX_ICO(c.weather_code), age=Math.round((Date.now()-WX.ts)/60000);
   var h='<div class="card"><div class="wx"><div class="big">'+ic[0]+'</div><div><div class="t">'+Math.round(c.temperature_2m)+'°</div><div class="muted small">Parigi adesso · '+ic[1]+(c.wind_speed_10m>25?' · vento '+Math.round(c.wind_speed_10m)+' km/h':'')+'</div></div>'+
@@ -1488,7 +1522,7 @@ function renderWx(){
     DAYS.forEach(function(D){var i=d.time.indexOf(D.date); if(i<0)return; var w=WX_ICO(d.weather_code[i]);
       rows+='<div style="border-top:3px solid '+D.c+'"><span>'+w[0]+'</span>'+D.dow.slice(0,3)+' '+D.n+'<br>'+Math.round(d.temperature_2m_max[i])+'° / '+Math.round(d.temperature_2m_min[i])+'°<br>☔ '+(d.precipitation_probability_max[i]==null?'–':d.precipitation_probability_max[i]+'%')+'</div>';});
     if(rows)h+='<div class="wxd">'+rows+'</div>';
-    else{var ti=d.time.indexOf(today.toISOString().slice(0,10)); if(ti>=0)h+='<div class="muted small" style="margin-top:8px">Oggi max '+Math.round(d.temperature_2m_max[ti])+'°, min '+Math.round(d.temperature_2m_min[ti])+'°, pioggia '+(d.precipitation_probability_max[ti]||0)+'%. I quattro giorni del viaggio compaiono qui quando entrano nei 16 giorni di previsione.</div>';}
+    else{var ti=d.time.indexOf(today.toISOString().slice(0,10)); if(ti>=0)h+='<div class="muted small" style="margin-top:8px">Oggi a Parigi max '+Math.round(d.temperature_2m_max[ti])+'°, min '+Math.round(d.temperature_2m_min[ti])+'°, pioggia '+(d.precipitation_probability_max[ti]||0)+'%. Le previsioni per i quattro giorni del viaggio compaiono qui dal 2 giugno (16 giorni prima).</div>';}
   }
   h+='<div class="muted small" style="margin-top:8px">Dati Open-Meteo, aggiornati '+(age<2?'adesso':age+' min fa')+'; offline resta l\'ultimo scaricato.</div></div>';
   el.innerHTML=h;
@@ -1565,11 +1599,11 @@ function renderPlan(){
     h+='<div class="daycard"><div class="dayhead" style="background:'+D.c+'">'+
       '<div class="n">'+D.n+'</div><div class="m"><b>'+D.dow+' '+D.n+' giugno</b><span>'+D.title+'</span></div></div>'+
       '<div class="daystats">'+pill("⏱ fino alle "+hhmm(s.end))+pill("🚶 "+s.km.toFixed(1)+" km")+
-      pill("💶 ~"+Math.round(s.cost)+" €")+pill("📍 "+s.rows.length+" tappe")+'</div><div class="items">';
+      pill("💶 ~"+Math.round(s.cost)+" €")+pill("📍 "+s.rows.length+" tappe")+'</div><div class="items">'+taxiStrip(true);
     var num=0;
     s.rows.forEach(function(r,i){
       if(r.p.kind!=="fix")num++;
-      if(r.tr)h+='<div class="trf"><i>'+(r.tr.mode==="walk"?"🚶":"🚇")+'</i>'+r.tr.txt+'</div>';
+      if(r.tr)h+='<div class="trf"><i>'+(r.tr.mode==="walk"?"🚶":"🚇")+'</i><span style="flex:1">'+r.tr.txt+'</span>'+trLink(r)+'</div>';
       if(r.gap>20&&i>0)h+='<div class="trf" style="opacity:.75"><i>🫖</i>tempo libero · '+dur(r.gap)+'</div>';
       var dn=state.doneEv[r.id], isNow=nr&&nr.cur&&nr.cur.id===r.id&&DAYS[nr.day].id===D.id;
       h+='<div class="it'+(r.p.kind==="fix"?" fix":"")+(dn?" done":"")+(isNow?" now":"")+(POI[r.id].secret&&!revealed()?" secret":"")+'" onclick="tapItem(\''+D.id+'\',\''+r.id+'\')">'+
@@ -1579,7 +1613,7 @@ function renderPlan(){
         (docsFor(r.id).length?'<span class="pill b" style="cursor:pointer" onclick="event.stopPropagation();var dd=docsFor(\''+r.id+'\');dd.length===1?openDoc(dd[0].id):detail(\''+r.id+'\')">🎟 '+docsFor(r.id).length+' doc</span>':"")+'</div></div>'+
         '<div class="tm">'+hhmm(r.st)+'</div></div>';
     });
-    if(s.back)h+='<div class="trf"><i>'+(s.back.mode==="walk"?"🚶":"🚇")+'</i>rientro in hotel · '+s.back.txt+'</div>';
+    if(s.back)h+='<div class="trf"><i>'+(s.back.mode==="walk"?"🚶":"🚇")+'</i><span style="flex:1">rientro in hotel · '+s.back.txt+'</span>'+backLink(s)+'</div>';
     h+='</div></div>';
   });
   document.getElementById("planDays").innerHTML=h;
@@ -1674,7 +1708,7 @@ function detail(id){
   }
   if(p.url)h+='<a class="btn full" style="margin-top:12px" href="'+p.url+'" target="_blank" rel="noopener">🔗 '+(p.urlTxt||"Apri il sito")+'</a>';
   if(p.lat!=null&&!secret)h+='<button class="btn sec full" style="margin-top:8px" onclick="closeSheet();showOnMap(\''+id+'\')">🗺 Mostrala sulla mappa</button>';
-  if(p.lat!=null&&!secret)h+='<a class="btn ghost full" style="margin-top:8px" href="https://www.google.com/maps/dir/?api=1&destination='+p.lat+','+p.lon+'&travelmode=walking" target="_blank" rel="noopener">🧭 Portami lì (Google Maps)</a>';
+  if(p.lat!=null&&!secret)h+='<a class="btn ghost full" style="margin-top:8px" href="https://www.google.com/maps/dir/?api=1&destination='+p.lat+','+p.lon+'&travelmode=walking" target="_blank" rel="noopener">🧭 Portami lì da dove sono (Google Maps)</a>';
   h+='<button class="opt" onclick="closeSheet()" style="justify-content:center;color:var(--ink2);margin-top:6px">Chiudi</button></div>';
   openSheet(h);
 }
@@ -1692,10 +1726,10 @@ function renderDay(){
   var D=DAYS[curDay],s=schedule(D),h="";
   h+='<div class="card" style="border-left:5px solid '+D.c+'"><div class="kicker" style="color:'+D.c+';font-size:10px;letter-spacing:.2em;font-weight:800;text-transform:uppercase">'+D.dow+' '+D.n+' giugno 2027</div>'+
      '<h3 style="font-size:19px;margin:5px 0 7px">'+D.title+'</h3><p class="muted small" style="margin:0">'+D.intro+'</p>'+
-     '<div class="daystats" style="border:none;background:none;padding:10px 0 0">'+pill("⏱ "+D.start+" → "+hhmm(s.end))+pill("🚶 "+s.km.toFixed(1)+" km")+pill("💶 ~"+Math.round(s.cost)+" €")+'</div></div>';
+     '<div class="daystats" style="border:none;background:none;padding:10px 0 0">'+pill("⏱ "+D.start+" → "+hhmm(s.end))+pill("🚶 "+s.km.toFixed(1)+" km")+pill("💶 ~"+Math.round(s.cost)+" €")+'</div></div>'+taxiStrip(false);
   s.rows.forEach(function(r,i){
     var p=r.p, secret=POI[r.id].secret&&!revealed();
-    if(r.tr)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px">'+(r.tr.mode==="walk"?"🚶 ":"🚇 ")+r.tr.txt+'</div>';
+    if(r.tr)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px"><span style="flex:1">'+(r.tr.mode==="walk"?"🚶 ":"🚇 ")+r.tr.txt+'</span>'+trLink(r)+'</div>';
     if(r.gap>20&&i>0)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px;opacity:.8">🫖 tempo libero · '+dur(r.gap)+' — un caffè, due passi senza meta</div>';
     var dn=state.doneEv[r.id];
     h+='<div class="card" style="padding:12px 13px'+(dn?";opacity:.62":"")+'">'+
@@ -1717,7 +1751,7 @@ function renderDay(){
       '</div>'+
       '</div></div></div>';
   });
-  if(s.back)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px">'+(s.back.mode==="walk"?"🚶 ":"🚇 ")+'rientro in hotel · '+s.back.txt+'</div>';
+  if(s.back)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px"><span style="flex:1">'+(s.back.mode==="walk"?"🚶 ":"🚇 ")+'rientro in hotel · '+s.back.txt+'</span>'+backLink(s)+'</div>';
   h+='<div class="card flat" style="background:#F1ECDF;text-align:center"><div class="muted small">Il quadratino accanto all\'orario segna la tappa come fatta ✓. Vuoi cambiare qualcosa?</div>'+
      '<button class="btn sec full" style="margin-top:8px" onclick="go(\'s-piano\')">📅 Apri il calendario di sintesi</button></div>';
   document.getElementById("dayDetail").innerHTML=h;
@@ -1894,7 +1928,7 @@ function renderInfo(){
   });
   h+='</div>';
   INFO_CARDS.forEach(function(c,ci){
-    h+='<div class="tt">'+c.ico+' '+c.t+'</div><div class="card" id="info-'+ci+'">';
+    h+='<div class="tt">'+c.ico+' '+c.t+'</div><div class="card" id="info-'+(c.id||ci)+'">';
     c.h.forEach(function(r,ri){
       var sp=c.speak&&c.speak[ri]&&("speechSynthesis" in window)?'<button class="say" onclick="speak(\''+c.speak[ri].replace(/'/g,"\\'")+'\')" aria-label="Ascolta">🔊</button>':"";
       h+='<div class="kv"><b>'+r[0]+'</b><span>'+r[1]+sp+'</span></div>';});
@@ -1959,7 +1993,20 @@ function installBlock(){
 }
 function tick(id){state.done[id]=!state.done[id];save();renderInfo();}
 function tickEv(id,ev){if(ev)ev.stopPropagation();state.doneEv[id]=!state.doneEv[id];save();renderAll();}
-function printPdf(){buildPrint();setTimeout(function(){window.print();},60);}
+function printPdf(){
+  buildPrint();
+  var ok=false;
+  try{window.print();ok=true;}catch(e){}
+  if(!ok)openPrintPage();
+}
+function openPrintPage(){
+  buildPrint();
+  var css='body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:11pt;color:#221B18;max-width:720px;margin:0 auto;padding:16px}.pday{padding-top:14px}.pday+.pday{page-break-before:always}h1{font-size:22pt;margin:0 0 4px}h2{font-size:15pt;border-bottom:2.5pt solid #999;padding-bottom:4px;margin:0 0 8px}.pit{display:flex;gap:12px;padding:6px 0;border-bottom:.4pt dashed #BBB;page-break-inside:avoid}.pt{width:52px;flex:none;font-weight:800}.pb b{display:block}.pm{color:#666;font-size:9.5pt}.ptr{color:#666;font-size:9pt;padding:3px 0 3px 64px;font-style:italic}.pbx{width:14px;height:14px;border:1pt solid #555;border-radius:3px;flex:none;margin-top:3px}.phead{color:#555;font-size:10pt;margin:0 0 14px}.pbtn{position:sticky;top:0;background:#4B5C5D;color:#fff;border:0;border-radius:10px;padding:10px 16px;font-weight:800;font-size:14px;margin:0 0 12px}@media print{.pbtn{display:none}}';
+  var html='<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Parigi 2027 · programma</title><style>'+css+'</style></head><body><button class="pbtn" onclick="window.print()">🖨 Stampa / Salva come PDF</button>'+document.getElementById("printDoc").innerHTML+'</body></html>';
+  var blob=new Blob([html],{type:"text/html;charset=utf-8"}), u=URL.createObjectURL(blob);
+  var w=window.open(u,"_blank");
+  if(!w)toast("Il telefono ha bloccato la finestra: consenti i popup per questo sito");
+}
 function buildPrint(){
   var h='<h1>Parigi 2027 · Rosetta e Concetta</h1><div class="phead">17–20 giugno 2027 · Firenze ✈ Parigi · Hôtel de Castiglione, 38 rue du Faubourg Saint-Honoré, 8e</div>';
   DAYS.forEach(function(D){
@@ -2176,16 +2223,27 @@ function openIntro(force){
   if(!force&&state.intro)return;
   var box=document.getElementById("introVid"), fb=document.getElementById("introFb");
   var old=box.querySelector("iframe"); if(old)old.remove();
+  var old2=box.querySelector("video"); if(old2)old2.remove();
+  /* 1) video salvato nell'app (intro.mp4, anche offline); 2) altrimenti l'embed Instagram */
+  var v=document.createElement("video"); v.src="intro.mp4"; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute("playsinline",""); v.setAttribute("muted","");
+  v.style.cssText="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;opacity:0;transition:opacity .5s";
+  v.onloadeddata=function(){v.style.opacity="1";var p=v.play();if(p&&p.catch)p.catch(function(){});};
+  v.onerror=function(){v.remove();embed();};
+  box.appendChild(v);
+  var tapped=false; v.addEventListener("click",function(){v.muted=!v.muted;toast(v.muted?"Audio spento":"Audio acceso");});
+  function embed(){
   if(navigator.onLine!==false){
-    var f=document.createElement("iframe"); f.src=INTRO_URL; f.allow="autoplay; encrypted-media"; f.setAttribute("allowfullscreen",""); f.style.opacity="0"; f.style.transition="opacity .5s";
+    var f=document.createElement("iframe"); f.src=INTRO_URL; f.allow="autoplay; encrypted-media"; f.setAttribute("allowfullscreen",""); f.setAttribute("scrolling","no"); f.style.opacity="0"; f.style.transition="opacity .5s";
     f.onload=function(){f.style.opacity="1";};
+    setTimeout(function(){f.style.opacity="1";},2500);
     box.appendChild(f);
-  }
+  }}
   document.getElementById("intro").classList.add("on");
 }
 function closeIntro(never){
   document.getElementById("intro").classList.remove("on");
   var f=document.getElementById("introVid").querySelector("iframe"); if(f)f.remove();
+  var v=document.getElementById("introVid").querySelector("video"); if(v){try{v.pause();}catch(e){}v.remove();}
   if(never){state.intro=1;save();toast("L'intro non si riapre più da sola: la ritrovi in Info.");}
 }
 
