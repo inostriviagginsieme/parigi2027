@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#4B5C5D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Parigi 2027">
+<title>Parigi 2027 · Rosetta e Concetta</title>
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.mapbox,.mapbox *{touch-action:none}
+:root{
+--cream:#F6EFE4; --paper:#FFFCF7; --ink:#2F3A3B; --ink2:#6B7576; --line:#E6DCCB;
+--navy:#4B5C5D; --navy2:#5E9BAC; --rose:#C98A6B; --blush:#F3D9C2; --gold:#D9A85C; --butter:#ECC5A2;
+--sky:#A3B6BA; --mint:#B9CDB1; --wine:#A76E49; --stone:#D8D2C8; --linen:#EDE4D6; --sage:#6A8F6B;
+--d1:#A76E49; --d2:#C9975C; --d3:#5E9BAC; --d4:#6E8A8E;
+--sh:0 2px 0 rgba(75,92,93,.06),0 8px 22px -12px rgba(75,92,93,.45);
+--r:16px; --safe:env(safe-area-inset-bottom,0px);
+}
+html,body{margin:0;padding:0;height:100%}
+html{background:var(--cream)}
+body{
+background:var(--cream); color:var(--ink); font-size:16px; line-height:1.45;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+overscroll-behavior-y:none; -webkit-text-size-adjust:100%;
+display:flex; flex-direction:column; overflow:hidden; position:fixed; inset:0;
+}
+#scroll{flex:1 1 auto; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior-y:contain; padding-bottom:26px}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.015em;line-height:1.15}
+p{margin:0 0 .6em}
+a{color:var(--navy2)}
+button{font:inherit;color:inherit;border:none;background:none;cursor:pointer}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+
+/* ---------- HEADER ---------- */
+header{background:linear-gradient(170deg,#4B5C5D 0%,#5E9BAC 62%,#A3B6BA 100%);color:#F6EFE4;padding:0 0 10px;position:relative;overflow:hidden}
+.hero{position:relative;padding:calc(14px + env(safe-area-inset-top,0px)) 140px 4px 14px;max-width:640px;margin:0 auto;min-height:156px}
+.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--butter);font-weight:700}
+.hero h1{font-size:30px;margin:6px 0 2px;color:#FFFDF8}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{font-size:13.5px;color:#EEF2F0;font-weight:600}
+.heroart{position:absolute;right:6px;bottom:4px;width:138px;height:120px;pointer-events:none}
+.heroart .tour{position:absolute;left:0;bottom:0;width:62px;height:118px}
+.heroart .f{position:absolute;border-radius:50%;border:3px solid #FFF7EE;box-shadow:0 6px 14px rgba(0,0,0,.35);background:#FFF7EE}
+.heroart .f1{width:66px;height:66px;left:52px;bottom:6px}
+.heroart .f2{width:62px;height:62px;left:86px;bottom:40px}
+.heroart .f img{width:100%;height:100%;border-radius:50%;display:block}
+.cd{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.cd div{background:rgba(255,253,248,.14);border:1px solid rgba(236,197,162,.45);border-radius:10px;padding:4px 8px;font-size:11px;font-weight:700;color:#FFF9F0}
+.cd b{color:var(--gold)}
+
+/* ---------- NAV ---------- */
+nav{flex:0 0 auto;z-index:60;background:#FFFDF8;border-top:1px solid var(--line);
+padding:6px 4px calc(6px + var(--safe));display:flex;justify-content:space-around;box-shadow:0 -6px 20px -14px rgba(31,58,95,.6)}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;border-radius:12px;font-size:9px;font-weight:800;color:var(--ink2);letter-spacing:.01em;max-width:88px;min-width:0}
+nav button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--wine)}
+nav button.on svg{stroke:var(--wine)}
+
+/* ---------- GENERIC ---------- */
+section{display:none;padding-top:16px;animation:fade .25s ease}
+section.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:14px;margin-bottom:12px}
+.card.flat{box-shadow:none}
+.tt{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--ink2);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+.tt:before{content:"";width:16px;height:2px;background:var(--gold);border-radius:2px;flex:none}
+.muted{color:var(--ink2);font-size:13px}
+.small{font-size:12.5px}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;background:var(--linen);color:var(--ink);white-space:nowrap}
+.pill.g{background:#E1EBDD;color:#3F5F41}.pill.y{background:#FBECC8;color:#8A6208}
+.pill.b{background:#DCE8EA;color:#3A6A75}.pill.r{background:#F3E1D3;color:#A76E49}
+.pill.free{background:#DFF0DE;color:#3D6B3A}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--navy);color:#FFFDF8;border-radius:11px;padding:10px 14px;font-size:13.5px;font-weight:800;text-decoration:none}
+.btn.sec{background:var(--linen);color:var(--ink)}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn.rose{background:var(--wine)}
+.btn.full{display:flex;width:100%}
+.btn:active{transform:scale(.98)}
+.row{display:flex;gap:8px}
+.row>*{flex:1}
+hr{border:none;border-top:1px dashed var(--line);margin:12px 0}
+
+/* ---------- CHIPS ---------- */
+.chips{display:flex;gap:7px;overflow-x:auto;padding:2px 14px 8px;margin:0 -14px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 13px;border-radius:99px;background:var(--paper);border:1.5px solid var(--line);font-size:13px;font-weight:800;color:var(--ink2)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#FFFDF8}
+
+/* ---------- DAY CARDS ---------- */
+.daycard{border-radius:var(--r);border:1px solid var(--line);background:var(--paper);box-shadow:var(--sh);margin-bottom:12px;overflow:hidden}
+.dayhead{padding:12px 14px;display:flex;align-items:center;gap:10px;color:#FFFDF8}
+.dayhead .n{font-size:23px;font-weight:900;line-height:1}
+.dayhead .m{flex:1;min-width:0}
+.dayhead .m b{display:block;font-size:15px;font-weight:900}
+.dayhead .m span{font-size:11.5px;opacity:.9;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.daystats{display:flex;gap:6px;padding:8px 12px;background:#FBF8F0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.items{padding:8px 10px 12px}
+.it{display:flex;gap:9px;align-items:flex-start;padding:8px;border-radius:12px;border:1px solid transparent}
+.it:active{background:#FBF6EA}
+.it.sel{background:#FBF0DC;border-color:var(--gold)}
+.it .idx{width:24px;height:24px;border-radius:8px;background:var(--linen);color:var(--ink);font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.it .bd{flex:1;min-width:0}
+.it .bd b{font-size:14px;display:block;font-weight:800}
+.it .bd .met{font-size:11.5px;color:var(--ink2);margin-top:2px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.it .tm{font-size:11.5px;font-weight:900;color:var(--ink2);flex:none;font-variant-numeric:tabular-nums;margin-top:3px}
+.it.fix .idx{background:var(--navy);color:var(--butter)}
+.it.done .idx{background:var(--sage);color:#FFFDF8}
+.it.done .bd b{text-decoration:line-through;opacity:.55}
+.it.now{background:#FFF4E5;border-color:var(--gold)}
+.it.secret .idx{background:linear-gradient(135deg,#A76E49,#ECC5A2);color:#fff}
+.evck{width:30px;height:30px;border-radius:9px;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;background:var(--paper)}
+.evck.on{background:var(--sage);border-color:var(--sage)}
+#printDoc{display:none}
+@media print{
+  body{background:#fff;padding:0;display:block;height:auto;overflow:visible}
+  #scroll{overflow:visible;height:auto;padding:0}
+  header,nav,main>section,.fin,.sheetbg,.lb,.dv,.srch,.intro{display:none !important}
+  #printDoc{display:block;font-size:11pt;color:#221B18}
+  #printDoc .pday{padding-top:6mm}
+  #printDoc .pday + .pday{page-break-before:always}
+  #printDoc h1{font-size:20pt;margin:0 0 2mm}
+  #printDoc h2{font-size:14pt;border-bottom:2.5pt solid #999;padding-bottom:1.5mm;margin:0 0 3mm}
+  #printDoc .pit{display:flex;gap:4mm;padding:2.2mm 0;border-bottom:.4pt dashed #BBB;page-break-inside:avoid}
+  #printDoc .pt{width:16mm;flex:none;font-weight:800;font-variant-numeric:tabular-nums}
+  #printDoc .pb b{display:block}
+  #printDoc .pm{color:#666;font-size:9.5pt}
+  #printDoc .ptr{color:#666;font-size:9pt;padding:.8mm 0 .8mm 20mm;font-style:italic}
+  #printDoc .pbx{width:4.2mm;height:4.2mm;border:1pt solid #555;border-radius:1mm;flex:none;margin-top:1mm}
+  #printDoc .phead{color:#555;font-size:9.5pt;margin:0 0 5mm}
+}
+.trf{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink2);padding:1px 0 1px 41px;font-weight:600}
+.trf i{font-style:normal}
+
+/* ---------- ADESSO ---------- */
+.now{background:linear-gradient(135deg,#4B5C5D,#5E9BAC);color:#FFFDF8;border:none}
+.now .k{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--butter);font-weight:800}
+.now h3{font-size:18px;margin:4px 0 2px}
+.now .muted{color:#E6EEF0}
+.now .btn.sec{background:rgba(255,255,255,.14);color:#FFFDF8}
+
+/* ---------- WALLET ---------- */
+.wdoc{display:flex;gap:11px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;box-shadow:var(--sh)}
+.wdoc .th{width:46px;height:46px;border-radius:11px;background:var(--linen);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;overflow:hidden}
+.wdoc .th img{width:100%;height:100%;object-fit:cover}
+.wdoc .bd{flex:1;min-width:0}
+.wdoc .bd b{display:block;font-size:14px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wdoc .bd .sm{font-size:12px;color:var(--ink2);margin-top:2px}
+.wdoc .act{display:flex;gap:6px;flex:none}
+.wdoc .act button,.wdoc .act a{width:34px;height:34px;border-radius:10px;background:var(--linen);display:flex;align-items:center;justify-content:center;font-size:15px;text-decoration:none;color:var(--ink)}
+.wdoc.built{border-style:dashed}
+.dv{position:fixed;inset:0;background:rgba(20,24,40,.96);z-index:95;display:none;flex-direction:column}
+.dv.on{display:flex}
+.dv .top{display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;color:#F7F3EA}
+.dv .top b{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dv .top button,.dv .top a{background:rgba(255,253,248,.14);color:#F7F3EA;border-radius:10px;padding:8px 11px;font-size:13px;font-weight:800;text-decoration:none}
+.dv .body{flex:1;min-height:0;background:#F7F3EA;margin:0 8px calc(8px + var(--safe));border-radius:14px;overflow:auto;display:flex;align-items:flex-start;justify-content:center}
+.dv iframe{width:100%;height:100%;border:0;border-radius:14px}
+.dv img{max-width:none;min-width:100%;height:auto;display:block;margin:auto}
+.dv .body.wide{display:block}
+.wsel{width:100%;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font-size:14.5px;font-family:inherit;color:var(--ink);margin:8px 0}
+
+/* ---------- SPESE ---------- */
+.exp{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.exp:last-child{border:none}
+.exp .who{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff;flex:none}
+.exp .bd{flex:1;min-width:0}
+.exp .bd b{display:block;font-size:14px}
+.exp .amt{font-weight:900;font-variant-numeric:tabular-nums;flex:none}
+.exp .x{width:28px;height:28px;border-radius:8px;background:var(--linen);font-size:13px;flex:none}
+.inp{width:100%;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;color:var(--ink)}
+.bal{background:#E1EBDD;border-radius:12px;padding:10px 12px;font-size:13.5px;margin-top:10px}
+
+/* ---------- RICERCA ---------- */
+.sbtn{position:absolute;right:14px;top:calc(12px + env(safe-area-inset-top,0px));width:40px;height:40px;border-radius:50%;background:rgba(255,253,248,.14);border:1px solid rgba(241,223,166,.35);display:flex;align-items:center;justify-content:center;z-index:5}
+.sbtn svg{width:20px;height:20px;fill:none;stroke:#F0E9D8;stroke-width:2.2;stroke-linecap:round}
+.srch{position:fixed;inset:0;background:var(--cream);z-index:90;display:none;flex-direction:column;animation:fade .18s ease}
+.srch.on{display:flex}
+.srch .bar{display:flex;gap:8px;align-items:center;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:var(--sh)}
+.srch .bar .inw{flex:1;display:flex;align-items:center;gap:8px;background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:0 12px}
+.srch .bar input{flex:1;background:transparent;border:0;outline:0;padding:11px 0;font-size:16px;color:var(--ink);font-family:inherit;min-width:0}
+.srch .bar input::placeholder{color:var(--ink2)}
+.srch .bar input::-webkit-search-cancel-button,.srch .bar input::-webkit-search-decoration{-webkit-appearance:none;display:none}
+.srch .bar .x{width:28px;height:28px;border-radius:50%;background:var(--linen);color:var(--ink2);font-weight:800;font-size:15px;display:none;align-items:center;justify-content:center;flex:none}
+.srch .bar .x.on{display:flex}
+.srch .bar .cls{font-size:14px;font-weight:800;color:var(--navy2);padding:8px 4px;flex:none}
+.srch .res{flex:1;overflow:auto;padding:10px 14px calc(20px + var(--safe));max-width:640px;width:100%;margin:0 auto}
+.srch .hit{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px;box-shadow:var(--sh)}
+.srch .hit .ic{width:36px;height:36px;border-radius:11px;background:var(--linen);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.srch .hit .bd{flex:1;min-width:0}
+.srch .hit b{font-size:14.5px;display:block;line-height:1.3}
+.srch .hit .sm{font-size:12.5px;color:var(--ink2);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.srch .hit .tags{margin-top:6px}
+.srch mark{background:#F5E4A8;color:inherit;border-radius:3px;padding:0 1px}
+.srch .empty{text-align:center;color:var(--ink2);font-size:14px;padding:40px 20px;line-height:1.5}
+.srch .sugg{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;justify-content:center}
+.hl{animation:hl 2.2s ease}
+@keyframes hl{0%,60%{box-shadow:0 0 0 3px var(--gold),var(--sh)}100%{box-shadow:var(--sh)}}
+
+/* ---------- ACTION SHEET ---------- */
+.sheetbg{position:fixed;inset:0;background:rgba(31,58,95,.5);z-index:80;display:none;align-items:flex-end;backdrop-filter:blur(2px)}
+.sheetbg.on{display:flex}
+.sheet{background:var(--paper);width:100%;max-width:640px;margin:0 auto;border-radius:20px 20px 0 0;padding:8px 14px calc(18px + var(--safe));animation:up .22s ease;max-height:84dvh;overflow:auto}
+@keyframes up{from{transform:translateY(40px)}to{transform:none}}
+.grab{width:38px;height:4px;background:var(--line);border-radius:9px;margin:6px auto 12px}
+.sheet h3{font-size:17px;margin-bottom:2px}
+.opt{display:flex;align-items:center;gap:10px;width:100%;padding:12px 10px;border-radius:12px;font-size:14.5px;font-weight:700;text-align:left;border-bottom:1px solid var(--line)}
+.opt:last-child{border-bottom:none}
+.opt .dot{width:12px;height:12px;border-radius:99px;flex:none}
+.opt.dis{opacity:.35}
+
+/* ---------- DETAIL ---------- */
+.det .lead{font-size:14.5px;line-height:1.5}
+.tip{background:#FBF3E0;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:9px 11px;font-size:12.8px;line-height:1.42;margin-top:10px}
+.tip b{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A6208;margin-bottom:3px;font-weight:900}
+.tip.ok{background:#E1EBDD;border-left-color:var(--sage)}
+.tip.ok b{color:#3F5F41}
+.tip.secret{background:linear-gradient(135deg,#F7E6D8,#FBF3E0);border-left-color:var(--wine)}
+.tip.secret b{color:var(--wine)}
+.kv{display:flex;gap:8px;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.kv:last-child{border:none}
+.kv b{flex:none;width:82px;color:var(--ink2);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+.kv span{flex:1}
+.say{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--linen);font-size:13px;margin-left:6px;vertical-align:middle}
+
+/* ---------- MAP ---------- */
+.mapbox{position:relative;background:#F1ECDF;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);touch-action:none}
+#map{display:block;width:100%;height:auto;background:#F1ECDF}
+.mapctl{position:absolute;right:8px;bottom:8px;display:flex;flex-direction:column;gap:5px}
+.mapctl button{width:34px;height:34px;border-radius:10px;background:rgba(255,253,248,.94);border:1px solid var(--line);font-size:17px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.leg{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;font-size:11.5px;font-weight:700;color:var(--ink2)}
+.leg i{width:10px;height:10px;border-radius:99px;display:inline-block;margin-right:4px}
+.poplabel{position:absolute;left:10px;right:10px;bottom:8px;background:rgba(255,253,248,.97);border:1px solid var(--line);border-radius:12px;padding:9px 11px;font-size:13px;box-shadow:var(--sh);display:none}
+.poplabel.on{display:block}
+.poplabel b{display:block;font-size:14px}
+
+/* ---------- DINNER ---------- */
+.resto{display:flex;gap:11px;align-items:flex-start}
+.resto .av{width:44px;height:44px;border-radius:13px;flex:none;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--linen)}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+
+/* ---------- CHECKLIST ---------- */
+.ck{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.ck:last-child{border:none}
+.ck .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;margin-top:1px}
+.ck.done .box{background:var(--sage);border-color:var(--sage)}
+.ck.done .bd b{text-decoration:line-through;opacity:.5}
+.ck .bd{flex:1;min-width:0}
+.ck .bd b{font-size:14px;display:block}
+
+/* ---------- PHOTOS ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;display:block;background:var(--linen)}
+.gcell{position:relative}
+.gcell .who{position:absolute;left:3px;bottom:3px;font-size:8.5px;font-weight:900;background:rgba(31,58,95,.75);color:#FFF;padding:1px 5px;border-radius:99px;letter-spacing:.04em}
+.lb{position:fixed;inset:0;background:rgba(20,24,40,.96);z-index:90;display:none;flex-direction:column;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + var(--safe))}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:66vh;object-fit:contain;border-radius:12px;margin:0 auto;display:block}
+.lb .ctr{color:#F7F3EA;margin-top:14px;max-width:640px;width:100%;margin-left:auto;margin-right:auto}
+.lb input{width:100%;background:rgba(255,253,248,.1);border:1px solid rgba(255,253,248,.25);color:#FFF;border-radius:11px;padding:11px;font-size:14px;margin-bottom:9px}
+.drop{border:2px dashed var(--line);border-radius:var(--r);padding:22px 14px;text-align:center;background:var(--paper)}
+.warn{background:#FBECC8;border:1px solid #EBD08A;color:#7A5A08;border-radius:12px;padding:10px 12px;font-size:12.5px;font-weight:600;margin-bottom:12px}
+
+/* ---------- INTRO ---------- */
+.intro{position:fixed;inset:0;z-index:120;background:#2F3A3B;color:#F7F3EA;display:none;flex-direction:column;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top,0px)) 16px calc(18px + var(--safe))}
+.intro.on{display:flex}
+.intro .vid{width:100%;max-width:400px;aspect-ratio:9/16;max-height:62vh;border-radius:18px;overflow:hidden;background:#4B5C5D;box-shadow:0 20px 50px rgba(0,0,0,.6);position:relative}
+.intro .vid iframe{width:100%;height:100%;border:0;display:block}
+.intro .fb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(170deg,#4B5C5D,#5E9BAC 60%,#ECC5A2)}
+.intro .fb svg{width:120px;height:200px}
+.intro h1{font-size:30px;margin:16px 0 2px;text-align:center}
+.intro h1 em{font-style:normal;color:var(--gold)}
+.intro p{color:#D7DEDD;font-size:13.5px;text-align:center;max-width:360px}
+.intro .btn{margin-top:12px;background:#ECC5A2;color:#2F3A3B;padding:12px 26px;font-size:15px}
+.intro .skip{color:#A3B6BA;font-size:12.5px;margin-top:10px;text-decoration:underline}
+@keyframes twinkle{0%,100%{opacity:.4}50%{opacity:1}}
+.intro .fb .tw{animation:twinkle 1.6s ease-in-out infinite}
+
+.wx{display:flex;gap:10px;align-items:center}
+.wx .big{font-size:38px;line-height:1}
+.wx .t{font-size:26px;font-weight:900;line-height:1}
+.wxd{display:flex;gap:6px;margin-top:10px}
+.wxd div{flex:1;text-align:center;background:var(--linen);border-radius:12px;padding:7px 4px;font-size:11.5px;font-weight:700;line-height:1.3}
+.wxd div span{display:block;font-size:20px}
+.diary{width:100%;min-height:86px;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:14px;color:var(--ink);resize:vertical;margin-top:6px}
+.dlab{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;margin-top:12px}
+.dlab i{width:10px;height:10px;border-radius:99px;display:inline-block}
+.fin{text-align:center;padding:26px 10px 14px;color:var(--ink2);font-size:12px}
+.fin img{width:52px;height:52px;border-radius:50%;margin:0 -8px 8px;border:2px solid #fff;box-shadow:var(--sh)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<!-- ============ TOUR EIFFEL (cartoon) ============ -->
+<g id="tour">
+  <path d="M60 10 l-4 0 l-2 40 c-2 26 -8 54 -20 82 c-9 20 -20 43 -40 77 l0 9 l26 0 c9 -20 20 -40 34 -40 c14 0 25 20 34 40 l26 0 l0 -9 c-20 -34 -31 -57 -40 -77 c-12 -28 -18 -56 -20 -82 z" fill="#8A5A3C" stroke="#3E2616" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M22 133 h72" stroke="#F6E7C8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M4 190 h108" stroke="#F6E7C8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M38 157 q20 -26 40 0" fill="none" stroke="#3E2616" stroke-width="3"/>
+  <rect x="42" y="70" width="32" height="7" rx="3" fill="#F6E7C8"/>
+  <circle cx="58" cy="8" r="5" fill="#FFD66B" stroke="#3E2616" stroke-width="2.5"/>
+</g>
+<!-- ============ SKYLINE PARIGI ============ -->
+<g id="sky">
+  <path d="M0 60h300v14H0z" fill="currentColor"/>
+  <path d="M14 60V40h10V26h6v14h10v20zM52 60V34h8v26zM70 60V46h22v14zM70 46l11-10 11 10z" fill="currentColor"/>
+  <path d="M120 60V30h4V8h4v22h4v30zM100 60V44h14v16zM140 60V44h14v16z" fill="currentColor"/>
+  <path d="M176 60V38h22v22zM187 38a9 9 0 0 1 0-18a9 9 0 0 1 0 18z" fill="currentColor"/>
+  <path d="M216 60V42h12v18zM232 60V36h12v24zM248 60V46h30v14zM256 46l7-8 7 8zM290 60V40h8v20z" fill="currentColor"/>
+</g>
+</defs>
+</svg>
+
+<div id="scroll">
+<header>
+  <div class="hero">
+    <button class="sbtn" onclick="openSearch()" aria-label="Cerca nel programma"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
+    <div class="heroart">
+      <svg class="tour" viewBox="0 0 116 200"><use href="#tour"/></svg>
+      <div class="f f1"><img src="face_sx.webp" alt=""></div>
+      <div class="f f2"><img src="face_dx.webp" alt=""></div>
+    </div>
+    <div class="kicker">17 → 20 giugno 2027</div>
+    <h1>Parigi <em>2027</em></h1>
+    <div class="sub">Rosetta &amp; Concetta · Firenze ✈ Parigi</div>
+    <div class="cd" id="cd"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= PIANO ================= -->
+<section id="s-piano" class="on">
+  <div id="nowCard"></div>
+  <div id="wxCard"></div>
+  <div class="card" style="background:linear-gradient(160deg,#FBF3E0,#FFFDF8)">
+    <h3 style="font-size:16px">Il calendario di sintesi</h3>
+    <p class="muted small" style="margin-top:5px">Terza volta a Parigi: i grandi classici rifatti meglio (la Tour Eiffel fino in cima, Louvre e Orsay con il biglietto a orario e un percorso secco, la Sainte-Chapelle, i Bateaux Mouches, la Grande Arche) e in mezzo la <b>Parigi che ancora non avete visto</b>: passaggi coperti, atelier d'artista, bouillon Belle Époque, Saint-Germain nelle traverse, Montmartre di vicolo in vicolo. Tocca una tappa per <b>spostarla di giorno, cambiarne l'ordine o eliminarla</b>: orari, tragitti, costi, mappa e PDF si ricalcolano da soli. <b>Ripristina</b> riporta tutto al programma originale.</p>
+    <div class="row" style="margin-top:10px;flex-wrap:wrap">
+      <button class="btn sec" onclick="resetPlan()">↺ Ripristina</button>
+      <button class="btn sec" onclick="openSearch()">🔍 Cerca</button>
+      <button class="btn sec" onclick="go('s-mappa')">🗺 Mappa</button>
+      <button class="btn sec" onclick="printPdf()">🖨 PDF</button>
+    </div>
+  </div>
+  <div id="planDays"></div>
+  <div class="card flat" style="background:#F1ECDF">
+    <h4 style="font-size:14px">Tappe messe da parte</h4>
+    <p class="muted small" style="margin-top:4px">Quello che togli dai giorni finisce qui. Puoi rimetterlo dove vuoi.</p>
+    <div id="parked"></div>
+  </div>
+  <div class="tt">Il viaggio in numeri</div>
+  <div class="card" id="totals"></div>
+</section>
+
+<!-- ================= GIORNI ================= -->
+<section id="s-giorni">
+  <div class="chips" id="dayChips"></div>
+  <div id="dayDetail"></div>
+</section>
+
+<!-- ================= MAPPA ================= -->
+<section id="s-mappa">
+  <div class="chips" id="mapChips"></div>
+  <div class="mapbox">
+    <svg id="map" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="mapctl">
+      <button onclick="zoomMap(1.4)">+</button>
+      <button onclick="zoomMap(1/1.4)">−</button>
+      <button onclick="resetZoom()" style="font-size:13px">⌂</button>
+    </div>
+    <div class="poplabel" id="pop"></div>
+  </div>
+  <div class="leg" id="mapLeg"></div>
+  <div class="card" style="margin-top:12px">
+    <h4 style="font-size:14px">Come si legge</h4>
+    <p class="muted small" style="margin-top:5px">Mappa disegnata a mano su coordinate reali: la Senna, le isole, i parchi e i quartieri sono al loro posto. I numeri sui pallini seguono l'ordine della giornata; la linea colorata è il percorso. Trascina per spostarti, pizzica o usa +/− per lo zoom. Funziona senza rete. Montmartre sta in alto e la Défense fuori a sinistra: con il filtro del giorno la mappa ci si centra da sola.</p>
+  </div>
+</section>
+
+<!-- ================= CENE ================= -->
+<section id="s-cene">
+  <div class="card" style="background:linear-gradient(160deg,#F3E1D3,#FFFDF8)">
+    <h3 style="font-size:16px">Tavola prenotata, zero telefonate</h3>
+    <p class="muted small" style="margin-top:5px">Solo locali con prenotazione <b>online vera</b> (modulo sul sito, Zenchef, TheFork). Chi risponde solo al telefono è escluso apposta, tranne i bouillon storici che non prendono prenotazioni e si fanno a fila corta.</p>
+  </div>
+  <div id="restos"></div>
+</section>
+
+<!-- ================= WALLET ================= -->
+<section id="s-wallet">
+  <div class="card" style="background:linear-gradient(160deg,#DCE8EA,#FFFDF8)">
+    <h3 style="font-size:16px">Il Wallet del viaggio</h3>
+    <p class="muted small" style="margin-top:5px">Biglietti, prenotazioni, carte d'imbarco: <b>PDF o foto</b>, salvati dentro l'app e disponibili <b>anche offline</b>. Ogni documento è agganciato alla sua tappa: lo ritrovi anche aprendo la tappa dal programma.</p>
+  </div>
+  <label class="drop" style="display:block">
+    <input type="file" id="docIn" accept="application/pdf,image/*" multiple style="display:none">
+    <div style="font-size:30px">🎟</div>
+    <div style="font-weight:900;margin-top:4px">Aggiungi biglietto o documento</div>
+    <div class="muted small">PDF, screenshot o foto · anche più file insieme</div>
+    <select class="wsel" id="docPoi" onclick="event.stopPropagation()"></select>
+  </label>
+  <div id="walletList"></div>
+  <div class="tt">💶 Le spese in comune</div>
+  <div class="card">
+    <p class="muted small" style="margin:0 0 8px">Chi paga cosa: segnate qui le spese anticipate da una sola (taxi, biglietti, un pranzo) e in fondo l'app dice <b>chi deve quanto a chi</b>. Resta sul telefono di chi lo scrive.</p>
+    <div class="row" style="margin-bottom:8px"><input class="inp" id="expWhat" placeholder="Cosa (es. biglietti Orangerie)"><input class="inp" id="expAmt" type="number" inputmode="decimal" placeholder="€" style="max-width:90px"></div>
+    <div class="row" id="expWho"></div>
+    <div id="expList"></div>
+    <div id="expBal"></div>
+  </div>
+</section>
+
+<!-- ================= ALBUM ================= -->
+<section id="s-album">
+  <div id="storageWarn"></div>
+  <div class="card">
+    <h3 style="font-size:16px">L'album del viaggio</h3>
+    <p class="muted small" style="margin-top:5px">Caricate le foto da <b>tutti e due i telefoni</b>. Restano dentro l'app, anche offline. Alla fine si esporta tutto in un unico file .zip da caricare su <b>Journi</b> (o Photosì, Cewe, Albumepoca) per il libro stampato.</p>
+    <div style="margin:10px 0 4px" class="muted small"><b>Chi sta caricando?</b></div>
+    <div class="row" id="whoRow"></div>
+  </div>
+  <label class="drop" style="display:block">
+    <input type="file" id="fileIn" accept="image/*" multiple style="display:none">
+    <div style="font-size:30px">📸</div>
+    <div style="font-weight:900;margin-top:4px">Aggiungi foto</div>
+    <div class="muted small">Scatta o scegli dalla galleria · più foto insieme</div>
+  </label>
+  <div class="chips" id="albumChips" style="margin-top:12px"></div>
+  <div id="gallery"></div>
+  <div class="tt">📓 Il diario di viaggio</div>
+  <div class="card" id="diaryCard"></div>
+  <div class="tt">Esporta e stampa</div>
+  <div class="card">
+    <div class="row" style="margin-bottom:8px">
+      <button class="btn" onclick="exportZip()">⬇ Scarica .zip</button>
+      <button class="btn sec" onclick="exportStory()">📖 Testi album</button>
+    </div>
+    <p class="muted small" style="margin:0">Lo zip contiene le foto rinominate in ordine cronologico (<code>2027-06-19_03_sab_rosetta.jpg</code>) più un file con le didascalie e le righe del diario di ogni sera: è esattamente ciò che serve per caricarle su Journi senza impazzire.</p>
+    <hr>
+    <div style="font-size:13px"><b>Come si uniscono i due telefoni</b><br>
+    <span class="muted small">1. Ognuna carica le sue foto qui. 2. A fine viaggio una delle due fa <b>Scarica .zip</b> e lo manda su WhatsApp all'altra. 3. Chi riceve estrae lo zip e usa <b>Aggiungi foto</b> per importarle: ora un telefono ha l'album completo. 4. Da lì, zip finale → Journi.</span></div>
+  </div>
+</section>
+
+<!-- ================= INFO ================= -->
+<section id="s-info">
+  <div id="infoBody"></div>
+</section>
+
+<div id="printDoc"></div>
+<div class="fin">
+  <div><img src="face_sx.webp" alt=""><img src="face_dx.webp" alt=""></div>
+  <div><b>Parigi 2027 · Rosetta e Concetta</b></div>
+  <div id="verTag"></div>
+</div>
+</main>
+</div>
+
+<nav id="nav"></nav>
+
+<div class="intro" id="intro">
+  <div class="vid" id="introVid">
+    <div class="fb" id="introFb">
+      <svg viewBox="0 0 116 200"><use href="#tour"/></svg>
+      <div style="font-size:12px;letter-spacing:.2em;color:#F1DFA6" class="tw">PARIS, MON AMOUR</div>
+    </div>
+  </div>
+  <h1>Parigi <em>2027</em></h1>
+  <p>Rosetta &amp; Concetta · 17–20 giugno · la terza volta è quella giusta.</p>
+  <button class="btn" onclick="closeIntro()">Entra nel viaggio →</button>
+  <button class="skip" onclick="closeIntro(true)">non mostrare più l'intro</button>
+</div>
+
+<div class="srch" id="srch">
+  <div class="bar">
+    <div class="inw"><span style="font-size:16px">🔍</span><input id="srchIn" type="search" placeholder="Cerca tappa, giorno, cena, orario…" autocomplete="off" autocorrect="off" spellcheck="false" oninput="doSearch()" enterkeyhint="search"><button class="x" id="srchX" onclick="clearSearch()" aria-label="Cancella">×</button></div>
+    <button class="cls" onclick="closeSearch()">Chiudi</button>
+  </div>
+  <div class="res" id="srchRes"></div>
+</div>
+<div class="sheetbg" id="sheetbg" onclick="if(event.target===this)closeSheet()">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<div class="dv" id="dv">
+  <div class="top"><b id="dvTitle"></b><a id="dvOpen" href="#" target="_blank" rel="noopener">↗ Apri</a><button id="dvShare" onclick="shareDoc(curDoc)">📤</button><button onclick="closeDoc()">✕ Chiudi</button></div>
+  <div class="body" id="dvBody"></div>
+</div>
+<div class="lb" id="lb">
+  <img id="lbImg" alt="">
+  <div class="ctr">
+    <input id="lbCap" placeholder="Didascalia… (finirà nell'album stampato)">
+    <div class="row">
+      <button class="btn sec" onclick="delPhoto()">🗑 Elimina</button>
+      <button class="btn sec" onclick="savePhoto()">⬇ Salva</button>
+      <button class="btn" onclick="closeLb()">Fatto</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =================================================================
+   DATI DEL VIAGGIO — tutto offline, niente rete
+   ================================================================= */
+var APP_VER="3 · 5 ott 2026";
+var HOTEL = {n:"Hôtel de Castiglione", lat:48.8696, lon:2.3196};
+var INTRO_URL="https://www.instagram.com/reel/Daln1CbuaCj/embed/";
+var SECRET_AT=new Date(2027,5,18,17,0,0); /* la cena a sorpresa si svela venerdì 18 giugno alle 17:00 */
+
+var POI = {
+/* ---------- TRASFERIMENTI FISSI ---------- */
+volo1:{n:"Volo Firenze → Parigi Orly", sub:"diretto · 1h50", at:"07:15", min:110, ico:"✈️", kind:"fix",
+ lat:null, lon:null, price:0, priceTxt:"già pagato",
+ desc:"Decollo da Firenze alle 07:15, atterraggio a Orly alle 09:05. In aeroporto entro le 05:45. Schengen: niente controllo passaporti, si esce dritte verso la metro.",
+ tip:"Sveglia alle 04:30, caffè in aeroporto. Il primo giorno è lungo ma vi regala una giornata intera in più: alle 10:30 avete già le valigie in hotel e Parigi davanti."},
+
+trasf1:{n:"Orly → Madeleine con la metro 14", sub:"diretta, senza cambi · 30 min · biglietto aeroporto in app", min:55, ico:"🚇", kind:"fix",
+ lat:48.8700, lon:2.3247, price:14, priceTxt:"14 € a testa · biglietto «Paris Région ◇ Aéroports»",
+ stop:"Metro 14 «Aéroport d'Orly» → Madeleine, poi 5 min a piedi",
+ url:"https://www.iledefrance-mobilites.fr/aide-et-contacts/titres-unitaires-tarifs-reduits/quels-tickets-pour-l-aeroport", urlTxt:"Biglietti per gli aeroporti (sito ufficiale)",
+ desc:"Dal 2024 la linea 14, automatica e con aria condizionata, parte direttamente da Orly: la stazione sta tra i terminal 1-2-3 e 4, si segue il cartello «Métro 14». Si scende a Madeleine senza cambi, in mezz'ora, e l'hotel è a cinque minuti a piedi lungo rue Royale e il Faubourg Saint-Honoré. Niente taxi, niente navette: è il modo più rapido ed economico che esista.",
+ tip:"Il biglietto aeroporto (14 € a tratta nel 2026, verificate il prezzo in app) si compra prima nell'app Île-de-France Mobilités o alle macchine in stazione. In uscita dalla metro a Madeleine prendete l'uscita «Rue Royale»: la chiesa della Madeleine ve la trovate davanti, l'hotel è alle sue spalle."},
+
+drop:{n:"Deposito bagagli in hotel", sub:"Hôtel de Castiglione · 38 rue du Faubourg Saint-Honoré", min:20, ico:"🧳", kind:"fix",
+ lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"gratis",
+ stop:"Metro Madeleine (8, 12, 14) o Concorde (1, 8, 12)",
+ url:"https://www.hoteldecastiglione.com/", urlTxt:"Sito dell'hotel",
+ desc:"Il check-in è nel pomeriggio, ma le valigie si lasciano subito alla reception. Posizione da sogno: siete sulla via più elegante di Parigi, tra la Madeleine, Place Vendôme e Concorde, a dieci minuti a piedi dalle Tuileries e dall'Orangerie, con tre linee di metro sotto casa.",
+ tip:"Scrivete all'hotel qualche settimana prima: arrivo giovedì alle 10:30 con deposito bagagli e richiesta di early check-in; domenica check-out e ritiro valigie verso le 14:15. In reception chiedete anche il wi-fi e se hanno il servizio taxi a tariffa fissa per l'aeroporto, utile come piano B della domenica."},
+
+checkin:{n:"Check-in e respiro", sub:"doccia, cambio, piedi a riposo", min:60, ico:"🛏", kind:"fix",
+ lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"—",
+ desc:"Pausa vera dopo una sveglia all'alba e mezza Parigi a piedi. Doccia, cambio scarpe, dieci minuti orizzontali. Alle 20:30 vi aspetta una delle sale più belle della città e ci volete arrivare vive.",
+ tip:"Dal Marais all'hotel: metro 1 da Saint-Paul a Concorde, 12 minuti, poi 6 a piedi."},
+
+pausaVen:{n:"Pausa in hotel prima della cena", sub:"doccia, cambio d'abito, gambe su", min:45, ico:"🛁", kind:"fix",
+ lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"—",
+ desc:"Dal Flore la metro 12 porta dritta a Madeleine in dodici minuti. Tre quarti d'ora per la doccia, il cambio (stasera ci si veste bene) e un respiro. Il ristorante è a tre minuti di passeggiata.",
+ tip:"Alle 19:55 si esce. Dress code: elegante ma senza esagerare, come a un bel compleanno."},
+
+checkout:{n:"Check-out e bagagli in deposito", sub:"si esce leggere", min:15, ico:"🧳", kind:"fix",
+ lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"gratis",
+ desc:"Check-out entro mezzogiorno, ma le valigie restano in deposito senza costi: si torna a prenderle alle 14:30, dopo pranzo.",
+ tip:"Lasciate fuori una felpa leggera per l'aereo e tenete in borsa i biglietti dell'Orangerie già scaricati sul telefono."},
+
+bagagli:{n:"Ritiro bagagli in hotel", sub:"ultimo giro, poi Opéra", min:10, ico:"🧳", kind:"fix",
+ lat:HOTEL.lat, lon:HOTEL.lon, price:0, priceTxt:"—",
+ desc:"Si passa a riprendere le valigie, si saluta la reception e si cammina dieci minuti fino a rue Scribe, dietro l'Opéra, dove parte il Roissybus.",
+ tip:"Controllate cassaforte, caricabatterie e il cassetto del comodino: è lì che restano sempre le cose."},
+
+trasf2:{n:"Opéra → Charles de Gaulle con il Roissybus", sub:"partenza da rue Scribe · ogni 15–20 min · 60–75 min", at:"15:00", min:75, ico:"🚌", kind:"fix",
+ lat:48.8712, lon:2.3300, price:14, priceTxt:"14 € a testa · stesso biglietto aeroporto (verificare in app)",
+ stop:"Fermata Roissybus in rue Scribe, angolo rue Auber, dietro l'Opéra Garnier",
+ url:"https://www.ratp.fr/titres-et-tarifs/billet-aeroport", urlTxt:"Roissybus · info e biglietti (RATP)",
+ desc:"Il Roissybus è l'autobus diretto dall'Opéra all'aeroporto Charles de Gaulle: ferma a tutti i terminal (1, 2 e 3), si sale con le valigie senza scale né cambi e in un'ora abbondante si è ai banchi check-in. Partenza alle 15:00, arrivo verso le 16:15 per un volo delle 18:00: stretto ma corretto; se il bus tarda più di dieci minuti, taxi.",
+ tip:"Verificate sulla carta d'imbarco il terminal (il bus lo annuncia a bordo). Piano B se piove o siete stanche: taxi a tariffa fissa dall'hotel, circa 55–60 € dalla riva destra, 45 minuti se il traffico lo consente. Niente RER B con le valigie: scale e borseggiatori."},
+
+volo2:{n:"Volo Parigi CDG → Firenze", sub:"diretto · 1h40", at:"18:00", min:100, ico:"✈️", kind:"fix",
+ lat:null, lon:null, price:0, priceTxt:"già pagato",
+ desc:"Partenza alle 18:00, atterraggio a Firenze alle 19:40. Un'ora e quaranta e siete a casa, con il telefono pieno di foto e le borse piene di cose comprate alle Puces.",
+ tip:"Al CDG i controlli possono essere lenti: due ore prima è il minimo. Ultimo souvenir sensato in aeroporto: una scatola di macarons Ladurée, ce l'hanno quasi tutti i terminal."},
+
+/* ---------- GIOVEDÌ 17 ---------- */
+faubourg:{n:"Il Faubourg Saint-Honoré, la via di casa", sub:"Élysée, Hermès, la Madeleine, Ladurée", min:45, ico:"🎩", kind:"see",
+ lat:48.8702, lon:2.3165, price:0, priceTxt:"GRATIS",
+ stop:"Si parte dalla porta dell'hotel",
+ desc:"Il vostro hotel sta sulla via più elegante di Parigi. Verso ovest, al numero 55, c'è il Palazzo dell'Élysée con i gendarmi davanti al portone: ci abita il Presidente. Verso est, al 24, la casa madre di Hermès con le sue vetrine-scenografia. Si torna verso la Madeleine passando da rue Royale: Ladurée al 16 (i macarons sono nati qui nel 1930) e, in piazza, la bottega della senape Maille e la casa del tè Mariage Frères.",
+ tip:"Comprate i macarons la domenica, non oggi: non reggono tre giorni. Davanti all'Élysée non ci si ferma a fotografare i gendarmi: vi fanno circolare con molta gentilezza."},
+
+vendome:{n:"Place Vendôme", sub:"la piazza dei gioiellieri e del Ritz", min:15, ico:"💍", kind:"see",
+ lat:48.8675, lon:2.3294, price:0, priceTxt:"GRATIS",
+ stop:"Da rue Saint-Honoré, 5 min",
+ desc:"Un ottagono perfetto del 1699 con al centro la colonna fusa con il bronzo dei cannoni di Austerlitz. Intorno, Chanel, Cartier, Boucheron, Chaumet e il Ritz, dove Coco Chanel visse 34 anni. Si attraversa, si guarda, si sogna.",
+ tip:"La colonna fu abbattuta dai comunardi nel 1871 su proposta del pittore Courbet, che poi fu condannato a pagarne la ricostruzione: 323.000 franchi. Morì in esilio prima della prima rata."},
+
+palaisroyal:{n:"Palais-Royal e le colonne di Buren", sub:"il giardino segreto di Parigi", min:45, ico:"🏛", kind:"see",
+ lat:48.8650, lon:2.3372, price:0, priceTxt:"GRATIS",
+ stop:"Metro 1/7 Palais Royal–Musée du Louvre · a piedi da Vendôme 10 min",
+ url:"https://www.domaine-palais-royal.fr/", urlTxt:"Sito ufficiale (orari)",
+ desc:"Dietro la Comédie-Française c'è un cortile con 260 colonne a righe bianche e nere, l'opera di Daniel Buren del 1986 che Parigi odiò e poi adorò: la foto giusta è in piedi su una colonna. Dietro, il giardino del Palais-Royal: tigli potati a parallelepipedo, fontane, panchine, silenzio totale a cinquanta metri dal Louvre. Sotto le arcate, le boutique più strane della città: Didier Ludot per l'alta moda vintage, i profumi di Serge Lutens, guanti, scatole da musica.",
+ tip:"Il giardino è aperto dalle 7 alle 22:30 d'estate. Qui, al Café de Foy, il 12 luglio 1789 Camille Desmoulins salì su un tavolo e chiamò i parigini alle armi: due giorni dopo cadde la Bastiglia."},
+
+vivienne:{n:"Galerie Vivienne e i passages", sub:"i centri commerciali del 1823", min:35, ico:"🪞", kind:"see",
+ lat:48.8667, lon:2.3395, price:0, priceTxt:"GRATIS",
+ stop:"Uscita nord del Palais-Royal, 3 min",
+ desc:"I passages couverts sono le gallerie coperte a vetri dove la borghesia parigina faceva shopping al riparo dal fango, prima di Haussmann. La Galerie Vivienne è la più bella: mosaici a pavimento, lucernari, la libreria Jousseaume con i libri antichi, la bottega di vini Legrand. Da lì, in dieci minuti, si arriva al Passage des Panoramas (1799, il più antico, filatelici e bistrot) e ai Passages Jouffroy e Verdeau, con il Musée Grévin e i negozi di bastoni da passeggio.",
+ tip:"Nei passages si gira con il naso all'insù: il bello è nei soffitti. Il percorso vi porta esattamente alla porta del pranzo: il Passage des Panoramas sbuca su boulevard Montmartre, e Chartier è a cento metri."},
+
+chartier:{n:"Pranzo da Bouillon Chartier", sub:"dal 1896 · senza prenotazione · l'ordine scritto sulla tovaglia", min:70, ico:"🍽", kind:"eat",
+ lat:48.8720, lon:2.3430, price:20, priceTxt:"15–22 € a testa",
+ stop:"7 rue du Faubourg-Montmartre, 9e · fondo del Passage Jouffroy",
+ url:"https://www.bouillon-chartier.com/", urlTxt:"Bouillon Chartier",
+ desc:"Il bouillon originale: una sala del 1896 con specchi, portacappelli di ottone sopra i tavoli e camerieri in gilet nero che scrivono l'ordine direttamente sulla tovaglia di carta. Uovo con maionese, poulet frites, bourguignon, baba al rum: si mangia in due con 40 euro, in un posto che non è cambiato di una virgola in 130 anni.",
+ tip:"È il piano B del pranzo di giovedì se Les Indécises non si riesce a prenotare: non si prenota, mai, e la fila scorre veloce a pranzo (dieci minuti, molto di più la sera). Si condivide il tavolo con sconosciuti ed è parte del gioco. Aperto 11:30–24:00 tutti i giorni."},
+
+rivoli59:{n:"59 Rivoli, la casa degli artisti", sub:"sei piani di atelier aperti · dal reel di Francesca", min:50, ico:"🎨", kind:"see",
+ lat:48.8588, lon:2.3473, price:0, priceTxt:"GRATIS (offerta libera)",
+ stop:"59 rue de Rivoli, 1er · Metro Châtelet · dal pranzo: metro 8/9 Grands Boulevards → 4 Châtelet, o 20 min a piedi",
+ url:"https://www.59rivoli.org/", urlTxt:"Sito del 59 Rivoli (orari e concerti)",
+ desc:"Un palazzo haussmanniano abbandonato da una banca, occupato nel 1999 da tre artisti: pochi giorni dopo erano dieci, e aprirono le porte a chiunque volesse curiosare. Il Comune alla fine lo comprò e nel 2009 lo riaprì «in regola». Oggi è una scala a chiocciola dipinta da cima a fondo con trenta atelier su sei piani, i pittori che lavorano davanti a voi e vi raccontano le loro tele, odore di vernice fresca, una facciata che cambia vestito ogni mese. È il terzo luogo dell'arte contemporanea di Parigi dopo Pompidou e Jeu de Paume, ma senza vetrine.",
+ tip:"Aperto da martedì a domenica, 13:00–20:00, ingresso libero con un'offerta all'uscita. Chiedete sempre prima di fotografare: è il loro posto di lavoro. Le stampe e i piccoli lavori si comprano direttamente dagli artisti: il souvenir più bello che porterete a casa. Il Centre Pompidou, a cinque minuti, è chiuso per lavori fino al 2030: quindi questo è il vostro Pompidou."},
+
+marais:{n:"Il Marais: Place des Vosges, Carnavalet, rue des Rosiers", sub:"la Parigi del Seicento e del falafel", min:90, ico:"🏘", kind:"see",
+ lat:48.8556, lon:2.3655, price:0, priceTxt:"GRATIS",
+ stop:"Metro 1 Saint-Paul · dal 59 Rivoli 18 min a piedi lungo rue de Rivoli",
+ url:"https://www.carnavalet.paris.fr/", urlTxt:"Musée Carnavalet (gratis)",
+ desc:"Si entra da rue des Francs-Bourgeois e si sbuca sulla piazza più bella di Parigi: Place des Vosges, 1612, trentasei padiglioni di mattoni rosa attorno a un giardino. Al numero 6 c'è la casa di Victor Hugo (gratis). A due passi, il Musée Carnavalet: la storia di Parigi in due palazzi aristocratici, gratuito, con la camera da letto di Proust e le insegne delle botteghe antiche. Poi rue des Rosiers, il cuore del quartiere ebraico: falafel da L'As du Fallafel, pasticcerie, boutique vintage. Chiusura al Village Saint-Paul, i cortili nascosti degli antiquari.",
+ tip:"Dalla Place des Vosges, nell'angolo sud-ovest, un portone dà sul giardino dell'Hôtel de Sully: è un passaggio segreto che sbuca su rue Saint-Antoine. L'As du Fallafel (34 rue des Rosiers) è chiuso il venerdì sera e il sabato: oggi è giovedì, perfetto per uno spuntino da 9 euro mangiato in piedi."},
+
+operanotte:{n:"Rientro per l'Opéra e Place Vendôme illuminate", sub:"dalla cena all'hotel a piedi, 25 min", min:30, ico:"🌙", kind:"see",
+ lat:48.8719, lon:2.3316, price:0, priceTxt:"GRATIS",
+ stop:"Metro 8 Strasbourg–Saint-Denis → Opéra (3 fermate), poi a piedi",
+ desc:"Dal ristorante tre fermate di metro e si esce davanti all'Opéra Garnier illuminata: la facciata d'oro, la cupola verde, i lampioni. Da lì si scende per rue de la Paix, si attraversa Place Vendôme con la colonna accesa e si torna a dormire passando da rue Saint-Honoré. Il miglior finale possibile per il primo giorno.",
+ tip:"Se siete stanche la metro 8 arriva fino a Madeleine, a cinque minuti dall'hotel. Ma i venti minuti a piedi valgono il doppio."},
+
+/* ---------- VENERDÌ 18 ---------- */
+perelachaise:{n:"Père-Lachaise", sub:"Piaf, Chopin, Jim Morrison, Oscar Wilde", min:120, ico:"🕊", kind:"see",
+ lat:48.8610, lon:2.3935, price:0, priceTxt:"GRATIS",
+ stop:"Metro 8 Madeleine → République, poi 3 → Gambetta (35 min). Si entra dall'alto e si scende",
+ url:"https://www.paris.fr/lieux/cimetiere-du-pere-lachaise-5035", urlTxt:"Mappa e orari (Comune di Parigi)",
+ desc:"Il cimitero più visitato del mondo: 44 ettari di viali alberati in collina, cappelle gotiche, gatti, e un elenco di inquilini da far girare la testa. Édith Piaf (divisione 97), Chopin con la sua musa in lacrime (11), Oscar Wilde con la sfinge coperta di baci (89), Jim Morrison con il recinto (6), Modigliani, Proust, Molière, Balzac, Delacroix, Maria Callas nel colombario. Entrando da Gambetta si è già in alto: tutto il percorso è in discesa.",
+ tip:"Aperto dalle 8:00 (8:30 il sabato, 9:00 la domenica) alle 18:00. Fate uno screenshot della mappa ufficiale prima di entrare: dentro ci si perde volentieri, ma due ore passano in fretta. Il bacio sulla tomba di Wilde è vietato dal 2011 (il rossetto corrodeva la pietra): ora c'è il vetro, e i baci stanno sul vetro."},
+
+canal:{n:"Canal Saint-Martin e l'Hôtel du Nord", sub:"ponti girevoli, chiuse, Atmosphère", min:50, ico:"⛵️", kind:"see",
+ lat:48.8722, lon:2.3658, price:0, priceTxt:"GRATIS",
+ stop:"Metro 3 Gambetta → République (10 min), poi 5 min a piedi",
+ desc:"Il canale voluto da Napoleone nel 1802 per portare acqua potabile a Parigi, con nove chiuse, ponti girevoli e le passerelle di ferro ad arco rese celebri da Amélie Poulain (quella in cui lancia i sassi). Si cammina sul quai de Valmy tra platani e ragazzi seduti sul bordo, si passa davanti all'Hôtel du Nord, l'albergo del film del 1938 dove Arletty pronunciò il più famoso «Atmosphère! Atmosphère!» del cinema francese: oggi è un bistrot.",
+ tip:"Al 34 di rue Yves-Toudic c'è Du Pain et des Idées, una delle panetterie più belle di Parigi (vetrine del 1875): l'escargot pistacchio-cioccolato è leggendario. Apre solo dal lunedì al venerdì, 7:00–20:00. Oggi è venerdì: non lasciatevela scappare."},
+
+bouillonrep:{n:"Pranzo al Bouillon République", sub:"prenotabile online · dal reel «si mangia con 20 €»", at:"13:45", min:75, ico:"🍲", kind:"eat",
+ lat:48.8655, lon:2.3650, price:22, priceTxt:"18–25 € a testa",
+ stop:"39 boulevard du Temple, 3e · Metro République · dal canale 10 min a piedi",
+ url:"https://bouillonlesite.com/reservation/", urlTxt:"Prenota online (Bouillon Pigalle · République)",
+ desc:"Il fratello di Bouillon Pigalle in una grande sala da brasserie, stessa carta e stessi prezzi da capogiro: uovo mayo a 2 euro, lumache, bourguignon a 12, profiteroles. È il locale del video che avete visto: cucina francese vera, veloce, rumorosa, allegra. Qui, a differenza di Chartier, si prenota online.",
+ tip:"Prenotate il tavolo delle 13:45: senza prenotazione la fila del venerdì a pranzo è lunga. Aperto 11:30–24:00 tutti i giorni."},
+
+ilesaintlouis:{n:"Île Saint-Louis e il gelato Berthillon", sub:"l'isola del Seicento", min:60, ico:"🍦", kind:"see",
+ lat:48.8517, lon:2.3567, price:6, priceTxt:"gelato ~5–7 €",
+ stop:"Dal Marais a piedi: rue de Turenne, Saint-Paul, Pont Marie (20 min)",
+ url:"https://berthillon.fr/", urlTxt:"Berthillon",
+ desc:"Un'isola intera costruita in un colpo solo nel Seicento, senza metro, senza negozi di catena: una strada centrale, palazzi con i portoni di quercia, i lungosenna più tranquilli di Parigi. Berthillon (29-31 rue Saint-Louis-en-l'Île) fa il gelato dal 1954: caramello al burro salato, fragola di bosco, pera. Si mangia seduti sul quai de Bourbon con l'abside di Notre-Dame davanti, dalla punta ovest dell'isola.",
+ tip:"Il salone Berthillon è chiuso lunedì e martedì: oggi è venerdì. Dal Pont Saint-Louis, il ponticello pedonale che unisce le due isole, c'è la vista di Notre-Dame restaurata con la guglia nuova: senza fila, senza biglietto."},
+
+jacquemart:{n:"Musée Jacquemart-André", sub:"la villa più bella di Parigi · venerdì aperto fino a tardi", min:80, ico:"🖼", kind:"see",
+ lat:48.8755, lon:2.3105, price:19, priceTxt:"19 € con mostra · fascia oraria online",
+ stop:"Metro 1 Saint-Paul → Franklin D. Roosevelt, poi 9 → Saint-Philippe-du-Roule (25 min)",
+ url:"https://www.musee-jacquemart-andre.com/en/prepare-your-visit/rates", urlTxt:"Biglietti e orari",
+ desc:"La casa di una coppia dell'Ottocento, Édouard André e Nélie Jacquemart, che spesero una fortuna in viaggi in Italia comprando Botticelli, Mantegna, Uccello, Bellini, e li appesero in casa. Si visita come una villa, non come un museo: la sala da ballo con le pareti che scompaiono, il giardino d'inverno, la scala a doppia rampa con l'affresco del Tiepolo portato via da Venezia. Riaperto nel 2024 dopo un restauro totale. A dieci minuti a piedi dall'hotel.",
+ tip:"Il venerdì, in periodo di mostra, resta aperto fino alle 21:30: niente fretta. Il biglietto online va preso con la fascia oraria. Il Café Jacquemart-André, nella sala da pranzo con il soffitto del Tiepolo, è uno dei più belli di Parigi: aperto fino alle 17:30, se arrivate in tempo prendete almeno un tè."},
+
+/* ---------- SABATO 19 ---------- */
+puces:{n:"Les Puces de Saint-Ouen", sub:"il mercato dell'antiquariato più grande del mondo · solo sab-dom-lun", min:150, ico:"🪑", kind:"see",
+ lat:48.9035, lon:2.3430, price:0, priceTxt:"GRATIS · portafogli a rischio",
+ stop:"Metro 14 da Madeleine → Mairie de Saint-Ouen (12 min), poi 10 min a piedi · oppure 4 Porte de Clignancourt",
+ url:"https://www.pucesdeparissaintouen.com/en/", urlTxt:"Sito ufficiale delle Puces",
+ desc:"Sette ettari, quattordici mercati, duemila mercanti: dal 1885 i rigattieri cacciati da Parigi si sono installati qui, oltre le fortificazioni, e ci sono rimasti. Il Marché Vernaison (1920) è il più antico, un labirinto di vicoli con bancarelle di tutto: bigiotteria, giocattoli di latta, biancheria ricamata, cartoline. Il Paul Bert Serpette è quello chic del design del Novecento, dove comprano gli arredatori e le star. Il Marché Dauphine ha i libri, i vinili e i vestiti vintage su due piani. Il Biron è quello dei lampadari da palazzo.",
+ tip:"Aperto sabato e domenica 10:00–18:00 (il lunedì a orario ridotto). Si contratta con garbo, il 10–15% si ottiene sempre; contanti e contactless accettati quasi ovunque. Entrate da rue des Rosiers e fate Vernaison, Dauphine, Paul Bert, in quest'ordine. Occhio alle borse: è una delle zone con più borseggiatori."},
+
+macocotte:{n:"Pranzo da Ma Cocotte", sub:"prenotabile online · il ristorante di Starck dentro le Puces", at:"12:45", min:80, ico:"🍗", kind:"eat",
+ lat:48.9031, lon:2.3447, price:35, priceTxt:"30–40 € a testa",
+ stop:"106 rue des Rosiers, Saint-Ouen · accanto al Paul Bert Serpette",
+ url:"https://www.macocotte-lespuces.com/", urlTxt:"Prenota online",
+ desc:"Philippe Starck ha disegnato una grande cantina industriale con il camino, le piastrelle smaltate e le sedie tutte diverse, nel cuore del mercato: pollo arrosto, filetto di manzo, verdure al forno, dolci da brasserie. Il sabato a pranzo è pieno di famiglie e di mercanti: prenotare online è obbligatorio.",
+ tip:"Alternativa più folle e più kitsch: Chez Louisette, dentro il Marché Vernaison, una guinguette con le ghirlande dove una cantante fa Piaf tra i tavoli dagli anni Trenta. Non prende prenotazioni online e si mangia così così, ma lo spettacolo è impagabile: se passate davanti e c'è posto, cambiate programma."},
+
+mm1:{n:"Montmartre 1 · la collina dei vicoli", sub:"Lamarck, le scale di Becquerel, Sacré-Cœur dal retro, Saint-Rustique, il Tertre", min:60, ico:"🪜", kind:"see",
+ lat:48.8880, lon:2.3415, price:0, priceTxt:"GRATIS",
+ stop:"Dal Bouillon Pigalle: metro 12 Pigalle → Lamarck-Caulaincourt, 2 fermate (8 min)",
+ url:"https://www.instagram.com/p/DdyCGj8CBb0/", urlTxt:"Le 20 tappe di Paris la douce",
+ desc:"Tre ore a Montmartre fatte bene, seguendo le venti tappe del post di Paris la douce ma dall'alto in basso, per non fare le scale in salita. Si esce dalla metro Lamarck-Caulaincourt tra le due scalinate gemelle (quella del film Amélie), si sale per rue Becquerel, si gira per rue du Chevalier-de-la-Barre, si entra nel Square Marcel-Bleustein-Blanchet, il giardino dietro il Sacré-Cœur dove non va nessuno, e si arriva alla basilica dal retro. Dentro, il mosaico del Cristo in gloria, uno dei più grandi del mondo; fuori, tutta Parigi ai piedi. Poi rue Saint-Rustique, la strada più antica della collina, senza marciapiedi, e Place du Tertre con i pittori.",
+ tip:"Place du Tertre alle 15 del sabato è una calca: attraversatela, fotografate, ma la vera Montmartre è cinquanta metri più in là. Davanti al Sacré-Cœur ci sono i tizi del braccialetto di cotone che vi afferrano il polso: mani in tasca e «non, merci» deciso. La cupola della basilica (300 gradini, ~8 €) regala la vista più alta della città: solo se avete gambe da vendere."},
+
+mm2:{n:"Montmartre 2 · la vigna, la Maison Rose, Dalida, i mulini", sub:"rue Norvins, Cortot, l'Abreuvoir, Lepic, il Bateau-Lavoir, Abbesses", min:65, ico:"🍇", kind:"see",
+ lat:48.8870, lon:2.3380, price:0, priceTxt:"GRATIS · Musée de Montmartre 15 €",
+ stop:"Tutto a piedi, in discesa",
+ url:"https://museedemontmartre.fr/", urlTxt:"Musée de Montmartre (facoltativo)",
+ desc:"Da Place du Tertre si scende per rue Norvins davanti al Consulat, poi rue des Saules: a sinistra la vigna del Clos Montmartre, l'ultima di Parigi (mille bottiglie l'anno, vendute all'asta), a destra la Maison Rose, la casetta rosa dipinta da Utrillo, oggi un bistrot. Rue de l'Abreuvoir è la strada più fotografata della collina; porta a Place Dalida, con il busto di bronzo dal seno lucidato dai turisti che lo toccano per fortuna. Si risale un attimo in rue Girardon fino al Moulin de la Galette, il mulino di Renoir, e si scende per rue Lepic (al 54 abitò Van Gogh) fino a Place Émile-Goudeau e al Bateau-Lavoir, dove Picasso dipinse Les Demoiselles d'Avignon. Si finisce in Place des Abbesses: la chiesa Art Nouveau di Saint-Jean, l'entrata della metro di Guimard, il Mur des je t'aime con la frase in 250 lingue.",
+ tip:"Il Musée de Montmartre (12 rue Cortot, 10:00–19:00) ha il giardino di Renoir e la vista sulla vigna: se avete tempo e voglia, è il museo più poetico di Parigi. Passage Cottin, con la scala che sembra un quadro, è la tappa 18 del post: sta sul versante est, dietro il Sacré-Cœur, e la lasciamo a chi vuole allungare."},
+
+cimmontmartre:{n:"Cimitero di Montmartre", sub:"Dalida, Truffaut, Degas, Stendhal, Nijinsky", min:40, ico:"🌹", kind:"see",
+ lat:48.8875, lon:2.3300, price:0, priceTxt:"GRATIS",
+ stop:"20 avenue Rachel · da Abbesses 10 min a piedi, giù per rue des Abbesses e rue Lepic",
+ desc:"Scavato in una vecchia cava di gesso, sotto il ponte di rue Caulaincourt: la tomba di Dalida con la statua a grandezza naturale e il sole dietro la testa è la più fiorita di Parigi. Poi Truffaut, Degas, Stendhal, Berlioz, Nijinsky, Offenbach e La Dame aux camélias vera, Alphonsine Plessis. Mezz'ora tra i gatti, prima della cena ai piedi della collina.",
+ tip:"Chiude alle 18:00: arrivate entro le 17:15. La mappa con le tombe celebri è all'ingresso. Da qui al Bouillon Pigalle sono sette minuti lungo boulevard de Clichy."},
+
+aperimontmartre:{n:"Aperitivo in Place des Abbesses", sub:"un bicchiere all'ombra, prima di cena", min:75, ico:"🥂", kind:"eat",
+ lat:48.8844, lon:2.3385, price:10, priceTxt:"8–12 € a testa",
+ stop:"Place des Abbesses · rue des Martyrs",
+ desc:"Il quartiere intorno ad Abbesses è la Montmartre dove vivono i parigini: caffè con i tavolini fuori, rue des Martyrs piena di botteghe di formaggi e pasticcerie. Un kir o un bicchiere di bianco a un tavolino, le gambe che ringraziano, la luce lunga di giugno.",
+ tip:"Il sole tramonta alle 21:57: la cena è alle 19:30 proprio perché dopo si risale per il tramonto dalle scale del Sacré-Cœur."},
+
+tramonto:{n:"Tramonto dalle scale del Sacré-Cœur", sub:"il finale del sabato · sole giù alle 21:57", at:"21:15", min:55, ico:"🌇", kind:"see",
+ lat:48.8862, lon:2.3430, price:0, priceTxt:"GRATIS",
+ stop:"Da Le Chat Noir: metro 2 Blanche → Anvers (2 fermate) e funicolare, oppure 20 min a piedi in salita",
+ desc:"Alle 21:30 le scale del Sacré-Cœur sono piene di gente seduta con una bottiglia, un chitarrista, e tutta Parigi che si accende sotto. Il sole va giù dietro la Défense alle 21:57 e per venti minuti il cielo fa quello che sa fare solo a giugno. È la foto del viaggio: voi due, le scale, la città.",
+ tip:"La funicolare da Anvers si prende con un normale biglietto metro e sale in un minuto. Per tornare: metro 12 da Abbesses porta direttamente a Madeleine in 12 minuti, uscita Rue Royale, e siete a casa."},
+
+/* ---------- DOMENICA 20 ---------- */
+orangerie:{n:"Musée de l'Orangerie · le Ninfee", sub:"Monet in due sale ovali · nel combinato con Orsay", at:"11:45", min:60, ico:"🪷", kind:"see",
+ lat:48.8638, lon:2.3226, price:0, priceTxt:"compresa nel combinato Orsay + Orangerie · fascia oraria",
+ stop:"Da Orsay 12 min a piedi: Pont de la Concorde, ingresso dalle Tuileries lato Concorde",
+ url:"https://www.musee-orangerie.fr/en/node/197", urlTxt:"Biglietti e orari",
+ desc:"Otto pannelli lunghi fino a diciassette metri, montati in due sale ovali illuminate dal cielo: Monet li dipinse negli ultimi anni di vita per donarli alla Francia il giorno dopo l'armistizio del 1918, come «un bouquet di fiori» per la pace. Ci si siede al centro e si resta. Sotto, la collezione Walter-Guillaume: Renoir, Cézanne, Matisse, Modigliani, Picasso, Soutine, in un'ora. Era già nel vostro piano del 2021 e non l'avete mai fatta: si rimedia.",
+ tip:"Con il combinato si prenota comunque la fascia 11:45 online. Un'ora basta: le due sale ovali con calma, poi il piano di sotto a passo svelto. Alle 12:45 si esce: Concorde è a tre minuti, metro 1 fino a Châtelet e si pranza davanti alla Sainte-Chapelle."},
+
+deuxpalais:{n:"Pranzo alla Brasserie Les Deux Palais", sub:"davanti alla Sainte-Chapelle · il vostro tavolo del 2025", at:"13:00", min:75, ico:"🥂", kind:"eat",
+ lat:48.8558, lon:2.3457, price:30, priceTxt:"25–35 € a testa",
+ stop:"3 boulevard du Palais, Île de la Cité · Metro 4 Cité · dall'Orangerie: metro 1 Concorde → Châtelet (8 min), poi 8 min a piedi",
+ url:"https://www.google.com/maps/search/Brasserie+Les+Deux+Palais+Paris", urlTxt:"Les Deux Palais (mappa e prenotazione)",
+ desc:"La brasserie all'angolo tra il Palazzo di Giustizia e la Sainte-Chapelle, con la sala Art Nouveau, i banconi e i camerieri che servono avvocati e turisti insieme: ci siete già state nel 2025 e ci tornate, perché la Sainte-Chapelle è dall'altra parte della strada. Croque, salade, confit, un bicchiere, e alle 14:25 si attraversa.",
+ tip:"Prenotare il tavolo delle 13:00 (verificare il canale online: TheFork o telefono). Con il biglietto delle 14:30 in tasca non c'è fretta a tavola, ma il controllo di sicurezza alla Sainte-Chapelle vuole dieci minuti."},
+
+
+tuileries:{n:"Tuileries e la cioccolata di Angelina", sub:"il giardino, poi il chocolat chaud più famoso di Parigi", min:50, ico:"☕️", kind:"eat",
+ lat:48.8653, lon:2.3285, price:12, priceTxt:"cioccolata ~9 € · 7/7, senza prenotazione",
+ stop:"226 rue de Rivoli, uscendo dalle Tuileries lato nord",
+ url:"https://www.angelina-paris.fr/", urlTxt:"Angelina",
+ desc:"Si attraversa il giardino delle Tuileries dalle vasche con le sedie verdi fino all'uscita su rue de Rivoli: al 226 c'è Angelina, salone Belle Époque del 1903 dove Coco Chanel e Proust venivano per la cioccolata calda «L'Africain», così densa che si mangia col cucchiaio, e per il Mont-Blanc di castagne. La pausa dolce dell'ultimo giorno.",
+ tip:"La domenica a mezzogiorno c'è fila: se supera i 15 minuti, prendete la cioccolata da asporto allo sportello accanto e bevetela sulle sedie del giardino. Il risultato è lo stesso e la vista è migliore."},
+
+cafepaix:{n:"Pranzo al Café de la Paix", sub:"prenotabile online · la terrazza davanti all'Opéra", at:"13:15", min:60, ico:"🥐", kind:"eat",
+ lat:48.8708, lon:2.3312, price:45, priceTxt:"40–60 € a testa",
+ stop:"5 place de l'Opéra · dal Louvre 15 min a piedi per avenue de l'Opéra",
+ url:"https://www.cafedelapaix.fr/", urlTxt:"Prenota online",
+ desc:"La brasserie del 1862 disegnata dallo stesso architetto dell'Opéra, con i soffitti dipinti e la terrazza che guarda la facciata di Garnier: ci hanno pranzato Zola, Maupassant, Hemingway e, nel 1944, De Gaulle il giorno della liberazione. Caro, sì, ma è l'ultimo pranzo e sta a due minuti dalla fermata del bus per l'aeroporto. Si finisce in bellezza e senza correre.",
+ tip:"Chiedete un tavolo in terrazza, la domenica è la più ambita, e dite subito che alle 14:15 dovete uscire: alle 14:30 si ritirano le valigie in hotel (10 min) e alle 15:00 parte il Roissybus da rue Scribe, proprio dietro il ristorante. Se il pranzo va lungo, il taxi a tariffa fissa dall'hotel è il piano B."},
+
+indecises:{n:"Pranzo da Les Indécises", sub:"brasserie di quartiere anni Sessanta, rinata · rue des Trois-Bornes", at:"13:45", min:75, ico:"🍽", kind:"eat",
+ lat:48.8668, lon:2.3745, price:28, priceTxt:"25–35 € a testa",
+ stop:"2 rue des Trois-Bornes, 11e · Metro 3 Parmentier · dai passages: metro 9 Grands Boulevards → République, poi 3 → Parmentier (20 min)",
+ url:"https://www.google.com/maps/search/Les+Ind%C3%A9cises+rue+des+Trois-Bornes+Paris", urlTxt:"Les Indécises (mappa, telefono, prenotazione)",
+ desc:"Una brasserie d'angolo del 1960 nell'11e, con il bancone, le sedie di legno curvato e il neon, rimessa in piedi da un ragazzo del quartiere: cucina da bistrot fatta bene, piatto del giorno, vino al bicchiere, prezzi onesti. È la Parigi dei parigini, a dieci minuti a piedi dal Marais, dove si continua dopo pranzo.",
+ tip:"Prenotare: il canale di prenotazione va verificato (è un bistrot piccolo, spesso si prenota per telefono o Instagram). Se non si riesce online, Bouillon Chartier resta nell'elenco delle cene come alternativa senza prenotazione."},
+
+pompidou:{n:"Centre Pompidou, da fuori", sub:"chiuso per lavori fino al 2030 · la fontana Stravinsky", min:15, ico:"🏗", kind:"see",
+ lat:48.8606, lon:2.3522, price:0, priceTxt:"GRATIS",
+ stop:"Place Georges-Pompidou · dal Marais 10 min a piedi",
+ url:"https://www.centrepompidou.fr/en/", urlTxt:"Centre Pompidou (stato dei lavori)",
+ desc:"Il museo è chiuso dal settembre 2025 per cinque anni di ristrutturazione totale: dentro non si entra, e la collezione è in giro per il mondo. Ma la macchina di Piano e Rogers con i tubi colorati e la scala mobile in facciata è ancora lì, e accanto la fontana Stravinsky di Tinguely e Niki de Saint Phalle con le bocche rosse e il cappello a cilindro che girano. Dieci minuti, le foto, e si va al 59 Rivoli, che è il Pompidou di questo viaggio.",
+ tip:"Sulla piazza in pendenza ci si siede e si guarda: è il salotto all'aperto del quartiere. Attenzione alle borse."},
+
+orsay:{n:"Musée d'Orsay", sub:"biglietto combinato Orsay + Orangerie · gli impressionisti nella stazione", at:"09:30", min:120, ico:"🚂", kind:"see",
+ lat:48.8600, lon:2.3266, price:24, priceTxt:"~24 € combinato con l'Orangerie (vale 3 mesi) · fascia oraria",
+ stop:"Dall'hotel 20 min a piedi: Concorde, Pont de la Concorde, quai Anatole-France · ingresso C per chi ha il biglietto",
+ url:"https://www.musee-orsay.fr/en/visit/tickets-and-rates", urlTxt:"Biglietti (combinato Orsay + Orangerie)",
+ desc:"La stazione del 1900 con l'orologio gigante e, al quinto piano, la più grande collezione impressionista del mondo: Monet, Renoir, Degas, Van Gogh, Cézanne, Gauguin, Toulouse-Lautrec. Si sale subito in alto (ascensore), si fa il quinto piano con calma, si guarda Parigi attraverso il quadrante dell'orologio, e si scende per le sculture della navata. Due ore bastano se si evita il pianterreno.",
+ tip:"Prendete il biglietto combinato Orsay + Orangerie: costa meno di due biglietti separati e copre le Ninfee subito dopo. Fascia 9:30 all'apertura, ingresso C (prenotati). Chiuso il lunedì."},
+
+cite:{n:"Île de la Cité: Notre-Dame, Place Dauphine, Pont Neuf", sub:"il cuore medievale, a piedi", min:60, ico:"⛪️", kind:"see",
+ lat:48.8565, lon:2.3440, price:0, priceTxt:"GRATIS",
+ stop:"Uscendo dalla Sainte-Chapelle, tutto a piedi",
+ desc:"Da boulevard du Palais si costeggia la Conciergerie con le torri tonde, si gira attorno al Palazzo di Giustizia fino a Place Dauphine, il triangolo di platani del 1607 dove non passa nessuno, e si esce sulla punta dell'isola al Pont Neuf, il ponte più vecchio di Parigi con le facce scolpite. Chi vuole rientra un attimo in Notre-Dame restaurata (gratis, fila di 20–30 minuti, la navata bianca com'era nel Duecento): nel 2025 l'avete vista, oggi decidete voi.",
+ tip:"Al mercato dei fiori di Place Louis-Lépine, accanto alla metro Cité, il sabato ci sono anche gli uccelli; oggi è venerdì, solo fiori. Dal Pont Neuf a Saint-Germain si attraversa la Senna e si è in rue Dauphine: cinque minuti."},
+
+saintechapelle:{n:"Sainte-Chapelle", sub:"biglietto con orario · 1.113 vetrate del Duecento", at:"14:30", min:60, ico:"🪟", kind:"see",
+ lat:48.8554, lon:2.3450, price:13, priceTxt:"13 € · fascia oraria online (monumenti nazionali)",
+ stop:"10 boulevard du Palais · ingresso con controllo di sicurezza, davanti al tribunale · dal ristorante: attraversare la strada",
+ url:"https://tickets.monuments-nationaux.fr/fr-FR/produits-seances?site=2035141861660400306&famille=2129032708460404016", urlTxt:"Biglietteria ufficiale (Centre des Monuments Nationaux)",
+ desc:"Immancabile, come avete detto. La cappella che Luigi IX costruì in sei anni per custodire la corona di spine: la cappella bassa scura e dipinta, poi la scala a chiocciola e, di colpo, la cappella alta che è tutta vetro, quindici vetrate di quindici metri con 1.113 scene della Bibbia, dalla Genesi all'Apocalisse, lette dal basso verso l'alto e da sinistra a destra. Alle 14:30 di giugno il sole entra da sud e accende il rosso e il blu.",
+ tip:"Il biglietto a orario va preso sul sito dei Monuments Nationaux: la fila senza biglietto supera l'ora. Si passa un controllo come in aeroporto (è dentro il Palazzo di Giustizia): niente coltellini né bottiglie grandi. Chiude alle 19:00 d'estate."},
+
+sg1:{n:"Saint-Germain-des-Prés", sub:"Buci, il Procope, Furstenberg, la chiesa più vecchia di Parigi", min:80, ico:"📚", kind:"see",
+ lat:48.8537, lon:2.3335, price:0, priceTxt:"GRATIS",
+ stop:"Dal Pont Neuf: rue Dauphine, poi rue de Buci",
+ desc:"Il quartiere degli editori, di Sartre e di Juliette Gréco, fatto a piedi come si deve. Rue de Buci con il mercato e i caffè, la Cour du Commerce-Saint-André con il Procope (1686, il caffè più antico di Parigi, dove Voltaire beveva quaranta tazze al giorno e Danton abitava di fianco), rue Saint-André-des-Arts, poi la chiesa di Saint-Germain-des-Prés, l'edificio più antico della città (anno 1000, campanile romanico, interni ridipinti di blu e oro). Da lì rue Bonaparte, rue Jacob con le gallerie e gli antiquari, e Place Furstenberg, la piazzetta con i quattro paulownia e la casa-atelier di Delacroix: la più bella di Parigi, lo dicono tutti e hanno ragione.",
+ tip:"Le botteghe da non saltare: la Pâtisserie Pierre Hermé (72 rue Bonaparte) per il macaron Ispahan, Debauve & Gallais (30 rue des Saints-Pères, cioccolatieri dal 1800, era la farmacia dei re), Ladurée al 21 rue Bonaparte. Nel 2025 avete già fatto il boulevard: oggi state nelle traverse."},
+
+flore:{n:"Aperitivo al Café de Flore (o Deux Magots)", sub:"il rito di Saint-Germain, in terrazza", min:40, ico:"🍸", kind:"eat",
+ lat:48.8541, lon:2.3326, price:16, priceTxt:"12–20 € a testa · senza prenotazione",
+ stop:"172 boulevard Saint-Germain · poi metro 12 Saint-Germain-des-Prés → Madeleine, diretta, 12 min",
+ url:"https://cafedeflore.fr/", urlTxt:"Café de Flore",
+ desc:"Caro, lo sappiamo, e lo si fa lo stesso una volta: un kir o un calice in terrazza al Flore, dove Sartre e Beauvoir scrivevano al caldo durante la guerra, o ai Deux Magots dall'altra parte della piazza. Mezz'ora a guardare passare Parigi, poi la metro 12 vi riporta dritte a Madeleine per la doccia prima della cena.",
+ tip:"Il conto si paga mentre si ordina, uso del posto. Alle 19:00 si parte: alle 19:15 siete in hotel, alle 20:00 a tavola a tre minuti da lì."},
+
+tour:{n:"Tour Eiffel fino in cima", sub:"ascensore fino alla sommità · biglietto con orario, da prendere appena esce", at:"09:30", min:135, ico:"🗼", kind:"see",
+ lat:48.8584, lon:2.2945, price:36, priceTxt:"~36 € sommità con ascensore · fascia oraria online",
+ stop:"Metro 1 Concorde → Franklin D. Roosevelt, poi 9 → Trocadéro (25 min), e si scende a piedi dal Trocadéro per il Pont d'Iéna",
+ url:"https://www.toureiffel.paris/en/rates-opening-times", urlTxt:"Biglietteria ufficiale (unica da usare)",
+ desc:"Stavolta fino in cima: 276 metri, il piano più alto, con la stanza di Gustave Eiffel ricostruita con le statuine di cera e lo champagne bar. Si arriva dal Trocadéro, che è l'unico punto da cui la torre si vede intera con la Senna davanti, si attraversa il Pont d'Iéna e si entra con il biglietto a orario. Due ascensori: fino al secondo piano, poi quello piccolo per la sommità. Mettete in conto due ore con le code ai controlli.",
+ tip:"I biglietti per la sommità si esauriscono: escono online circa 60 giorni prima, cioè intorno al 19 aprile, e vanno presi quel giorno sul sito ufficiale (toureiffel.paris), mai dai rivenditori. Fascia 9:30: è la meno affollata e la luce del mattino è dalla parte giusta. Vento forte: la sommità può chiudere, in quel caso rimborsano la differenza."},
+
+bateaux:{n:"Bateaux Mouches", sub:"la crociera classica dal Pont de l'Alma · 70 min", at:"12:30", min:80, ico:"⛴", kind:"see",
+ lat:48.8638, lon:2.3060, price:19, priceTxt:"~19 € · orario online",
+ stop:"Port de la Conférence, Pont de l'Alma (riva destra) · dalla Tour Eiffel 20 min a piedi lungo la Senna",
+ url:"https://www.bateaux-mouches.fr/en", urlTxt:"Prenota online (sito ufficiale)",
+ desc:"La crociera che avete già fatto due volte e che rifarete lo stesso, perché funziona: settanta minuti dal Pont de l'Alma fino all'Île Saint-Louis e ritorno, sotto trentuno ponti, con Notre-Dame restaurata, il Louvre, Orsay e la torre dal basso. Partenze ogni 30–45 minuti, si sale sul ponte scoperto.",
+ tip:"Prenotate la corsa delle 12:30 e state in cima a prua, lato sinistro all'andata (è quello di Notre-Dame). Dalla Tour Eiffel si arriva a piedi in venti minuti lungo il quai Branly: niente metro."},
+
+pigalle:{n:"Pranzo al Bouillon Pigalle", sub:"prenotabile online · dal reel «si mangia con 20 €»", at:"14:15", min:70, ico:"🍲", kind:"eat",
+ lat:48.8822, lon:2.3372, price:22, priceTxt:"18–25 € a testa",
+ stop:"22 boulevard de Clichy, 18e · Metro 2 Pigalle · dai Bateaux Mouches: 9 Alma-Marceau → 1 Franklin D. Roosevelt → 2 Charles de Gaulle-Étoile → Pigalle (30 min)",
+ url:"https://bouillonlesite.com/reservation/", urlTxt:"Prenota online (sito ufficiale)",
+ desc:"Il locale che ha fatto rinascere la moda dei bouillon: tre piani, trecento posti, carta corta e prezzi inverosimili (uovo mayo 2 €, lumache 7, bourguignon 12, profiteroles 4) con una cucina dignitosissima. Rumoroso, allegro, giovane, sempre pieno. È il locale del reel «si mangia con 20 €», ai piedi della vostra Montmartre.",
+ tip:"Prenotate il tavolo delle 14:15. Da qui la metro 12 porta in due fermate a Lamarck-Caulaincourt, da dove parte il giro di Montmartre in discesa."},
+
+deuxmoulins:{n:"Merenda al Café des Deux Moulins", sub:"il bar di Amélie · 15 rue Lepic · crème brûlée obbligatoria", min:40, ico:"🍮", kind:"eat",
+ lat:48.8850, lon:2.3335, price:10, priceTxt:"8–12 € a testa · senza prenotazione",
+ stop:"15 rue Lepic, 18e · da Place des Abbesses 3 min in discesa",
+ url:"https://cafedesdeuxmoulins.fr/", urlTxt:"Café des Deux Moulins",
+ desc:"Il bar dove Amélie Poulain faceva la cameriera nel film del 2001: il bancone di zinco, l'insegna rossa, il tabac in fondo, le foto di Audrey Tautou alle pareti. È rimasto un caffè di quartiere vero, non un museo, e la merenda giusta è la crème brûlée, da rompere con il cucchiaino come fa lei. Si chiama rue Lepic, non rue de Lapin: Au Lapin Agile è un'altra cosa, il cabaret in rue des Saules che avete incrociato nel giro di prima.",
+ tip:"Si entra e basta, il tavolo si trova quasi sempre. Il bagno è quello del film. Da qui a Le Chat Noir sono cinque minuti in discesa per rue Lepic e boulevard de Clichy."},
+
+defense:{n:"La Défense e la Grande Arche", sub:"da fuori: l'asse storico visto dalla fine", min:30, ico:"🏙", kind:"see", trMin:28,
+ lat:48.8925, lon:2.2360, price:0, priceTxt:"GRATIS",
+ stop:"Metro 1 Concorde → La Défense (22 min, capolinea), uscita Grande Arche · ritorno con la stessa linea fino a Palais-Royal",
+ desc:"L'asse che parte dal Louvre e passa per Concorde, gli Champs e l'Arco di Trionfo finisce qui, nel cubo vuoto di Spreckelsen del 1989, alto 110 metri, con dentro Notre-Dame che ci starebbe intera. Dalla scalinata si guarda indietro tutta Parigi in linea retta fino al Louvre, dove andate subito dopo. Mezz'ora sull'esplanade tra le torri, il Pollice di César e la fontana di Agam, e si riparte.",
+ tip:"Solo da fuori, come chiedevate: il tetto dell'Arche costa 16 € e non vale la fila. Linea 1 diretta da Concorde, automatica, con i vagoni panoramici: sedetevi davanti. Domenica mattina la Défense è deserta: è il momento giusto."},
+
+louvre:{n:"Louvre", sub:"biglietto con orario · Denon: Gioconda, Nike, Venere, la Grande Galerie", at:"11:00", min:110, ico:"🖼", kind:"see", trMin:25,
+ lat:48.8606, lon:2.3376, price:22, priceTxt:"22 € · fascia oraria obbligatoria online",
+ stop:"Metro 1 La Défense → Palais-Royal–Musée du Louvre (25 min), ingresso dal Carrousel (sotto, meno fila) o dalla Piramide",
+ url:"https://www.ticketlouvre.fr/", urlTxt:"Biglietteria ufficiale",
+ desc:"Fascia delle 11:00 e un percorso secco di due ore: dalla Piramide dritte all'ala Denon, la Nike di Samotracia in cima allo scalone, la Grande Galerie con Leonardo, la sala della Gioconda (ci si entra a flusso, cinque minuti e si esce), le Nozze di Cana di fronte, poi giù alla Venere di Milo. Il resto del museo, un'altra vita: alle 12:50 si esce dal Carrousel.",
+ tip:"Il biglietto a orario online è obbligatorio, senza non si entra. Niente valigie: le avete lasciate in hotel. Dall'uscita del Carrousel a Place de l'Opéra sono 15 minuti a piedi per avenue de l'Opéra."},
+
+/* ---------- PROPOSTE DA PARCHEGGIO ---------- */
+opera:{n:"Opéra Garnier, dentro", sub:"la scala, il foyer, il soffitto di Chagall", min:75, ico:"🎭", kind:"see",
+ lat:48.8719, lon:2.3316, price:15, priceTxt:"~15 € · online",
+ stop:"Metro Opéra · 10 min dall'hotel",
+ url:"https://www.operadeparis.fr/en/visits/palais-garnier", urlTxt:"Visita del Palais Garnier",
+ desc:"Il grande scalone di marmo, il Grand Foyer che sembra Versailles, la sala rossa e oro con il soffitto dipinto da Chagall nel 1964 e il lampadario da sei tonnellate del Fantasma dell'Opera. Visita libera 10:00–17:00, salvo prove.",
+ tip:"Da infilare la domenica mattina al posto delle Tuileries, o il venerdì al posto di Jacquemart-André se preferite l'oro al Botticelli."},
+
+catacombe:{n:"Catacombe di Parigi", sub:"sei milioni di parigini, venti metri sotto terra", min:90, ico:"💀", kind:"see",
+ lat:48.8339, lon:2.3324, price:29, priceTxt:"29 € online · fascia oraria obbligatoria",
+ stop:"Metro 4/6 Denfert-Rochereau",
+ url:"https://www.catacombes.paris.fr/en", urlTxt:"Biglietti ufficiali",
+ desc:"Un chilometro e mezzo di gallerie nelle antiche cave, con le ossa di sei milioni di parigini sistemate in muri ordinati dal 1786, quando i cimiteri del centro straripavano. Erano nel piano del 2021. 130 gradini in discesa, 112 in salita, 14 gradi fissi.",
+ tip:"Solo con biglietto online a orario, settimane prima: si esaurisce. Da mettere il venerdì mattina al posto del Père-Lachaise, se preferite il buio ai viali."},
+
+rodin:{n:"Musée Rodin e il suo giardino", sub:"il Pensatore tra le rose", min:90, ico:"🗿", kind:"see",
+ lat:48.8553, lon:2.3158, price:14, priceTxt:"14 € · giardino da solo 5 €",
+ stop:"Metro 13 Varenne",
+ url:"https://www.musee-rodin.fr/en", urlTxt:"Biglietti",
+ desc:"La villa settecentesca dove Rodin visse e lavorò, con tre ettari di giardino di rose dove stanno il Pensatore, la Porta dell'Inferno e i Borghesi di Calais. Dentro, Il Bacio e le opere di Camille Claudel. A giugno le rose sono al massimo.",
+ tip:"Chiuso il lunedì. Il biglietto solo giardino con il caffè sotto i tigli è una delle pause migliori di Parigi."},
+
+vuitton:{n:"Fondation Louis Vuitton", sub:"il veliero di vetro di Gehry nel Bois de Boulogne", min:150, ico:"⛵️", kind:"see",
+ lat:48.8766, lon:2.2633, price:16, priceTxt:"16 € · navetta 2 €",
+ stop:"Navetta dall'Arc de Triomphe (avenue de Friedland) ogni 15 min, o metro 1 Les Sablons",
+ url:"https://www.fondationlouisvuitton.fr/en", urlTxt:"Mostre e biglietti",
+ desc:"Dodici vele di vetro sopra gli alberi, l'edificio più spettacolare costruito a Parigi in questo secolo. Dipende dalla mostra in corso a giugno 2027: se è una delle grandi (negli anni scorsi Rothko, Basquiat-Warhol, Pollock), vale mezza giornata.",
+ tip:"Controllate il programma a primavera. Se ci andate, è il pomeriggio del venerdì al posto di Jacquemart-André."},
+
+mouffetard:{n:"Rue Mouffetard e il Panthéon", sub:"il mercato della domenica mattina e la cripta dei grandi", min:120, ico:"🧀", kind:"see",
+ lat:48.8420, lon:2.3500, price:13, priceTxt:"mercato gratis · Panthéon 13 €",
+ stop:"Metro 7 Place Monge · bus 84 da Madeleine",
+ desc:"La strada medievale in discesa del Quartiere Latino con il mercato alimentare (formaggi, ostriche, rosticcerie) e, la domenica mattina, la fisarmonica con il ballo in piazza davanti a Saint-Médard. Risalendo, il Panthéon con il pendolo di Foucault e la cripta di Voltaire, Rousseau, Hugo, Zola, Marie Curie, Joséphine Baker. Era nel piano del 2021.",
+ tip:"Domenica mattina al posto dell'Orangerie, se preferite il mercato ai Monet. Si rientra con la 7 fino a Opéra."},
+
+petitpalais:{n:"Petit Palais e il suo giardino", sub:"museo gratis, caffè sotto il porticato", min:70, ico:"🏺", kind:"see",
+ lat:48.8660, lon:2.3146, price:0, priceTxt:"GRATIS (collezioni permanenti)",
+ stop:"10 min a piedi dall'hotel · Metro 1/13 Champs-Élysées–Clemenceau",
+ url:"https://www.petitpalais.paris.fr/en", urlTxt:"Petit Palais",
+ desc:"Il palazzo dell'Esposizione del 1900 di fronte al Grand Palais: cupole, mosaici, scalone, e collezioni gratuite (Courbet, Monet, Cézanne, la gioielleria Art Nouveau). Il giardino interno con il porticato e le palme è un caffè segreto a due passi dagli Champs.",
+ tip:"Chiuso il lunedì. Perfetto per un'ora libera il giovedì o la domenica, o se piove."},
+
+lafayette:{n:"Terrazza delle Galeries Lafayette", sub:"la cupola e la vista sui tetti, gratis", min:40, ico:"🛍", kind:"see",
+ lat:48.8738, lon:2.3320, price:0, priceTxt:"GRATIS",
+ stop:"40 boulevard Haussmann · 8 min dall'hotel",
+ desc:"Avete già fatto i grandi magazzini due volte, ma la terrazza sul tetto (7° piano, ascensore) con la vista sull'Opéra e la Tour Eiffel, e la passerella di vetro sotto la cupola Art Nouveau del 1912, sono un'altra cosa. Dieci minuti, zero euro.",
+ tip:"Da infilare la domenica tra Angelina e il pranzo: il Café de la Paix è a tre minuti."},
+
+canalcrociera:{n:"Crociera sul Canal Saint-Martin", sub:"le chiuse, il tunnel sotto la Bastiglia", min:150, ico:"🚤", kind:"see",
+ lat:48.8530, lon:2.3690, price:23, priceTxt:"~23 € · online",
+ stop:"Porto dell'Arsenal (Bastille) o Parc de la Villette",
+ url:"https://www.canauxrama.com/en/", urlTxt:"Canauxrama",
+ desc:"Due ore e mezza di battello lento attraverso le nove chiuse del canale e il tunnel di due chilometri sotto boulevard Richard-Lenoir, con le aperture a volta che fanno entrare la luce. La crociera che a Parigi quasi nessuno fa.",
+ tip:"Alternativa al Père-Lachaise per il venerdì mattina, se volete una giornata più lenta."},
+
+samaritaine:{n:"La Samaritaine", sub:"la scala Art Nouveau e il pavone di ferro", min:40, ico:"🦚", kind:"see",
+ lat:48.8592, lon:2.3425, price:0, priceTxt:"GRATIS",
+ stop:"Metro 7 Pont-Neuf · a 5 min dal 59 Rivoli",
+ desc:"Il grande magazzino del 1910 riaperto nel 2021 dopo sedici anni di restauro: la scala monumentale, le ringhiere a pavone, il fregio di smalto sotto il lucernario. Si entra per guardare, non per comprare.",
+ tip:"Giovedì, cinque minuti prima del 59 Rivoli: le due cose sono a 400 metri l'una dall'altra."}
+};
+
+var DAYS_DEF = [
+ {id:"gio", n:"17", dow:"Giovedì", date:"2027-06-17", c:"#A76E49",
+  title:"Faubourg, passages, Marais e 59 Rivoli",
+  intro:"Si atterra alle 9:05 e alle 10:30 le valigie sono già in hotel, sulla via più elegante di Parigi. Si parte a piedi: l'Élysée e la Madeleine, Place Vendôme, il giardino del Palais-Royal con le colonne di Buren, le gallerie coperte del 1823. Pranzo da Les Indécises, la brasserie anni Sessanta dell'11e, poi il Marais a piedi, il Pompidou visto da fuori (è chiuso fino al 2030) e il 59 Rivoli, la casa degli artisti del reel, aperta fino alle 20. Check-in con calma e cena nella sala Art Nouveau del 1906 di Bouillon Julien, rientro passando dall'Opéra illuminata.",
+  start:"05:30",
+  items:["volo1","trasf1","drop","faubourg","vendome","palaisroyal","vivienne","indecises","marais","pompidou","rivoli59","checkin","cenaGio","operanotte"]},
+
+ {id:"ven", n:"18", dow:"Venerdì", date:"2027-06-18", c:"#C9975C",
+  title:"Rive Gauche: Orsay, le Ninfee, la Sainte-Chapelle, Saint-Germain",
+  intro:"La giornata della riva sinistra, tutta a piedi lungo la Senna. Orsay all'apertura con gli impressionisti al quinto piano, le Ninfee all'Orangerie con lo stesso biglietto, pranzo alla Brasserie Les Deux Palais e, dall'altra parte della strada, la Sainte-Chapelle con la fascia delle 14:30. Poi l'Île de la Cité fino al Pont Neuf e tutto il pomeriggio a Saint-Germain-des-Prés: Buci, il Procope, Furstenberg, la chiesa dell'anno Mille, le botteghe, l'aperitivo al Flore. Metro 12 dritta a Madeleine, doccia, vestito bello: la sera c'è una cena a sorpresa, a tre minuti di passeggiata.",
+  start:"09:10",
+  items:["orsay","orangerie","deuxpalais","saintechapelle","cite","sg1","flore","pausaVen","cenaVen"]},
+
+ {id:"sab", n:"19", dow:"Sabato", date:"2027-06-19", c:"#5E9BAC",
+  title:"La Tour Eiffel in cima, la Senna e tre ore a Montmartre",
+  intro:"Si parte dal Trocadéro e si sale fino in cima alla Tour Eiffel con la fascia delle 9:30, poi a piedi lungo la Senna fino ai Bateaux Mouches delle 12:30. Pranzo al Bouillon Pigalle da 20 euro ai piedi della collina e Montmartre fatta bene: tre ore di vicoli, scale, la vigna, la Maison Rose, Dalida, i mulini, il Bateau-Lavoir, seguendo le venti tappe del post, dall'alto in basso. Merenda al bar di Amélie in rue Lepic, cena da Le Chat Noir e risalita per il tramonto dalle scale del Sacré-Cœur alle 21:57.",
+  start:"09:00",
+  items:["tour","bateaux","pigalle","mm1","mm2","deuxmoulins","cenaSab","tramonto"]},
+
+ {id:"dom", n:"20", dow:"Domenica", date:"2027-06-20", c:"#6E8A8E",
+  title:"La Grande Arche, il Louvre e l'ultimo pranzo",
+  intro:"L'ultimo giorno segue l'asse storico al contrario: la metro 1 fino alla Défense per vedere la Grande Arche da fuori quando la piazza è deserta, poi la stessa linea fino al Louvre con la fascia delle 11:00 e un percorso secco di due ore (Gioconda, Nike, Venere, la Grande Galerie). Pranzo in terrazza al Café de la Paix davanti all'Opéra, alle 14:30 le valigie, alle 15:00 il Roissybus da rue Scribe, alle 18:00 il volo.",
+  start:"09:30",
+  items:["checkout","defense","louvre","cafepaix","bagagli","trasf2","volo2"]}
+];
+
+var PARKED_DEF = ["chartier","tuileries","ilesaintlouis","puces","macocotte","perelachaise","canal","bouillonrep","jacquemart","cimmontmartre","aperimontmartre","opera","lafayette","petitpalais","samaritaine","rodin","mouffetard","catacombe","vuitton","canalcrociera"];
+
+/* ============ RISTORANTI: SOLO PRENOTAZIONE ONLINE ============ */
+var CENE = [
+ {id:"cenaGio", n:"Bouillon Julien", when:"Giovedì 17 · 20:30 · 2 persone · da prenotare online", ico:"🌿", av:"#E1EBDD",
+  zone:"16 rue du Faubourg Saint-Denis, 10e · Metro 8 Strasbourg–Saint-Denis (dal Marais: 8 da Chemin Vert, diretta)",
+  kind:"Bouillon Art Nouveau del 1906, monumento storico", price:"20–30 € a testa",
+  desc:"La sala più bella tra tutti i bouillon di Parigi: pannelli di vetro dipinto con le quattro stagioni, pavoni, mogano scolpito, un soffitto che è un giardino. Prezzi da bouillon: œuf mayo, terrine, bourguignon, baba, vino della casa. Monumento storico dal 1997, è il locale del secondo reel di LA TUA PARIGI: si mangia bene con 20 euro in una delle sale più fotografate della città.",
+  url:"https://www.bouillon-julien.com/rserver", urlTxt:"Prenota online (sito ufficiale)",
+  adv:"2–3 settimane prima: la sala è piccola e il giovedì sera è pieno.",
+  tips:"Dopo cena, metro 8 fino a Opéra: tre fermate e si rientra a piedi per rue de la Paix e Place Vendôme illuminate."},
+
+ {id:"cenaVen", n:"Contraste ⭐", when:"Venerdì 18 · 20:00 · 2 persone · 🎁 sorpresa", ico:"✨", av:"#F3E1D3",
+  zone:"18 rue d'Anjou, 8e · 3 minuti a piedi dall'hotel",
+  kind:"Una stella Michelin · chef Antoine Perchoc", price:"menu da 118 a 158 € · offerta 🎁",
+  desc:"Una stella Michelin a tre minuti dalla porta dell'hotel: la cucina istintiva di Antoine Perchoc, costruita sul prodotto e sui contrasti, in una sala intima tra la Madeleine e Saint-Augustin. Menu «Michelin moment» in sei tempi, menu di mare, degustazione in sette portate. È la cena del viaggio, ed è un regalo.",
+  url:"https://www.contraste.paris/en/", urlTxt:"Prenota online (modulo sul sito)",
+  adv:"Aperto solo dal lunedì al venerdì (cena 19:00–23:30, ultimo ordine 21:30): per questo sta il venerdì. Prenotare 4–6 settimane prima.",
+  tips:"Dress code elegante. Si rientra a piedi in tre minuti: nessuna metro, nessun orario.",
+  alt:"Alternativa stellata a 10 minuti: Pavyllon di Yannick Alléno (bancone con vista sul giardino dei Champs-Élysées, aperto 7/7) prende prenotazioni solo per telefono, quindi fuori criterio; Lucas Carton in Place de la Madeleine è l'altra stella a cinque minuti.",
+  altUrl:"https://www.lucascarton.com/"},
+
+ {id:"cenaSab", n:"Le Chat Noir", when:"Sabato 19 · 19:30 · 2 persone · da prenotare online", ico:"🐈‍⬛", av:"#DCE8EA",
+  zone:"68 boulevard de Clichy, 18e · tra Blanche e Pigalle, davanti al Moulin Rouge",
+  kind:"Brasserie di Montmartre, il vostro ritorno", price:"30–45 € a testa",
+  desc:"Ci siete già state nel 2025 ed è tornato in lista: la brasserie con il gatto nero di Steinlen sull'insegna, i tavolini sul boulevard davanti al Moulin Rouge, cucina francese da brasserie (entrecôte, confit, crème brûlée) e il caos buono del sabato sera a Pigalle. È a cinque minuti in discesa dal bar di Amélie.",
+  url:"https://www.thefork.it/", urlTxt:"Prenota online (cercare «Le Chat Noir Montmartre» su TheFork)",
+  adv:"2–3 settimane. Verificate che la prenotazione online sia attiva: se no, piano B Bouillon Pigalle, 400 metri più in là.",
+  tips:"Tavolo alle 19:30 e conto per le 21:00: alle 21:15 si è sulle scale del Sacré-Cœur per il tramonto. Da Blanche la metro 2 porta ad Anvers in due minuti, poi la funicolare."},
+
+ {id:"altPigalle", n:"Bouillon Pigalle", when:"Sabato 19 · 14:15 · pranzo · prenotare online", ico:"🍷", av:"#DCE6F0",
+  zone:"22 boulevard de Clichy, 18e · ai piedi di Montmartre, Metro Pigalle",
+  kind:"Il bouillon moderno del 2017, 300 coperti su tre piani", price:"18–25 € a testa",
+  desc:"Il locale che ha fatto rinascere la moda dei bouillon: tre piani, trecento posti, carta corta e prezzi inverosimili (uovo mayo 2 €, lumache 7, bourguignon 12, profiteroles 4) con una cucina dignitosissima. È la tappa del reel «si mangia con 20 €»: nel programma sta a pranzo il sabato, prima di salire a Montmartre, ed è il piano B della cena se Le Chat Noir non prende prenotazioni online.",
+  url:"https://bouillonlesite.com/reservation/", urlTxt:"Prenota online (sito ufficiale)",
+  adv:"Prenotazione online disponibile: fatela. Senza, la fila del sabato supera l'ora."},
+
+ {id:"altChartier", n:"Bouillon Chartier", when:"Piano B del pranzo di giovedì · senza prenotazione", ico:"🍽", av:"#EDE4D6",
+  zone:"7 rue du Faubourg-Montmartre, 9e · fondo del Passage Jouffroy", kind:"Il bouillon originale del 1896", price:"15–22 € a testa",
+  desc:"Specchi, portacappelli di ottone, camerieri in gilet che scrivono l'ordine sulla tovaglia di carta: 130 anni senza cambiare una virgola. Non prende prenotazioni per principio; a pranzo la fila dura dieci minuti. È dove sbucano i passages di giovedì mattina, se Les Indécises non si riesce a prenotare.",
+  url:"https://www.bouillon-chartier.com/", urlTxt:"Bouillon Chartier",
+  adv:"Nessuna: si va e basta."},
+
+ {id:"altLucas", n:"Lucas Carton ⭐", when:"Alternativa stellata · Place de la Madeleine", ico:"🌟", av:"#FBECC8",
+  zone:"9 place de la Madeleine, 8e · 5 min dall'hotel", kind:"Una stella Michelin, sala Art Nouveau di Majorelle", price:"menu 95–170 € a testa",
+  desc:"Il ristorante del 1839 con le boiserie Art Nouveau di Louis Majorelle, classificate monumento storico: la stella più vicina all'hotel, con una sala che da sola vale la serata. È il piano B della cena di venerdì.",
+  url:"https://www.lucascarton.com/", urlTxt:"Sito e prenotazioni",
+  adv:"3–4 settimane. Verificare giorni di apertura (di norma chiuso domenica e lunedì)."},
+
+ {id:"altLouisette", n:"Chez Louisette", when:"Se rimettete le Puces in programma · dentro il mercato", ico:"🎤", av:"#F7DDE0",
+  zone:"Marché Vernaison, 136 avenue Michelet, Saint-Ouen", kind:"Guinguette con la cantante che fa Piaf tra i tavoli", price:"25–35 € a testa",
+  desc:"Ghirlande, tovaglie a quadri, una cantante con il microfono che gira tra i tavoli con La vie en rose e Milord, dagli anni Trenta. Si mangia così così (pollo, patate, vino nel bicchiere a stelo spesso) e non importa a nessuno. Non si prenota online: se passate e c'è posto, dentro.",
+  url:"https://www.pucesdeparissaintouen.com/en/marche-vernaison/", urlTxt:"Marché Vernaison",
+  adv:"Solo sul posto, verso le 12:15 prima della calca."},
+
+ {id:"altSouffle", n:"Le Soufflé", when:"Alternativa per un pranzo vicino all'hotel", ico:"🥚", av:"#FBECC8",
+  zone:"36 rue du Mont-Thabor, 1er · 6 min dall'hotel", kind:"Dal 1961, soufflé salati e dolci e basta", price:"35–45 € a testa",
+  desc:"Un ristorantino fuori dal tempo dove tutto, dall'antipasto al dolce, è un soufflé: formaggio, spinaci, Grand Marnier, cioccolato. Caldo, buffo, molto parigino. Prenotabile online.",
+  url:"https://www.lesouffle.fr/", urlTxt:"Prenota online",
+  adv:"Pochi giorni bastano. Verificare se aperto la domenica: di norma no, quindi sta bene al giovedì o al venerdì."}
+];
+
+/* ============ CHECKLIST PRENOTAZIONI ============ */
+function vt(t){return (t.secret&&!revealed())?Object.assign({},t,t.secret,{u:""}):t;}
+var TODO = [
+ {id:"t1", t:"Contraste ⭐ · cena di venerdì alle 20:00", d:"Prenotare online sul sito (modulo). Aperto solo lun–ven. Se pieno: Lucas Carton.", u:"https://www.contraste.paris/en/", uTxt:"modulo di prenotazione", pri:1, secret:{t:"Cena a sorpresa di venerdì alle 20:00 🎁", d:"Tavolo già prenotato da chi la regala. Voi dovete solo portare un vestito bello."}},
+ {id:"t2", t:"Bouillon Julien · cena di giovedì alle 20:30", d:"Prenotazione online sul sito ufficiale, 2 persone a nome Rosetta.", u:"https://www.bouillon-julien.com/rserver", uTxt:"prenota", pri:1},
+ {id:"t20", t:"Tour Eiffel · sommità, sabato 19 alle 9:30", d:"Solo biglietteria ufficiale. I biglietti escono circa 60 giorni prima (intorno al 19 aprile 2027) e la sommità si esaurisce in giornata: segnarsi la data. ~36 € a testa.", u:"https://www.toureiffel.paris/en/rates-opening-times", uTxt:"biglietteria ufficiale", pri:1},
+ {id:"t21", t:"Louvre · fascia 11:00 di domenica 20", d:"22 € a testa, biglietto a orario obbligatorio. Salvare il PDF nel Wallet.", u:"https://www.ticketlouvre.fr/", uTxt:"biglietteria ufficiale", pri:1},
+ {id:"t22", t:"Orsay + Orangerie · biglietto combinato, venerdì 18: Orsay 9:30, Orangerie 11:45", d:"~24 € a testa il combinato (vale 3 mesi). Le fasce dei due musei si prenotano separatamente con lo stesso biglietto.", u:"https://www.musee-orsay.fr/en/visit/tickets-and-rates", uTxt:"biglietti Orsay", pri:1},
+ {id:"t26", t:"Sainte-Chapelle · fascia 14:30 di venerdì 18", d:"13 € a testa sulla biglietteria dei Monuments Nationaux (esiste anche il biglietto doppio con la Conciergerie). Senza biglietto a orario la fila supera l'ora.", u:"https://tickets.monuments-nationaux.fr/fr-FR/produits-seances?site=2035141861660400306&famille=2129032708460404016", uTxt:"biglietteria ufficiale", pri:1},
+ {id:"t23", t:"Bateaux Mouches · corsa delle 12:30 di sabato 19", d:"~19 € a testa, online sul sito ufficiale, Port de la Conférence.", u:"https://www.bateaux-mouches.fr/en", uTxt:"prenota", pri:2},
+ {id:"t24", t:"Le Chat Noir · cena di sabato alle 19:30", d:"Cercare «Le Chat Noir Montmartre» su TheFork. Se non prenotabile online: Bouillon Pigalle (piano B).", u:"https://www.thefork.it/", uTxt:"TheFork", pri:2},
+ {id:"t27", t:"Les Indécises · pranzo di giovedì alle 13:45", d:"2 rue des Trois-Bornes, 11e. Verificare il canale di prenotazione (sito/Instagram/telefono). Piano B senza prenotazione: Bouillon Chartier.", u:"https://www.google.com/maps/search/Les+Ind%C3%A9cises+rue+des+Trois-Bornes+Paris", uTxt:"mappa e contatti", pri:2},
+ {id:"t28", t:"Les Deux Palais · pranzo di venerdì alle 13:00", d:"3 boulevard du Palais, davanti alla Sainte-Chapelle. Verificare la prenotazione online (TheFork) o telefono.", u:"https://www.google.com/maps/search/Brasserie+Les+Deux+Palais+Paris", uTxt:"mappa e contatti", pri:2},
+ {id:"t4", t:"Biglietti aeroporto nell'app Île-de-France Mobilités", d:"Due «Paris Région ◇ Aéroports» (Orly → Madeleine con la 14, giovedì) e due per il Roissybus di domenica, più un carnet di biglietti metro sul telefono di ciascuna. Verificare prezzi 2027.", u:"https://www.iledefrance-mobilites.fr/aide-et-contacts/titres-unitaires-tarifs-reduits/quels-tickets-pour-l-aeroport", uTxt:"info biglietti", pri:1},
+ {id:"t5", t:"Email all'hotel: deposito bagagli giovedì 10:30, early check-in, ritiro domenica 14:30", d:"Chiedere anche la tariffa taxi fissa per CDG come piano B.", u:"https://www.hoteldecastiglione.com/", uTxt:"sito hotel", pri:2},
+ {id:"t8", t:"Bouillon Pigalle · pranzo di sabato alle 14:15", d:"Prenotazione online sul sito del gruppo.", u:"https://bouillonlesite.com/reservation/", uTxt:"prenota", pri:2},
+ {id:"t9", t:"Café de la Paix · pranzo di domenica alle 13:15", d:"Prenotazione online, chiedere la terrazza e avvisare che alle 14:15 si esce.", u:"https://www.cafedelapaix.fr/", uTxt:"prenota", pri:2},
+ {id:"t12", t:"Facoltativo · Musée de Montmartre", d:"15 €, giardino di Renoir, 10:00–19:00. Si decide sul posto sabato.", u:"https://museedemontmartre.fr/", uTxt:"sito", pri:4},
+ {id:"t13", t:"Facoltativo · Catacombe o Fondation Louis Vuitton", d:"Solo se si cambia il venerdì: controllare la mostra della Fondation a primavera.", u:"https://www.fondationlouisvuitton.fr/en", uTxt:"programma", pri:4}
+];
+
+/* ============ GEOMETRIA MAPPA (coordinate reali) ============ */
+var MB={lon0:2.228, lon1:2.405, lat0:48.9080, lat1:48.8300, W:1000, H:800};
+function px(lon){return (lon-MB.lon0)/(MB.lon1-MB.lon0)*MB.W;}
+function py(lat){return (MB.lat0-lat)/(MB.lat0-MB.lat1)*MB.H;}
+function poly(a){return a.map(function(p){return px(p[0]).toFixed(1)+","+py(p[1]).toFixed(1);}).join(" ");}
+
+var RIVER=[[2.405,48.8330],[2.390,48.8360],[2.378,48.8395],[2.3680,48.8430],[2.3620,48.8470],[2.3560,48.8505],[2.3480,48.8540],[2.3410,48.8580],[2.3330,48.8615],[2.3250,48.8630],[2.3150,48.8640],[2.3050,48.8630],[2.2960,48.8595],[2.2900,48.8560],[2.2800,48.8500],[2.2700,48.8440],[2.2600,48.8400]];
+var ISLANDS=[
+ [[2.3360,48.8545],[2.3440,48.8515],[2.3520,48.8505],[2.3525,48.8535],[2.3450,48.8560],[2.3380,48.8570]],
+ [[2.3535,48.8500],[2.3600,48.8485],[2.3630,48.8500],[2.3600,48.8530],[2.3545,48.8530]]
+];
+var BRIDGES=[
+ {a:[2.3390,48.8555],b:[2.3420,48.8600],n:"Pont Neuf"},
+ {a:[2.3545,48.8490],b:[2.3570,48.8540],n:""},
+ {a:[2.3610,48.8475],b:[2.3640,48.8525],n:""},
+ {a:[2.3210,48.8605],b:[2.3225,48.8655],n:""},
+ {a:[2.3045,48.8605],b:[2.3060,48.8655],n:""},
+ {a:[2.3315,48.8590],b:[2.3335,48.8640],n:""}
+];
+var PARKS=[
+ {c:[2.3270,48.8637],r:[0.0060,0.0022],n:"Tuileries"},
+ {c:[2.3370,48.8660],r:[0.0014,0.0016],n:""},
+ {c:[2.3935,48.8605],r:[0.0060,0.0048],n:"Père-Lachaise"},
+ {c:[2.3425,48.8870],r:[0.0045,0.0030],n:"Montmartre"},
+ {c:[2.3300,48.8875],r:[0.0022,0.0018],n:""},
+ {c:[2.3105,48.8640],r:[0.0040,0.0020],n:"Champs"},
+ {c:[2.3370,48.8460],r:[0.0040,0.0032],n:"Luxembourg"},
+ {c:[2.3655,48.8555],r:[0.0010,0.0010],n:""}
+];
+var CANAL=[[2.3660,48.8660],[2.3655,48.8700],[2.3665,48.8740],[2.3690,48.8790],[2.3710,48.8840]];
+var LABELS=[
+ {p:[2.3400,48.8900],t:"MONTMARTRE"},{p:[2.3450,48.9060],t:"SAINT-OUEN · LES PUCES"},
+ {p:[2.3160,48.8730],t:"8e · FAUBOURG"},{p:[2.3330,48.8745],t:"OPÉRA"},
+ {p:[2.3610,48.8590],t:"MARAIS"},{p:[2.3420,48.8710],t:"GRANDS BOULEVARDS"},
+ {p:[2.3720,48.8730],t:"CANAL"},{p:[2.3880,48.8660],t:"PÈRE-LACHAISE"},
+ {p:[2.3480,48.8450],t:"QUARTIER LATIN"},{p:[2.3270,48.8520],t:"SAINT-GERMAIN"},
+ {p:[2.3060,48.8560],t:"INVALIDES"},{p:[2.2390,48.8960],t:"LA DÉFENSE"},{p:[2.2945,48.8545],t:"TOUR EIFFEL"},{p:[2.2870,48.8630],t:"TROCADÉRO"},{p:[2.3740,48.8500],t:"BASTILLE"},{p:[2.3440,48.8580],t:"CITÉ"}
+];
+
+/* ============ RICERCA ============ */
+function norm(t){return String(t||"").replace(/<[^>]+>/g," ").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/\s+/g," ").trim();}
+function esc(t){return String(t||"").replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function hi(text,terms){
+  var raw=String(text||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+  var chars=raw.split(""), keys=chars.map(function(c){return c.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");});
+  var flat="", map=[];
+  keys.forEach(function(k,i){for(var j=0;j<k.length;j++){flat+=k[j];map.push(i);}});
+  var markd=new Array(chars.length).fill(false);
+  terms.forEach(function(q){var i=0;while(q.length>=2&&(i=flat.indexOf(q,i))>=0){for(var j=i;j<i+q.length;j++)markd[map[j]]=true;i+=q.length;}});
+  var out="",open=false;
+  chars.forEach(function(c,i){if(markd[i]&&!open){out+="<mark>";open=true;}if(!markd[i]&&open){out+="</mark>";open=false;}out+=esc(c);});
+  if(open)out+="</mark>";
+  return out;
+}
+function whereIs(id){
+  for(var i=0;i<DAYS.length;i++){var ix=(state.plan[DAYS[i].id]||[]).indexOf(id);if(ix>=0)return {day:i,ix:ix};}
+  return null;
+}
+function searchIndex(){
+  var items=[], sch={};
+  DAYS.forEach(function(D,i){
+    var s=schedule(D); sch[D.id]=s;
+    items.push({kind:"day",ico:"📅",title:D.dow+" "+D.n+" giugno · "+D.title,sub:D.intro,
+      txt:norm(D.dow+" "+D.n+" giugno "+D.title+" "+D.intro+" "+D.date+" giorno giornata"),
+      strong:norm(D.dow+" "+D.n+" "+D.title),
+      tags:[pill("⏱ fino alle "+hhmm(s.end)),pill("🚶 "+s.km.toFixed(1)+" km")], act:"showDay("+i+")"});
+  });
+  Object.keys(POI).forEach(function(id){
+    var p=vp(id), w=whereIs(id), when="", tags=[];
+    if(w){var row=sch[DAYS[w.day].id].rows.filter(function(r){return r.id===id;})[0];
+      when=DAYS[w.day].dow+" "+DAYS[w.day].n+(row?" · "+hhmm(row.st):"");
+      tags.push('<span class="pill" style="background:'+DAYS[w.day].c+';color:#FFFDF8">'+when+'</span>');}
+    else if((state.parked||[]).indexOf(id)>=0){when="messa da parte";tags.push(pill("🗂 da parte"));}
+    else return;
+    if(p.priceTxt)tags.push(pill("💶 "+p.priceTxt,"y"));
+    if(p.min)tags.push(pill("⏱ "+dur(p.min)));
+    items.push({kind:"poi",id:id,ico:p.ico||"📍",title:p.n,sub:p.sub||p.desc,tags:tags,
+      txt:norm(p.n+" "+(p.sub||"")+" "+(p.desc||"")+" "+(p.tip||"")+" "+(p.stop||"")+" "+(p.priceTxt||"")+" "+when),
+      strong:norm(p.n+" "+(p.sub||"")), act:"openPoiFromSearch('"+id+"')"});
+  });
+  CENE.forEach(function(r){
+    if(r.id==="cenaVen"&&!revealed())return;
+    items.push({kind:"cena",ico:r.ico,title:r.n,sub:r.when+" · "+r.kind,tags:[pill("💶 "+r.price,"y"),pill("📍 "+r.zone,"b")],
+      txt:norm(r.n+" "+r.when+" "+r.kind+" "+r.zone+" "+r.desc+" "+(r.tips||"")+" "+(r.adv||"")+" "+(r.alt||"")+" ristorante cena prenotare"),
+      strong:norm(r.n+" "+r.kind), act:"jumpTo('s-cene','cena-"+r.id+"')"});
+  });
+  INFO_CARDS.forEach(function(c,ci){
+    var body=c.h.map(function(r){return r[0]+": "+r[1];}).join(" · ");
+    items.push({kind:"info",ico:c.ico,title:c.t,sub:body,tags:[pill("ℹ️ Info")],
+      txt:norm(c.t+" "+body+" "+(c.note||"")), strong:norm(c.t), act:"jumpTo('s-info','info-"+ci+"')"});
+  });
+  allDocs().forEach(function(d){
+    items.push({kind:"doc",ico:docIcon(d),title:d.name,sub:"Wallet · "+poiLabel(d.poi),tags:[pill("🎟 documento","b")],
+      txt:norm(d.name+" "+poiLabel(d.poi)+" biglietto documento wallet pdf"), strong:norm(d.name), act:"openDoc('"+d.id+"')"});
+  });
+  TODO.forEach(function(t){t=vt(t);
+    items.push({kind:"todo",ico:"✅",title:t.t,sub:t.d,tags:[pill(state.done[t.id]?"✓ fatto":"da fare","y")],
+      txt:norm(t.t+" "+t.d+" prenotazione prenotare biglietto"), strong:norm(t.t), act:"jumpTo('s-info',null)"});
+  });
+  return items;
+}
+var SUGG=["Montmartre","bouillon","metro","gratis","prenotare","Dalida","tramonto","Puces","Monet","aeroporto","gelato","sorpresa"];
+function openSearch(){
+  document.getElementById("srch").classList.add("on");
+  var i=document.getElementById("srchIn"); doSearch();
+  setTimeout(function(){i.focus();},50);
+}
+function closeSearch(){document.getElementById("srch").classList.remove("on");document.getElementById("srchIn").blur();}
+function clearSearch(){var i=document.getElementById("srchIn");i.value="";doSearch();i.focus();}
+function doSearch(){
+  var q=norm(document.getElementById("srchIn").value), box=document.getElementById("srchRes");
+  document.getElementById("srchX").classList.toggle("on",q.length>0);
+  if(q.length<2){
+    box.innerHTML='<div class="empty">Cerca una tappa, un giorno, una cena, un orario o una parola qualsiasi del programma.'+
+      '<div class="sugg">'+SUGG.map(function(t){return '<button class="chip" onclick="document.getElementById(\'srchIn\').value=\''+t+'\';doSearch()">'+t+'</button>';}).join("")+'</div></div>';
+    return;
+  }
+  var terms=q.split(" ").filter(function(t){return t.length>=2;}); if(!terms.length)terms=[q];
+  var hits=searchIndex().map(function(it){
+    var score=0;
+    for(var k=0;k<terms.length;k++){
+      var t=terms[k];
+      if(it.txt.indexOf(t)<0)return null;
+      if(it.strong&&it.strong.indexOf(t)>=0)score+=10;
+      score+=1;
+    }
+    if(it.kind==="poi")score+=2;
+    if(it.kind==="day")score+=1;
+    return {it:it,score:score};
+  }).filter(Boolean).sort(function(a,b){return b.score-a.score;});
+  if(!hits.length){box.innerHTML='<div class="empty">Niente con «'+esc(document.getElementById("srchIn").value)+'».<br>Prova con una parola sola o più corta.</div>';return;}
+  var h='<div class="muted small" style="margin:2px 2px 8px">'+hits.length+' risultat'+(hits.length===1?"o":"i")+'</div>';
+  hits.slice(0,40).forEach(function(x){
+    var it=x.it;
+    h+='<button class="hit" onclick="closeSearch();'+it.act+'"><div class="ic">'+it.ico+'</div><div class="bd"><b>'+hi(it.title,terms)+'</b>'+
+       '<div class="sm">'+hi(it.sub,terms)+'</div>'+(it.tags&&it.tags.length?'<div class="tags">'+it.tags.join("")+'</div>':"")+'</div></button>';
+  });
+  box.innerHTML=h;
+}
+function showDay(i){curDay=i;go("s-giorni");renderChips();renderDay();}
+function openPoiFromSearch(id){
+  var w=whereIs(id);
+  if(w){curDay=w.day;go("s-giorni");renderChips();renderDay();}
+  else go("s-piano");
+  setTimeout(function(){detail(id);},80);
+}
+function jumpTo(sec,elId){
+  go(sec);
+  if(!elId)return;
+  setTimeout(function(){var el=document.getElementById(elId);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"center"});el.classList.remove("hl");void el.offsetWidth;el.classList.add("hl");},120);
+}
+
+/* ============ WALLET: biglietti e documenti ============ */
+var WDOCS=[], curDoc=null;
+function docIcon(d){return d.type==="application/pdf"?"📄":"🖼";}
+function poiLabel(id){
+  if(!id||id==="_altro")return "Altro (senza tappa)";
+  var p=vp(id); if(!p)return id;
+  var w=whereIs(id);
+  return (p.ico||"")+" "+p.n+(w?" · "+DAYS[w.day].dow+" "+DAYS[w.day].n:"");
+}
+function docTargets(){
+  var out=[];
+  DAYS.forEach(function(D){(state.plan[D.id]||[]).forEach(function(id){out.push(id);});});
+  (state.parked||[]).forEach(function(id){out.push(id);});
+  return out;
+}
+async function loadDocs(){
+  var arr=await dbAll("d"); arr.sort(function(a,b){return a.ts-b.ts;});
+  WDOCS.forEach(function(d){if(d.url)try{URL.revokeObjectURL(d.url);}catch(e){}});
+  WDOCS=arr.map(function(d){try{d.url=URL.createObjectURL(d.blob);}catch(e){d.url="";}return d;});
+}
+function allDocs(){
+  var out=[];
+  Object.keys(POI).forEach(function(id){(POI[id].docs||[]).forEach(function(d,i){out.push({id:"b_"+id+"_"+i,poi:id,name:d.t.replace(/^[^\w]+/,""),type:/\.pdf$/i.test(d.u)?"application/pdf":"image/*",url:d.u,built:true,ts:0});});});
+  return out.concat(WDOCS);
+}
+function docsFor(poi){return allDocs().filter(function(d){return d.poi===poi;});}
+function docOrder(d){
+  if(!d.poi||d.poi==="_altro")return 9e9;
+  var w=whereIs(d.poi); if(!w)return 8e9;
+  var s=schedule(DAYS[w.day]).rows.filter(function(r){return r.id===d.poi;})[0];
+  return w.day*10000+(s?s.st:0);
+}
+function docChips(poi,small){
+  var dd=docsFor(poi); if(!dd.length)return "";
+  return dd.map(function(d){return '<button class="btn sec" style="padding:'+(small?"5px 9px;font-size:11.5px":"8px 12px;font-size:12.5px")+';background:#DCE8EA" onclick="event.stopPropagation();openDoc(\''+d.id+'\')">'+docIcon(d)+' '+esc(d.name)+'</button>';}).join("");
+}
+function docRow(d,compact){
+  var th=d.type==="application/pdf"?'<div class="th">📄</div>':'<div class="th"><img src="'+d.url+'" alt=""></div>';
+  var sub=compact?(d.built?"incluso nell'app":new Date(d.ts).toLocaleDateString("it-IT")+(d.size?" · "+Math.round(d.size/1024)+" KB":"")):poiLabel(d.poi)+(d.built?" · incluso nell'app":"");
+  return '<div class="wdoc'+(d.built?" built":"")+'">'+th+'<div class="bd"><b>'+esc(d.name)+'</b><div class="sm">'+sub+'</div></div>'+
+    '<div class="act"><button onclick="openDoc(\''+d.id+'\')" aria-label="Apri">👁</button>'+
+    (d.built?'':'<button onclick="delDoc(\''+d.id+'\')" aria-label="Elimina">🗑</button>')+'</div></div>';
+}
+function renderWallet(){
+  var sel=document.getElementById("docPoi"), cur=sel.value;
+  var h='<option value="_altro">Agganciare a… (scegli la tappa) · Altro</option>';
+  docTargets().forEach(function(id){h+='<option value="'+id+'">'+poiLabel(id)+'</option>';});
+  sel.innerHTML=h; if(cur&&sel.querySelector('option[value="'+cur+'"]'))sel.value=cur;
+  var docs=allDocs().sort(function(a,b){return docOrder(a)-docOrder(b)||a.ts-b.ts;}), out="", lastDay=null;
+  if(!docs.length){out='<div class="card flat" style="background:#F1ECDF;text-align:center"><div style="font-size:28px">🗂</div><p class="muted small" style="margin-top:6px">Il wallet è vuoto. Aggiungi qui il primo biglietto, oppure aprilo dalla scheda di una tappa.</p></div>';}
+  docs.forEach(function(d){
+    var w=d.poi&&d.poi!=="_altro"?whereIs(d.poi):null;
+    var lab=w?DAYS[w.day].dow+" "+DAYS[w.day].n+" giugno":(d.poi&&d.poi!=="_altro"&&POI[d.poi]?"Tappe messe da parte":"Altro");
+    if(lab!==lastDay){out+='<div class="tt">'+lab+'</div>';lastDay=lab;}
+    out+=docRow(d,false);
+  });
+  var tot=WDOCS.reduce(function(a,d){return a+(d.size||0);},0);
+  if(WDOCS.length)out+='<p class="muted small" style="margin:10px 4px 0">'+WDOCS.length+' document'+(WDOCS.length===1?"o":"i")+' salvat'+(WDOCS.length===1?"o":"i")+' sul telefono · '+(tot/1048576).toFixed(1)+' MB. Restano solo su questo telefono: per averli anche sull\'altro, condivideteli con 📤.</p>';
+  document.getElementById("walletList").innerHTML=out;
+  renderExp();
+}
+async function addDocs(list,poi){
+  var n=0, skipped=0;
+  for(var i=0;i<list.length;i++){
+    var f=list[i], isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name||""), isImg=f.type&&f.type.indexOf("image")===0;
+    if(!isPdf&&!isImg){skipped++;continue;}
+    if(f.size>25*1048576){skipped++;continue;}
+    try{
+      var blob=isImg?await shrink(f):f;
+      var name=(f.name||(isPdf?"documento.pdf":"foto.jpg")).replace(/\.[^.]+$/,"");
+      await dbPut({id:"d"+Date.now()+"_"+Math.random().toString(36).slice(2,8),poi:poi||"_altro",name:name,type:isPdf?"application/pdf":"image/jpeg",blob:blob,size:blob.size,ts:Date.now()},"d");
+      n++;
+    }catch(e){skipped++;}
+  }
+  await loadDocs(); renderWallet(); renderPlan(); renderDay();
+  if(document.getElementById("sheetbg").classList.contains("on")&&poi&&POI[poi])detail(poi);
+  toast(n+(n===1?" documento salvato":" documenti salvati")+(skipped?" · "+skipped+" scartat"+(skipped===1?"o":"i")+" (solo PDF o immagini, max 25 MB)":""));
+}
+function pickDocFor(poi){var inp=document.getElementById("docIn"); inp.dataset.poi=poi||"_altro"; inp.click();}
+function openDoc(id){
+  var d=allDocs().filter(function(x){return x.id===id;})[0]; if(!d)return;
+  curDoc=d;
+  document.getElementById("dvTitle").textContent=d.name;
+  var a=document.getElementById("dvOpen"); a.href=d.url;
+  document.getElementById("dvShare").style.display=(navigator.share&&!d.built)?"":"none";
+  var bodyEl=document.getElementById("dvBody"); bodyEl.classList.toggle("wide",d.type!=="application/pdf");
+  bodyEl.innerHTML=d.type==="application/pdf"?'<iframe src="'+d.url+'#toolbar=0" title="'+esc(d.name)+'"></iframe>':'<img src="'+d.url+'" alt="">';
+  document.getElementById("dv").classList.add("on");
+}
+function closeDoc(){document.getElementById("dv").classList.remove("on");document.getElementById("dvBody").innerHTML="";curDoc=null;}
+async function shareDoc(d){
+  if(!d||!navigator.share)return;
+  try{
+    var blob=d.blob||await (await fetch(d.url)).blob();
+    var file=new File([blob],d.name+(d.type==="application/pdf"?".pdf":".jpg"),{type:blob.type||d.type});
+    if(navigator.canShare&&!navigator.canShare({files:[file]})){toast("Questo telefono non condivide file da qui");return;}
+    await navigator.share({files:[file],title:d.name});
+  }catch(e){}
+}
+async function delDoc(id){
+  var d=WDOCS.filter(function(x){return x.id===id;})[0]; if(!d)return;
+  if(!confirm("Eliminare «"+d.name+"» dal wallet?"))return;
+  await dbDel(id,"d"); await loadDocs(); renderWallet(); renderPlan(); renderDay();
+  if(document.getElementById("sheetbg").classList.contains("on")&&d.poi&&POI[d.poi])detail(d.poi);
+  toast("Eliminato");
+}
+
+/* ============ SPESE IN COMUNE ============ */
+var WHO=["Rosetta","Concetta"], WHOC={Rosetta:"#A76E49",Concetta:"#5E9BAC"};
+function renderExp(){
+  var wr=document.getElementById("expWho"); if(!wr)return;
+  wr.innerHTML=WHO.map(function(w){return '<button class="btn sec" style="border:2px solid '+WHOC[w]+'" onclick="addExp(\''+w+'\')">+ ha pagato '+w+'</button>';}).join("");
+  var list=state.exp||[], h="";
+  if(!list.length)h='<div class="muted small" style="padding:8px 0">Ancora nessuna spesa segnata.</div>';
+  list.forEach(function(e,i){
+    h+='<div class="exp"><div class="who" style="background:'+WHOC[e.who]+'">'+e.who[0]+'</div><div class="bd"><b>'+esc(e.what)+'</b><span class="muted small">'+e.who+' · '+new Date(e.ts).toLocaleDateString("it-IT")+'</span></div><div class="amt">'+e.amt.toFixed(2)+' €</div><button class="x" onclick="delExp('+i+')">🗑</button></div>';
+  });
+  var tot={}, sum=0; WHO.forEach(function(w){tot[w]=0;});
+  list.forEach(function(e){tot[e.who]+=e.amt;sum+=e.amt;});
+  var half=sum/2, diff=tot.Rosetta-half, bal;
+  if(!list.length)bal="";
+  else if(Math.abs(diff)<0.005)bal='<div class="bal">Pari e patta: '+sum.toFixed(2)+' € in tutto, '+half.toFixed(2)+' € a testa.</div>';
+  else bal='<div class="bal">Totale '+sum.toFixed(2)+' €, cioè '+half.toFixed(2)+' € a testa. <b>'+(diff>0?"Concetta deve "+diff.toFixed(2)+" € a Rosetta":"Rosetta deve "+(-diff).toFixed(2)+" € a Concetta")+'</b>.</div>';
+  document.getElementById("expList").innerHTML=h; document.getElementById("expBal").innerHTML=bal;
+}
+function addExp(who){
+  var w=document.getElementById("expWhat"), a=document.getElementById("expAmt");
+  var amt=parseFloat(String(a.value).replace(",","."));
+  if(!w.value.trim()||!(amt>0)){toast("Scrivi cosa e quanto");return;}
+  state.exp=state.exp||[]; state.exp.push({what:w.value.trim(),amt:amt,who:who,ts:Date.now()});
+  w.value="";a.value=""; save(); renderExp();
+}
+function delExp(i){state.exp.splice(i,1);save();renderExp();}
+
+/* ============ TESTI SEZIONE INFO ============ */
+var INFO_CARDS = [
+{t:"I voli", ico:"✈️", h:[
+ ["Andata","<b>Giovedì 17 giugno</b><br>Firenze FLR <b>07:15</b> → Parigi Orly ORY <b>09:05</b><br>Diretto, 1h50. In aeroporto entro le 05:45."],
+ ["Ritorno","<b>Domenica 20 giugno</b><br>Parigi Charles de Gaulle CDG <b>18:00</b> → Firenze FLR <b>19:40</b><br>Diretto, 1h40. Roissybus dall'Opéra alle 14:45."]
+], note:"Due aeroporti diversi, apposta: Orly ha la metro 14 diretta fino a Madeleine; da CDG si rientra con il Roissybus che parte a dieci minuti dall'hotel. Verificate i terminal sulle carte d'imbarco."},
+
+{t:"L'hotel", ico:"🛏", h:[
+ ["Nome","Hôtel de Castiglione ★★★★"],
+ ["Indirizzo","38-40 rue du Faubourg Saint-Honoré, 75008 Paris"],
+ ["Metro","Madeleine (8, 12, 14) a 5 min · Concorde (1, 8, 12) a 7 min"],
+ ["A piedi","Madeleine 4 min · Place Vendôme 8 · Tuileries e Orangerie 10 · Opéra 10 · Champs-Élysées 12"],
+ ["Cena stellata","a 3 minuti a piedi, in rue d'Anjou"],
+ ["Check-in","nel pomeriggio · Check-out entro mezzogiorno · deposito bagagli alla reception"]
+], note:"Siete nella via dell'Élysée, di Hermès e delle gallerie d'arte: la Parigi più elegante. Tutte le partenze del programma sono calcolate da qui."},
+
+{t:"Muoversi a Parigi", ico:"🚇", h:[
+ ["Biglietto metro","Un biglietto «Métro-Train-RER» vale per tutta la rete, cambi inclusi: circa <b>2,50 €</b> (prezzo 2026, in app o su carta Navigo Easy da 2 €). Sul telefono: app <b>Île-de-France Mobilités</b>, si compra e si valida avvicinando il telefono al tornello (iPhone e Android)."],
+ ["Aeroporti","Biglietto «Paris Région ◇ Aéroports»: <b>14 €</b> a tratta, vale per la metro 14 da Orly e per il Roissybus verso CDG (verificare in app: il Roissybus potrebbe avere un titolo a parte)."],
+ ["Quanti","Per quattro giorni bastano una decina di corse a testa: comprate un carnet di 10 nell'app. Niente pass giornalieri: il programma è quasi tutto a piedi."],
+ ["Linee utili","<b>14</b> (automatica) Orly ↔ Madeleine ↔ Saint-Ouen · <b>12</b> Madeleine ↔ Abbesses (Montmartre) · <b>8</b> Madeleine ↔ République ↔ Strasbourg-Saint-Denis · <b>1</b> Concorde ↔ Saint-Paul (Marais) · <b>2</b> e <b>3</b> per il Père-Lachaise"],
+ ["Funicolare","Quella di Montmartre si prende con un biglietto metro normale."],
+ ["Orari","Metro 5:30–1:15 (il sabato fino alle 2:15). Il Roissybus 5:15–0:30 ogni 15–20 min."]
+], note:"Nei tornelli il telefono va appoggiato come una carta, senza aprire l'app. Tenete il biglietto fino all'uscita: i controlli ci sono."},
+
+{t:"Meteo e luce di giugno", ico:"🌤", h:[
+ ["Temperature","Massime 23–26 °C, minime 14–16 °C. Possibili giornate calde: Parigi a giugno può fare 30."],
+ ["Pioggia","Un giorno su tre un acquazzone breve. Un ombrello pieghevole in borsa e basta."],
+ ["Alba e tramonto","Alba 5:47, tramonto <b>21:57</b>: le serate sono lunghissime, si cena con la luce."],
+ ["Cosa mettere","Scarpe comodissime (Montmartre e le Puces sono tutte scale e sampietrini), un vestito per la cena di venerdì, una giacca leggera per la sera."]
+], note:"Le previsioni vere, aggiornate, stanno nella scheda Piano appena il viaggio entra nei 16 giorni. Il 21 giugno è la Fête de la Musique, con concerti gratis ovunque: voi partite il 20, ma il sabato sera Montmartre ha già l'aria di festa."},
+
+{t:"Soldi, mance, trappole", ico:"💰", h:[
+ ["Valuta","Euro: niente cambi, niente sorprese. Carte accettate ovunque, anche per un caffè. Alle Puces molti preferiscono il contante per contrattare."],
+ ["Mance","Il servizio è sempre compreso nel conto («service compris»). Si lasciano 1–2 € al caffè, 5–10 € in un ristorante dove si è stati bene. Mai obbligatorio."],
+ ["Braccialetti","Davanti al Sacré-Cœur e alle Tuileries ci sono i ragazzi del braccialetto di cotone: vi prendono il polso, lo annodano, poi chiedono 20 €. Mani in tasca, «non merci», si cammina."],
+ ["Petizioni","Ragazze con un foglio «per i sordomuti» che vi chiedono una firma: mentre firmate, la mano libera è nella vostra borsa. Non ci si ferma."],
+ ["Metro","Borsa davanti e chiusa sulla linea 1, sulla 4 e in tutte le stazioni delle Puces e di Montmartre. Il telefono non si tiene in mano vicino alle porte."],
+ ["Il gioco delle tre carte","Sul Pont Neuf e a Montmartre: non è un gioco, è una squadra di sei. Si guarda da lontano, al massimo."]
+], note:"Niente panico: Parigi è sicura, ma è la capitale europea del borseggio gentile. Con le borse chiuse e il no deciso siete a posto."},
+
+{t:"Quattro parole di francese", ico:"💬", h:[
+ ["Buongiorno","Bonjour · <i>bon-giùr</i>"],
+ ["Grazie mille","Merci beaucoup · <i>mersì bocù</i>"],
+ ["Per favore","S'il vous plaît · <i>sil vu plè</i>"],
+ ["Il conto, per favore","L'addition, s'il vous plaît · <i>ladisiòn sil vu plè</i>"],
+ ["Un tavolo per due","Une table pour deux · <i>ün tabl pur dö</i>"],
+ ["Dov'è la metro?","Où est le métro ? · <i>u è lö metrò</i>"],
+ ["Quanto costa?","C'est combien ? · <i>se combiàn</i>"],
+ ["Salute!","Santé ! · <i>santé</i> — guardandosi negli occhi, anche qui"]
+], note:"Il «bonjour» entrando in un negozio o in un caffè non è un optional: a Parigi chi non lo dice viene servito peggio. Provate, funziona sempre. Il tastino 🔊 ve le fa pronunciare dal telefono.", speak:["Bonjour","Merci beaucoup","S'il vous plaît","L'addition, s'il vous plaît","Une table pour deux","Où est le métro ?","C'est combien ?","Santé !"]},
+
+{t:"Numeri utili", ico:"🆘", h:[
+ ["Emergenze","112 (europeo) · 15 ambulanza SAMU · 17 polizia · 18 vigili del fuoco"],
+ ["Consolato d'Italia","5 boulevard Émile Augier, 75116 Paris · +33 1 44 30 47 00"],
+ ["Trasporti","Île-de-France Mobilités · iledefrance-mobilites.fr · app con mappe e orari in tempo reale"],
+ ["Aeroporti","parisaeroport.fr · Orly e Charles de Gaulle"],
+ ["Oggetti smarriti in metro","objets trouvés RATP, 36 rue des Morillons, 15e"]
+], note:"Fate una foto della carta d'identità e tenetela sul telefono di entrambe. In Francia per gli italiani basta la carta d'identità, ma dev'essere valida per l'espatrio."}
+];
+
+/* =================================================================
+   LOGICA
+   ================================================================= */
+/* -- ristoranti in programma diventano tappe -- */
+var RESTO_GEO={cenaGio:[48.8705,2.3545],cenaVen:[48.8710,2.3215],cenaSab:[48.8833,2.3325]};
+CENE.forEach(function(r){
+  if(!RESTO_GEO[r.id])return;
+  POI[r.id]={n:"Cena · "+r.n, sub:r.kind, min:105, ico:r.ico, kind:"eat",
+    lat:RESTO_GEO[r.id][0], lon:RESTO_GEO[r.id][1],
+    price:parseFloat((r.price.match(/\d+/)||[25])[0]), priceTxt:r.price,
+    stop:r.zone, url:r.url, urlTxt:r.urlTxt, desc:r.desc,
+    tip:(r.adv?"Quando prenotare: "+r.adv+" ":"")+(r.tips||"")};
+});
+POI.cenaGio.at="20:30"; POI.cenaGio.min=100;
+POI.cenaGio.sub="20:30 · 2 persone · prenotare online · sala Art Nouveau del 1906";
+POI.cenaGio.stop="16 rue du Faubourg Saint-Denis · dal Marais: metro 8 da Chemin Vert → Strasbourg-Saint-Denis (12 min); dall'hotel: metro 8 da Madeleine, diretta";
+POI.cenaSab.at="19:30"; POI.cenaSab.min=90;
+POI.cenaSab.sub="19:30 · 2 persone · prenotare online · brasserie davanti al Moulin Rouge";
+POI.cenaSab.stop="68 boulevard de Clichy · dal Café des Deux Moulins 5 min in discesa";
+/* -- la cena a sorpresa -- */
+POI.cenaVen.at="20:00"; POI.cenaVen.min=150; POI.cenaVen.price=0; POI.cenaVen.secret=true;
+POI.cenaVen.priceTxt="offerta 🎁";
+POI.cenaVen.sub="20:00 · 2 persone · ⭐ una stella Michelin · a 3 minuti dall'hotel";
+POI.cenaVen.stop="18 rue d'Anjou, 8e · 3 min a piedi dall'hotel";
+POI.cenaVen.booked="Il tavolo è prenotato. Il resto si scopre venerdì.";
+var SECRET_POI={n:"Cena a sorpresa 🎁", sub:"20:00 · 2 persone · ⭐ una stella Michelin · a 3 minuti dall'hotel", ico:"🎁",
+  stop:"8e arrondissement · si va a piedi dall'hotel, 3 minuti",
+  priceTxt:"offerta 🎁",
+  desc:"Venerdì sera c'è una cena che non trovate scritta da nessuna parte: un ristorante con una stella Michelin, a tre minuti di passeggiata dall'hotel, tavolo già prenotato per le 20:00. Nome e indirizzo compaiono qui dentro venerdì 18 giugno alle 17:00, giusto in tempo per cambiarsi.",
+  tip:"Dress code elegante, senza esagerare. Mettete in conto due ore e mezza a tavola e nessuna metro da prendere dopo: si torna a piedi."};
+function revealed(){return state.reveal||new Date()>=SECRET_AT;}
+function vp(id){var p=POI[id]; if(!p)return p; if(p.secret&&!revealed()){var o=Object.assign({},p,SECRET_POI);o.url=null;o.booked=null;o.docs=[];return o;} return p;}
+var tapsGift=0;
+function giftTap(){tapsGift++; if(tapsGift>=5){state.reveal=true;save();closeSheet();renderAll();renderCene();toast("Shh. La sorpresa è svelata solo su questo telefono.");}}
+function hideGift(){state.reveal=false;save();closeSheet();renderAll();renderCene();toast("Richiusa.");}
+
+var DAYS=DAYS_DEF, LS="parigi2027v1";
+var state={plan:null, parked:null, done:{}, doneEv:{}, who:"Rosetta", mig:0, exp:[], reveal:false, intro:0, diary:{}, notif:0, notified:{}};
+var MIG_VER=1;
+function save(){try{localStorage.setItem(LS,JSON.stringify({plan:state.plan,parked:state.parked,done:state.done,doneEv:state.doneEv,who:state.who,mig:state.mig,exp:state.exp,reveal:state.reveal,intro:state.intro,diary:state.diary,notif:state.notif,notified:state.notified}));}catch(e){}}
+function load(){
+  var d=null; try{d=JSON.parse(localStorage.getItem(LS)||"null");}catch(e){}
+  if(d&&d.plan&&d.plan.gio){state.plan=d.plan;state.parked=d.parked||[];state.done=d.done||{};state.doneEv=d.doneEv||{};state.who=d.who||"Rosetta";state.mig=d.mig||0;state.exp=d.exp||[];state.reveal=!!d.reveal;state.intro=d.intro||0;state.diary=d.diary||{};state.notif=d.notif||0;state.notified=d.notified||{};}
+  else defaults();
+  DAYS.forEach(function(D){state.plan[D.id]=(state.plan[D.id]||[]).filter(function(i){return POI[i];});});
+  state.parked=(state.parked||[]).filter(function(i){return POI[i];});
+  /* migrazione: tappe aggiunte nelle versioni successive entrano nei piani già salvati */
+  var ADDED=[];
+  var all=(state.parked||[]).slice(); DAYS.forEach(function(D){all=all.concat(state.plan[D.id]||[]);});
+  var changed=false;
+  ADDED.forEach(function(a){
+    if(!POI[a.id]||all.indexOf(a.id)>=0)return;
+    var arr=state.plan[a.day]=state.plan[a.day]||[], i=arr.indexOf(a.after);
+    arr.splice(i>=0?i+1:arr.length,0,a.id); changed=true;
+  });
+  if(changed)save();
+}
+function defaults(){var ex=state.exp,rv=state.reveal,it=state.intro,dy=state.diary,nf=state.notif,nd=state.notified;state.plan={};DAYS.forEach(function(D){state.plan[D.id]=D.items.slice();});state.parked=PARKED_DEF.slice();state.done={};state.mig=MIG_VER;state.exp=ex||[];state.reveal=!!rv;state.intro=it||0;state.diary=dy||{};state.notif=nf||0;state.notified=nd||{};}
+function resetPlan(){if(!confirm("Rimetti il programma come l'ho preparato io?"))return;defaults();save();renderAll();}
+
+/* -- tempo e distanze -- */
+function toMin(s){var p=String(s).split(":");return (+p[0])*60+(+p[1]);}
+function hhmm(m){m=Math.round(m);var h=Math.floor(m/60)%24,x=m%60;return (h<10?"0":"")+h+":"+(x<10?"0":"")+x;}
+function dur(m){var h=Math.floor(m/60),x=m%60;return h?(h+"h"+(x?(x<10?"0":"")+x:"")):(x+"'");}
+function hav(a,b){
+  var R=6371000,t=Math.PI/180;
+  var dl=(b.lat-a.lat)*t, dg=(b.lon-a.lon)*t, la=(a.lat+b.lat)/2*t;
+  var x=dg*Math.cos(la);
+  return Math.sqrt(dl*dl+x*x)*R;
+}
+function transfer(a,b){
+  if(!a||!b||a.lat==null||b.lat==null)return null;
+  var d=hav(a,b)*1.28;
+  if(d<95)return null;
+  if(d<1400){var m=Math.max(3,Math.round(d/75))+(b.extra||0);
+    return {mode:"walk",min:m,d:d,txt:"a piedi "+m+" min · "+Math.round(d/10)*10+" m"};}
+  var m2=b.trMin||(Math.round(d/380)+12);
+  return {mode:"metro",min:m2,d:d,txt:"~"+m2+" min · "+(b.stop||"con la metro")};
+}
+function schedule(D){
+  var ids=state.plan[D.id]||[], t=toMin(D.start), out=[], prev=null, walked=0, cost=0;
+  if(D.id!=="gio"){var f=ids.map(function(i){return POI[i];}).filter(function(p){return p&&p.lat!=null;})[0];
+    if(f&&hav(HOTEL,f)>60)prev={lat:HOTEL.lat,lon:HOTEL.lon,n:"Hotel"};}
+  ids.forEach(function(id){
+    var p=POI[id]; if(!p)return;
+    var tr=transfer(prev,p);
+    if(tr){t+=tr.min; if(tr.mode==="walk")walked+=tr.d;}
+    var gap=0;
+    if(p.at&&toMin(p.at)>t){gap=toMin(p.at)-t;t=toMin(p.at);}
+    out.push({id:id,p:vp(id),st:t,tr:tr,gap:gap});
+    t+=p.min; cost+=(p.price||0);
+    if(p.lat!=null)prev=p;
+  });
+  var back=null;
+  if(D.id!=="dom"&&prev&&hav(prev,HOTEL)>200){back=transfer(prev,{lat:HOTEL.lat,lon:HOTEL.lon,stop:"metro fino a Madeleine"});
+    if(back){t+=back.min; if(back.mode==="walk")walked+=back.d;}}
+  return {rows:out,end:t,km:walked/1000,cost:cost,back:back};
+}
+
+/* -- rendering PIANO -- */
+function pill(t,c){return '<span class="pill '+(c||"")+'">'+t+'</span>';}
+function todayDay(){var now=new Date();for(var i=0;i<DAYS.length;i++){var t=new Date(DAYS[i].date+"T00:00:00");if(t.toDateString()===now.toDateString())return i;}return -1;}
+function nowRow(){
+  var di=todayDay(); if(di<0)return null;
+  var s=schedule(DAYS[di]), now=new Date(), m=now.getHours()*60+now.getMinutes(), cur=null, next=null;
+  for(var i=0;i<s.rows.length;i++){var r=s.rows[i];
+    if(r.st<=m&&m<r.st+r.p.min)cur=r; else if(r.st>m&&!next)next=r;}
+  return {day:di,cur:cur,next:next,sched:s};
+}
+function renderNow(){
+  var el=document.getElementById("nowCard"); if(!el)return;
+  var nr=nowRow(); if(!nr){el.innerHTML="";return;}
+  var D=DAYS[nr.day], h='<div class="card now"><div class="k">📍 Adesso · '+D.dow+' '+D.n+' giugno</div>';
+  if(nr.cur)h+='<h3>'+(nr.cur.p.ico||"")+' '+nr.cur.p.n+'</h3><div class="muted small">dalle '+hhmm(nr.cur.st)+' · '+(nr.cur.p.sub||"")+'</div>';
+  else if(nr.next)h+='<h3>Prossima tappa alle '+hhmm(nr.next.st)+'</h3>';
+  else h+='<h3>Giornata finita. Brave.</h3>';
+  if(nr.next)h+='<div class="muted small" style="margin-top:6px">Poi: <b style="color:#fff">'+(nr.next.p.ico||"")+' '+nr.next.p.n+'</b> alle '+hhmm(nr.next.st)+(nr.next.tr?' · '+nr.next.tr.txt:'')+'</div>';
+  var hh=new Date().getHours(); if(hh>=19&&!(state.diary[D.id]||"").trim())h+='<div class="muted small" style="margin-top:8px">📓 Stasera scrivete le tre righe del diario: finiscono nell\'album stampato.</div>';
+  h+='<div class="row" style="margin-top:10px">'+(nr.cur?'<button class="btn sec" onclick="detail(\''+nr.cur.id+'\')">Scheda</button>':'')+(nr.next?'<button class="btn sec" onclick="detail(\''+nr.next.id+'\')">Prossima</button>':'')+'<button class="btn sec" onclick="showDay('+nr.day+')">La giornata</button>'+(hh>=19?'<button class="btn sec" onclick="openDiary(\''+D.id+'\')">📓 Diario</button>':'')+'</div></div>';
+  el.innerHTML=h;
+}
+
+/* ============ METEO (Open-Meteo, gratis, senza chiave) ============ */
+var WX_URL="https://api.open-meteo.com/v1/forecast?latitude=48.8696&longitude=2.3196&current=temperature_2m,weather_code,precipitation,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset&timezone=Europe%2FParis&forecast_days=16";
+var WX_ICO=function(c){c=+c;if(c===0)return ["☀️","sereno"];if(c<=2)return ["🌤","poco nuvoloso"];if(c===3)return ["☁️","coperto"];if(c<=48)return ["🌫","nebbia"];if(c<=57)return ["🌦","pioviggine"];if(c<=67)return ["🌧","pioggia"];if(c<=77)return ["🌨","neve"];if(c<=82)return ["🌦","rovesci"];if(c<=86)return ["🌨","neve"];return ["⛈","temporale"];};
+var WX=null;
+function loadWx(){
+  try{var c=JSON.parse(localStorage.getItem(LS+"_wx")||"null");if(c)WX=c;}catch(e){}
+  renderWx();
+  if(navigator.onLine===false)return;
+  fetch(WX_URL).then(function(r){return r.json();}).then(function(j){
+    if(!j||!j.current)return; WX={ts:Date.now(),cur:j.current,daily:j.daily};
+    try{localStorage.setItem(LS+"_wx",JSON.stringify(WX));}catch(e){}
+    renderWx();
+  }).catch(function(){});
+}
+function renderWx(){
+  var el=document.getElementById("wxCard"); if(!el)return;
+  var today=new Date(), trip0=new Date(2027,5,17), trip1=new Date(2027,5,21);
+  var inWindow=(trip0-today)/86400000<=15; /* le previsioni coprono 16 giorni */
+  if(!inWindow){el.innerHTML="";return;}
+  if(!WX){el.innerHTML='<div class="card flat" style="background:#F1ECDF"><div class="muted small">🌤 Meteo di Parigi: si aggiorna appena c\'è rete.</div></div>';return;}
+  var c=WX.cur, ic=WX_ICO(c.weather_code), age=Math.round((Date.now()-WX.ts)/60000);
+  var h='<div class="card"><div class="wx"><div class="big">'+ic[0]+'</div><div><div class="t">'+Math.round(c.temperature_2m)+'°</div><div class="muted small">Parigi adesso · '+ic[1]+(c.wind_speed_10m>25?' · vento '+Math.round(c.wind_speed_10m)+' km/h':'')+'</div></div>'+
+    '<div style="flex:1"></div><a class="btn ghost" style="padding:7px 10px;font-size:12px" href="https://www.meteo.it/" target="_blank" rel="noopener">meteo.it ↗</a></div>';
+  if(WX.daily&&WX.daily.time){
+    var d=WX.daily, rows="";
+    DAYS.forEach(function(D){var i=d.time.indexOf(D.date); if(i<0)return; var w=WX_ICO(d.weather_code[i]);
+      rows+='<div style="border-top:3px solid '+D.c+'"><span>'+w[0]+'</span>'+D.dow.slice(0,3)+' '+D.n+'<br>'+Math.round(d.temperature_2m_max[i])+'° / '+Math.round(d.temperature_2m_min[i])+'°<br>☔ '+(d.precipitation_probability_max[i]==null?'–':d.precipitation_probability_max[i]+'%')+'</div>';});
+    if(rows)h+='<div class="wxd">'+rows+'</div>';
+    else{var ti=d.time.indexOf(today.toISOString().slice(0,10)); if(ti>=0)h+='<div class="muted small" style="margin-top:8px">Oggi max '+Math.round(d.temperature_2m_max[ti])+'°, min '+Math.round(d.temperature_2m_min[ti])+'°, pioggia '+(d.precipitation_probability_max[ti]||0)+'%. I quattro giorni del viaggio compaiono qui quando entrano nei 16 giorni di previsione.</div>';}
+  }
+  h+='<div class="muted small" style="margin-top:8px">Dati Open-Meteo, aggiornati '+(age<2?'adesso':age+' min fa')+'; offline resta l\'ultimo scaricato.</div></div>';
+  el.innerHTML=h;
+}
+
+/* ============ AVVISI "TRA 30 MINUTI SI PARTE" ============ */
+function notifSupported(){return ("Notification" in window);}
+function enableNotif(){
+  if(!notifSupported()){toast("Questo telefono non supporta gli avvisi dal browser: usa il calendario qui sotto");return;}
+  Notification.requestPermission().then(function(p){
+    if(p==="granted"){state.notif=1;save();renderInfo();showNotif("Avvisi attivi 🗼","Vi avviso 30 minuti prima di ogni tappa, quando l\'app è aperta sul telefono.");}
+    else{toast("Permesso negato: usa il calendario (.ics)");}
+  });
+}
+function disableNotif(){state.notif=0;save();renderInfo();toast("Avvisi disattivati");}
+function showNotif(t,b){
+  try{
+    if(navigator.serviceWorker&&navigator.serviceWorker.ready){navigator.serviceWorker.ready.then(function(r){r.showNotification(t,{body:b,icon:"icon-192.png",badge:"icon-192.png",tag:"p27"+Date.now(),vibrate:[150,80,150]});}).catch(function(){new Notification(t,{body:b,icon:"icon-192.png"});});}
+    else new Notification(t,{body:b,icon:"icon-192.png"});
+  }catch(e){}
+}
+function notifTick(){
+  if(!state.notif||!notifSupported()||Notification.permission!=="granted")return;
+  var di=todayDay(); if(di<0)return;
+  var D=DAYS[di], s=schedule(D), now=new Date(), m=now.getHours()*60+now.getMinutes();
+  s.rows.forEach(function(r){
+    if(r.p.kind==="fix"&&!r.p.at)return;
+    var lead=r.st-m, key=D.id+"_"+r.id;
+    if(lead<=30&&lead>=27&&!state.notified[key]){
+      state.notified[key]=1; save();
+      var tr=r.tr?(" · "+r.tr.txt):"";
+      showNotif("Tra "+lead+" minuti: "+(r.p.ico||"")+" "+r.p.n,"Alle "+hhmm(r.st)+tr);
+    }
+  });
+}
+function icsEsc(s){return String(s||"").replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
+function exportIcs(){
+  var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Parigi 2027//IT","CALSCALE:GREGORIAN","X-WR-CALNAME:Parigi 2027 · Rosetta e Concetta","X-WR-TIMEZONE:Europe/Paris"];
+  function dt(date,min){var d=date.replace(/-/g,""),h=Math.floor(min/60),x=min%60;return d+"T"+(h<10?"0":"")+h+(x<10?"0":"")+x+"00";}
+  DAYS.forEach(function(D){
+    var s=schedule(D);
+    s.rows.forEach(function(r){
+      var p=r.p, end=r.st+p.min;
+      L.push("BEGIN:VEVENT","UID:p27-"+D.id+"-"+r.id+"@parigi2027","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z",
+        "DTSTART;TZID=Europe/Paris:"+dt(D.date,r.st),"DTEND;TZID=Europe/Paris:"+dt(D.date,end),
+        "SUMMARY:"+icsEsc((p.ico||"")+" "+p.n),
+        "LOCATION:"+icsEsc(p.stop||""),
+        "DESCRIPTION:"+icsEsc((p.sub?p.sub+"\n":"")+(r.tr?"Come arrivare: "+r.tr.txt+"\n":"")+(p.priceTxt?"Costo: "+p.priceTxt+"\n":"")+(p.tip||"")),
+        "BEGIN:VALARM","TRIGGER:-PT30M","ACTION:DISPLAY","DESCRIPTION:"+icsEsc("Tra 30 minuti: "+p.n),"END:VALARM","END:VEVENT");
+    });
+  });
+  L.push("END:VCALENDAR");
+  dl(new Blob([L.join("\r\n")],{type:"text/calendar;charset=utf-8"}),"Parigi2027_programma.ics");
+  toast("Calendario scaricato: aprilo e scegli «Aggiungi al calendario»");
+}
+
+/* ============ DIARIO DI VIAGGIO ============ */
+function renderDiary(){
+  var el=document.getElementById("diaryCard"); if(!el)return;
+  var h='<p class="muted small" style="margin:0">Ogni sera, tre righe: cosa vi ha fatto ridere, cosa non vi aspettavate, cosa vi portate a casa. Si salvano da sole mentre scrivete e finiscono nei testi dell\'album stampato, giorno per giorno.</p>';
+  DAYS.forEach(function(D){
+    var v=state.diary[D.id]||"";
+    h+='<div class="dlab"><i style="background:'+D.c+'"></i>'+D.dow+' '+D.n+' giugno · '+D.title+(v.trim()?' <span class="pill g">✓</span>':'')+'</div>'+
+       '<textarea class="diary" id="diary-'+D.id+'" placeholder="Stasera… (tre righe bastano)" oninput="saveDiary(\''+D.id+'\',this.value)">'+esc(v)+'</textarea>';
+  });
+  el.innerHTML=h;
+}
+function saveDiary(id,v){state.diary[id]=v;save();}
+function openDiary(id){go("s-album");setTimeout(function(){var t=document.getElementById("diary-"+id);if(t){t.scrollIntoView({behavior:"smooth",block:"center"});t.focus();}},150);}
+function renderPlan(){
+  var h="", nr=nowRow();
+  DAYS.forEach(function(D){
+    var s=schedule(D);
+    h+='<div class="daycard"><div class="dayhead" style="background:'+D.c+'">'+
+      '<div class="n">'+D.n+'</div><div class="m"><b>'+D.dow+' '+D.n+' giugno</b><span>'+D.title+'</span></div></div>'+
+      '<div class="daystats">'+pill("⏱ fino alle "+hhmm(s.end))+pill("🚶 "+s.km.toFixed(1)+" km")+
+      pill("💶 ~"+Math.round(s.cost)+" €")+pill("📍 "+s.rows.length+" tappe")+'</div><div class="items">';
+    var num=0;
+    s.rows.forEach(function(r,i){
+      if(r.p.kind!=="fix")num++;
+      if(r.tr)h+='<div class="trf"><i>'+(r.tr.mode==="walk"?"🚶":"🚇")+'</i>'+r.tr.txt+'</div>';
+      if(r.gap>20&&i>0)h+='<div class="trf" style="opacity:.75"><i>🫖</i>tempo libero · '+dur(r.gap)+'</div>';
+      var dn=state.doneEv[r.id], isNow=nr&&nr.cur&&nr.cur.id===r.id&&DAYS[nr.day].id===D.id;
+      h+='<div class="it'+(r.p.kind==="fix"?" fix":"")+(dn?" done":"")+(isNow?" now":"")+(POI[r.id].secret&&!revealed()?" secret":"")+'" onclick="tapItem(\''+D.id+'\',\''+r.id+'\')">'+
+        '<div class="idx" onclick="tickEv(\''+r.id+'\',event)">'+(dn?"✓":(r.p.kind==="fix"?r.p.ico:num))+'</div><div class="bd"><b>'+r.p.n+'</b>'+
+        '<div class="met">'+(r.p.sub?'<span>'+r.p.sub+'</span>':"")+
+        (r.p.priceTxt?'<span>· '+r.p.priceTxt+'</span>':"")+
+        (docsFor(r.id).length?'<span class="pill b" style="cursor:pointer" onclick="event.stopPropagation();var dd=docsFor(\''+r.id+'\');dd.length===1?openDoc(dd[0].id):detail(\''+r.id+'\')">🎟 '+docsFor(r.id).length+' doc</span>':"")+'</div></div>'+
+        '<div class="tm">'+hhmm(r.st)+'</div></div>';
+    });
+    if(s.back)h+='<div class="trf"><i>'+(s.back.mode==="walk"?"🚶":"🚇")+'</i>rientro in hotel · '+s.back.txt+'</div>';
+    h+='</div></div>';
+  });
+  document.getElementById("planDays").innerHTML=h;
+
+  var ph="";
+  if(!state.parked.length)ph='<div class="muted small" style="padding:8px 0">Niente da parte: il programma è completo.</div>';
+  else state.parked.forEach(function(id){var p=vp(id);
+    ph+='<div class="it" onclick="tapItem(\'parked\',\''+id+'\')"><div class="idx" style="background:#E1EBDD;color:#3F5F41">+</div>'+
+      '<div class="bd"><b>'+p.n+'</b><div class="met"><span>'+(p.sub||"")+'</span><span>· '+(p.priceTxt||"")+'</span></div></div>'+
+      '<div class="tm muted">aggiungi</div></div>';});
+  document.getElementById("parked").innerHTML=ph;
+
+  var tk=0,tc=0,tn=0;
+  DAYS.forEach(function(D){var s=schedule(D);tk+=s.km;tc+=s.cost;tn+=s.rows.length;});
+  document.getElementById("totals").innerHTML=
+    '<div class="kv"><b>Tappe</b><span>'+tn+' in quattro giorni, di cui '+state.parked.length+' tenute da parte</span></div>'+
+    '<div class="kv"><b>A piedi</b><span>circa <b>'+tk.toFixed(1)+' km</b> in totale, '+(tk/4).toFixed(1)+' km al giorno di media</span></div>'+
+    '<div class="kv"><b>Ingressi e pasti</b><span>circa <b>'+Math.round(tc)+' €</b> a testa, aeroporti, ingressi e pasti del programma compresi (la cena di venerdì è a parte: è un regalo)</span></div>'+
+    '<div class="kv"><b>Metro</b><span>una decina di corse a testa, circa 25 €, più i due biglietti aeroporto già contati</span></div>';
+  renderNow();
+}
+
+/* -- azione sulla tappa -- */
+function tapItem(from,id){
+  var p=vp(id);
+  var h='<div class="grab"></div><h3>'+(p.ico||"")+' '+p.n+'</h3><div class="muted small" style="margin-bottom:10px">'+(p.sub||"")+'</div>';
+  h+='<button class="opt" onclick="detail(\''+id+'\')"><span class="dot" style="background:var(--gold)"></span>Leggi la scheda completa</button>';
+  if(from!=="parked")h+='<button class="opt" onclick="tickEv(\''+id+'\');closeSheet()"><span class="dot" style="background:var(--sage)"></span>'+(state.doneEv[id]?"Togli la spunta «fatto»":"Segna come fatta ✓")+'</button>';
+  if(p.kind==="fix"&&from!=="parked"){
+    h+='<div class="muted small" style="padding:12px 4px 0">Questa tappa è fissa (volo, hotel o trasferimento) e non si può spostare.</div>';
+  }else{
+    if(from!=="parked"){
+      h+='<button class="opt" onclick="shift(\''+from+'\',\''+id+'\',-1)"><span class="dot" style="background:var(--sky)"></span>Sposta più presto nella giornata</button>';
+      h+='<button class="opt" onclick="shift(\''+from+'\',\''+id+'\',1)"><span class="dot" style="background:var(--sky)"></span>Sposta più tardi nella giornata</button>';
+    }
+    DAYS.forEach(function(D){
+      if(D.id===from)return;
+      h+='<button class="opt" onclick="moveTo(\''+from+'\',\''+id+'\',\''+D.id+'\')"><span class="dot" style="background:'+D.c+'"></span>Sposta a <b style="margin-left:3px">'+D.dow+' '+D.n+'</b></button>';
+    });
+    if(from!=="parked")h+='<button class="opt" onclick="moveTo(\''+from+'\',\''+id+'\',\'parked\')"><span class="dot" style="background:var(--wine)"></span>🗑 <b style="margin-left:2px">Elimina dal programma</b>&nbsp;<span class="muted small">(va tra le tappe da parte)</span></button>';
+  }
+  h+='<button class="opt" onclick="closeSheet()" style="justify-content:center;color:var(--ink2)">Annulla</button>';
+  openSheet(h);
+}
+function listOf(k){return k==="parked"?state.parked:state.plan[k];}
+function moveTo(from,id,to){
+  var a=listOf(from),i=a.indexOf(id); if(i<0)return; a.splice(i,1);
+  var b=listOf(to);
+  if(to==="parked")b.push(id);
+  else{
+    var pos=b.length;
+    for(var j=0;j<b.length;j++){var q=POI[b[j]];
+      if(q&&(q.kind==="fix"&&q.at)||(b[j].indexOf("cena")===0)){pos=j;break;}}
+    b.splice(pos,0,id);
+  }
+  save();closeSheet();renderAll();
+  toast(to==="parked" ? vp(id).n+" eliminata: la ritrovi tra le tappe da parte"
+                      : vp(id).n+" spostata a "+DAYS.filter(function(d){return d.id===to;})[0].dow+". Orari, mappa e PDF aggiornati");
+}
+function shift(day,id,dir){
+  var a=listOf(day),i=a.indexOf(id),j=i+dir;
+  if(i<0||j<0||j>=a.length)return closeSheet();
+  a[i]=a[j];a[j]=id;save();closeSheet();renderAll();
+}
+function toast(t){
+  var d=document.createElement("div");
+  d.style.cssText="position:fixed;left:50%;transform:translateX(-50%);bottom:96px;background:#2F3A3B;color:#FFFDF8;padding:10px 16px;border-radius:99px;font-size:13px;font-weight:800;z-index:130;box-shadow:0 8px 20px rgba(0,0,0,.3);max-width:88vw;text-align:center";
+  d.textContent=t;document.body.appendChild(d);
+  setTimeout(function(){d.style.transition="opacity .4s";d.style.opacity=0;setTimeout(function(){d.remove();},420);},1900);
+}
+
+/* -- scheda dettaglio -- */
+function detail(id){
+  var p=vp(id), secret=POI[id].secret&&!revealed();
+  var h='<div class="grab"></div><div class="det"><h3'+(secret?' onclick="giftTap()"':'')+'>'+(p.ico||"")+' '+p.n+'</h3>'+
+    '<div class="muted small" style="margin:2px 0 10px">'+(p.sub||"")+'</div>'+
+    '<div class="lead">'+p.desc+'</div>';
+  h+='<div style="margin-top:12px">';
+  if(p.priceTxt)h+='<div class="kv"><b>Costo</b><span>'+p.priceTxt+'</span></div>';
+  if(p.min)h+='<div class="kv"><b>Durata</b><span>'+dur(p.min)+'</span></div>';
+  if(p.stop)h+='<div class="kv"><b>Come</b><span>'+p.stop+'</span></div>';
+  h+='</div>';
+  if(p.tip)h+='<div class="tip"><b>Da sapere</b>'+p.tip+'</div>';
+  if(p.booked)h+='<div class="tip ok"><b>Prenotazione</b>'+p.booked+'</div>';
+  if(secret)h+='<div class="tip secret"><b>🎁 Sorpresa</b>Si svela da sola venerdì 18 giugno alle 17:00.</div>';
+  if(POI[id].secret&&state.reveal)h+='<button class="btn ghost full" style="margin-top:8px" onclick="hideGift()">🙈 Richiudi la sorpresa</button>';
+  var dd=docsFor(id);
+  if(!secret){
+    h+='<div class="tt" style="margin:14px 0 8px">🎟 Biglietti e documenti</div>';
+    dd.forEach(function(d){h+=docRow(d,true);});
+    h+='<button class="btn sec full" onclick="pickDocFor(\''+id+'\')">＋ Aggiungi biglietto o documento (PDF o foto)</button>';
+  }
+  if(p.url)h+='<a class="btn full" style="margin-top:12px" href="'+p.url+'" target="_blank" rel="noopener">🔗 '+(p.urlTxt||"Apri il sito")+'</a>';
+  if(p.lat!=null&&!secret)h+='<button class="btn sec full" style="margin-top:8px" onclick="closeSheet();showOnMap(\''+id+'\')">🗺 Mostrala sulla mappa</button>';
+  if(p.lat!=null&&!secret)h+='<a class="btn ghost full" style="margin-top:8px" href="https://www.google.com/maps/dir/?api=1&destination='+p.lat+','+p.lon+'&travelmode=walking" target="_blank" rel="noopener">🧭 Portami lì (Google Maps)</a>';
+  h+='<button class="opt" onclick="closeSheet()" style="justify-content:center;color:var(--ink2);margin-top:6px">Chiudi</button></div>';
+  openSheet(h);
+}
+function openSheet(h){document.getElementById("sheet").innerHTML=h;document.getElementById("sheetbg").classList.add("on");}
+function closeSheet(){document.getElementById("sheetbg").classList.remove("on");}
+
+/* -- GIORNI (vista analitica) -- */
+var curDay=0;
+function renderChips(){
+  var h="";
+  DAYS.forEach(function(D,i){h+='<button class="chip'+(i===curDay?" on":"")+'" onclick="curDay='+i+';renderChips();renderDay()">'+D.dow+' '+D.n+'</button>';});
+  document.getElementById("dayChips").innerHTML=h;
+}
+function renderDay(){
+  var D=DAYS[curDay],s=schedule(D),h="";
+  h+='<div class="card" style="border-left:5px solid '+D.c+'"><div class="kicker" style="color:'+D.c+';font-size:10px;letter-spacing:.2em;font-weight:800;text-transform:uppercase">'+D.dow+' '+D.n+' giugno 2027</div>'+
+     '<h3 style="font-size:19px;margin:5px 0 7px">'+D.title+'</h3><p class="muted small" style="margin:0">'+D.intro+'</p>'+
+     '<div class="daystats" style="border:none;background:none;padding:10px 0 0">'+pill("⏱ "+D.start+" → "+hhmm(s.end))+pill("🚶 "+s.km.toFixed(1)+" km")+pill("💶 ~"+Math.round(s.cost)+" €")+'</div></div>';
+  s.rows.forEach(function(r,i){
+    var p=r.p, secret=POI[r.id].secret&&!revealed();
+    if(r.tr)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px">'+(r.tr.mode==="walk"?"🚶 ":"🚇 ")+r.tr.txt+'</div>';
+    if(r.gap>20&&i>0)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px;opacity:.8">🫖 tempo libero · '+dur(r.gap)+' — un caffè, due passi senza meta</div>';
+    var dn=state.doneEv[r.id];
+    h+='<div class="card" style="padding:12px 13px'+(dn?";opacity:.62":"")+'">'+
+      '<div style="display:flex;gap:10px;align-items:flex-start">'+
+      '<div style="flex:none;text-align:center;min-width:44px"><div style="font-size:15px;font-weight:900;color:'+D.c+'">'+hhmm(r.st)+'</div>'+
+      '<div style="font-size:10px;color:var(--ink2);font-weight:700">'+dur(p.min)+'</div>'+
+      '<button class="evck'+(dn?" on":"")+'" style="margin:6px auto 0" onclick="tickEv(\''+r.id+'\',event)">'+(dn?"✓":"")+'</button></div>'+
+      '<div style="flex:1;min-width:0"><b style="font-size:15.5px">'+(p.ico||"")+' '+p.n+'</b>'+
+      '<div class="muted" style="font-size:12px;margin:1px 0 6px">'+(p.sub||"")+'</div>'+
+      '<div style="font-size:13.5px;line-height:1.45">'+p.desc+'</div>'+
+      (p.tip?'<div class="tip" style="margin-top:8px"><b>Da sapere</b>'+p.tip+'</div>':"")+
+      '<div class="tags" style="margin-top:8px">'+
+        (p.priceTxt?pill("💶 "+p.priceTxt,(p.price?"y":"free")):"")+
+        (p.stop?pill("📍 "+p.stop,"b"):"")+'</div>'+
+      (p.booked?'<div class="tip ok" style="margin-top:8px"><b>Prenotazione</b>'+p.booked+'</div>':"")+
+      '<div class="row" style="margin-top:8px;flex-wrap:wrap">'+(secret?"":docChips(r.id,false))+
+        (p.url?'<a class="btn sec" style="padding:8px 12px;font-size:12.5px" href="'+p.url+'" target="_blank" rel="noopener">🔗 '+(p.urlTxt||"Sito ufficiale")+'</a>':"")+
+        (p.kind!=="fix"?'<button class="btn ghost" style="padding:8px 12px;font-size:12.5px" onclick="tapItem(\''+D.id+'\',\''+r.id+'\')">✏️ Sposta / elimina</button>':"")+
+      '</div>'+
+      '</div></div></div>';
+  });
+  if(s.back)h+='<div class="trf" style="padding:2px 0 6px 8px;font-size:12px">'+(s.back.mode==="walk"?"🚶 ":"🚇 ")+'rientro in hotel · '+s.back.txt+'</div>';
+  h+='<div class="card flat" style="background:#F1ECDF;text-align:center"><div class="muted small">Il quadratino accanto all\'orario segna la tappa come fatta ✓. Vuoi cambiare qualcosa?</div>'+
+     '<button class="btn sec full" style="margin-top:8px" onclick="go(\'s-piano\')">📅 Apri il calendario di sintesi</button></div>';
+  document.getElementById("dayDetail").innerHTML=h;
+}
+
+/* -- MAPPA -- */
+var mapFilter="all", zx=1, tx=0, ty=0;
+function mapBase(){
+  var h='<defs><pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">'+
+    '<circle cx="2" cy="2" r="1.1" fill="#E0D7C4"/></pattern>'+
+    '<filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.6" flood-color="#2F3A3B" flood-opacity=".35"/></filter></defs>';
+  h+='<rect width="1000" height="800" fill="#EFE9DA"/><rect width="1000" height="800" fill="url(#dots)"/>';
+  PARKS.forEach(function(p){
+    h+='<ellipse cx="'+px(p.c[0]).toFixed(1)+'" cy="'+py(p.c[1]).toFixed(1)+'" rx="'+(p.r[0]/(MB.lon1-MB.lon0)*MB.W).toFixed(1)+
+       '" ry="'+(p.r[1]/(MB.lat0-MB.lat1)*MB.H).toFixed(1)+'" fill="#C9D6B9" opacity=".85"/>';
+  });
+  h+='<polyline points="'+poly(RIVER)+'" fill="none" stroke="#A3B6BA" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>';
+  h+='<polyline points="'+poly(RIVER)+'" fill="none" stroke="#BCCDD1" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>';
+  h+='<polyline points="'+poly(CANAL)+'" fill="none" stroke="#A3B6BA" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>';
+  ISLANDS.forEach(function(I){h+='<polygon points="'+poly(I)+'" fill="#EFE9DA" stroke="#A3B6BA" stroke-width="2"/>';});
+  (function(){var x=px(2.3080),y=py(48.8655);
+    h+='<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" transform="rotate(-6 '+x.toFixed(1)+' '+y.toFixed(1)+')" font-size="15" font-weight="800" fill="#7A9AA3" letter-spacing="3" text-anchor="middle" font-family="system-ui,sans-serif">SENNA</text>';})();
+  BRIDGES.forEach(function(b){
+    h+='<line x1="'+px(b.a[0]).toFixed(1)+'" y1="'+py(b.a[1]).toFixed(1)+'" x2="'+px(b.b[0]).toFixed(1)+'" y2="'+py(b.b[1]).toFixed(1)+
+       '" stroke="#8B7F6B" stroke-width="'+(b.n?6:4)+'" stroke-linecap="round" opacity="'+(b.n?".95":".7")+'"/>';
+  });
+  LABELS.forEach(function(l){
+    h+='<text x="'+px(l.p[0]).toFixed(1)+'" y="'+py(l.p[1]).toFixed(1)+'" font-size="14" font-weight="800" fill="#A79781" letter-spacing="1.6" text-anchor="middle" font-family="system-ui,sans-serif">'+l.t+'</text>';
+  });
+  var hx=px(HOTEL.lon), hy=py(HOTEL.lat);
+  h+='<g><circle cx="'+hx.toFixed(1)+'" cy="'+hy.toFixed(1)+'" r="13" fill="#2F3A3B" stroke="#FFFDF8" stroke-width="3" filter="url(#sh)"/>'+
+     '<rect x="'+(hx-5).toFixed(1)+'" y="'+(hy-3).toFixed(1)+'" width="10" height="6" rx="1.6" fill="#FFFDF8"/>'+
+     '<rect x="'+(hx-5).toFixed(1)+'" y="'+(hy-6).toFixed(1)+'" width="5" height="3.4" rx="1.4" fill="#FFFDF8"/>'+
+     '<text x="'+hx.toFixed(1)+'" y="'+(hy+30).toFixed(1)+'" font-size="14" font-weight="900" fill="#2F3A3B" text-anchor="middle" font-family="system-ui,sans-serif">HOTEL</text></g>';
+  return h;
+}
+function geoRows(D){
+  return schedule(D).rows.filter(function(r){
+    if(r.p.lat==null||r.p.kind==="fix")return false;
+    if(POI[r.id].secret&&!revealed())return false;
+    var x=px(r.p.lon),y=py(r.p.lat);return x>-10&&x<1010&&y>-10&&y<810;});
+}
+function renderMap(){
+  var h=mapBase()+"";
+  var show=DAYS.filter(function(D){return mapFilter==="all"||mapFilter===D.id;});
+  show.forEach(function(D){
+    var rs=geoRows(D);
+    if(rs.length>1){
+      var pts=rs.map(function(r){return px(r.p.lon).toFixed(1)+","+py(r.p.lat).toFixed(1);}).join(" ");
+      h+='<polyline points="'+pts+'" fill="none" stroke="'+D.c+'" stroke-width="'+(mapFilter==="all"?3.2:4.5)+
+         '" stroke-linecap="round" stroke-linejoin="round" opacity="'+(mapFilter==="all"?".45":".92")+'" stroke-dasharray="'+(mapFilter==="all"?"8 8":"0")+'"/>';
+    }
+  });
+  var all=(mapFilter==="all");
+  show.forEach(function(D){
+    geoRows(D).forEach(function(r,i){
+      var x=px(r.p.lon).toFixed(1), y=py(r.p.lat).toFixed(1);
+      h+='<g class="pin" onclick="pinTap(\''+r.id+'\')" style="cursor:pointer">'+
+         '<circle cx="'+x+'" cy="'+y+'" r="'+(all?9:16)+'" fill="'+D.c+'" stroke="#FFFDF8" stroke-width="'+(all?2.5:3)+'" filter="url(#sh)"/>'+
+         (all?"":'<text x="'+x+'" y="'+(+y+5.5)+'" font-size="15" font-weight="900" fill="#FFFDF8" text-anchor="middle" font-family="system-ui,sans-serif">'+(i+1)+'</text>')+
+         '</g>';
+    });
+  });
+  if(!all){
+    var D0=show[0], rs0=geoRows(D0);
+    if(rs0.length)h+='<text x="18" y="34" font-size="22" font-weight="900" fill="'+D0.c+'" font-family="system-ui,sans-serif">'+D0.dow+' '+D0.n+' · il percorso</text>';
+  }
+  var m=document.getElementById("map");
+  m.innerHTML='<g id="mg" transform="translate('+tx+','+ty+') scale('+zx+')">'+h+'</g>';
+  var lh="";
+  DAYS.forEach(function(D){lh+='<span><i style="background:'+D.c+'"></i>'+D.dow+'</span>';});
+  lh+='<span><i style="background:#2F3A3B"></i>Hotel</span>';
+  document.getElementById("mapLeg").innerHTML=lh;
+  var ch="";
+  ch+='<button class="chip'+(mapFilter==="all"?" on":"")+'" onclick="setFilter(\'all\')">Tutto il viaggio</button>';
+  DAYS.forEach(function(D){ch+='<button class="chip'+(mapFilter===D.id?" on":"")+'" onclick="setFilter(\''+D.id+'\')">'+D.dow+' '+D.n+'</button>';});
+  document.getElementById("mapChips").innerHTML=ch;
+}
+function setFilter(f){
+  mapFilter=f;
+  var D=DAYS.filter(function(d){return d.id===f;})[0];
+  if(D){var rs=geoRows(D);
+    if(rs.length){var sx=0,sy=0;rs.forEach(function(r){sx+=px(r.p.lon);sy+=py(r.p.lat);});sx/=rs.length;sy/=rs.length;
+      zx=1.6;tx=500-sx*zx;ty=400-sy*zx;}}
+  else{zx=1;tx=0;ty=0;}
+  renderMap();
+}
+function pinTap(id){
+  var p=vp(id);
+  var e=document.getElementById("pop");
+  e.innerHTML='<b>'+(p.ico||"")+' '+p.n+'</b><span class="muted small">'+(p.sub||"")+' · '+(p.priceTxt||"")+'</span>'+
+    '<button class="btn sec" style="margin-top:8px;padding:7px 11px;font-size:12.5px" onclick="detail(\''+id+'\')">Scheda completa</button>'+
+    '<button class="btn ghost" style="margin-top:8px;margin-left:6px;padding:7px 11px;font-size:12.5px" onclick="document.getElementById(\'pop\').classList.remove(\'on\')">Chiudi</button>';
+  e.classList.add("on");
+}
+function showOnMap(id){
+  var d=DAYS.filter(function(D){return (state.plan[D.id]||[]).indexOf(id)>=0;})[0];
+  mapFilter=d?d.id:"all"; go("s-mappa");
+  var p=POI[id];
+  if(p&&p.lat!=null){zx=2.4;tx=500-px(p.lon)*zx;ty=400-py(p.lat)*zx;}
+  renderMap();setTimeout(function(){pinTap(id);},200);
+}
+function zoomMap(f){
+  var nz=Math.min(6,Math.max(1,zx*f));f=nz/zx;
+  tx=500-(500-tx)*f; ty=400-(400-ty)*f; zx=nz; applyT();
+}
+function resetZoom(){zx=1;tx=0;ty=0;applyT();}
+function applyT(){var g=document.getElementById("mg");if(g)g.setAttribute("transform","translate("+tx+","+ty+") scale("+zx+")");}
+(function(){
+  var sv=null,ptr={},last=null,ld=0;
+  function rel(e){var m=document.getElementById("map"),b=m.getBoundingClientRect();
+    return {x:(e.clientX-b.left)/b.width*1000,y:(e.clientY-b.top)/b.height*800};}
+  document.addEventListener("DOMContentLoaded",function(){
+    sv=document.getElementById("map");
+    sv.addEventListener("pointerdown",function(e){sv.setPointerCapture(e.pointerId);ptr[e.pointerId]=rel(e);
+      var k=Object.keys(ptr);if(k.length===1)last=ptr[e.pointerId];});
+    sv.addEventListener("pointermove",function(e){
+      if(!(e.pointerId in ptr))return;
+      var k=Object.keys(ptr),c=rel(e);
+      if(k.length===1){tx+=c.x-last.x;ty+=c.y-last.y;last=c;ptr[e.pointerId]=c;applyT();}
+      else if(k.length===2){
+        ptr[e.pointerId]=c;var a=ptr[k[0]],b=ptr[k[1]];
+        var d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(ld){var f=d/ld,nz=Math.min(6,Math.max(1,zx*f));f=nz/zx;
+          var mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+          tx=mx-(mx-tx)*f;ty=my-(my-ty)*f;zx=nz;applyT();}
+        ld=d;
+      }
+    });
+    function up(e){delete ptr[e.pointerId];if(Object.keys(ptr).length<2)ld=0;}
+    sv.addEventListener("pointerup",up);sv.addEventListener("pointercancel",up);
+  });
+})();
+
+/* -- CENE -- */
+function renderCene(){
+  var h="";
+  CENE.forEach(function(r){
+    if(r.id==="cenaVen"&&!revealed()){
+      h+='<div class="card" id="cena-cenaVen" style="background:linear-gradient(135deg,#F3E1D3,#FBF3E0)"><div class="resto"><div class="av" style="background:#fff">🎁</div>'+
+        '<div style="flex:1;min-width:0"><div class="pill y" style="margin-bottom:5px">Venerdì 18 · 20:00 · 2 persone</div><h3 style="font-size:17px" onclick="giftTap()">Cena a sorpresa ⭐</h3>'+
+        '<div class="muted small" style="margin:2px 0 6px">Una stella Michelin, a 3 minuti dall\'hotel</div></div></div>'+
+        '<div style="font-size:13.5px;line-height:1.45;margin-top:8px">'+SECRET_POI.desc+'</div><div class="tip secret"><b>🎁 Sorpresa</b>'+SECRET_POI.tip+'</div></div>';
+      return;
+    }
+    h+='<div class="card" id="cena-'+r.id+'"><div class="resto"><div class="av" style="background:'+r.av+'">'+r.ico+'</div>'+
+      '<div style="flex:1;min-width:0"><div class="pill y" style="margin-bottom:5px">'+r.when+'</div>'+
+      '<h3 style="font-size:17px">'+r.n+'</h3>'+
+      '<div class="muted small" style="margin:2px 0 6px">'+r.kind+'</div></div></div>'+
+      '<div style="font-size:13.5px;line-height:1.45;margin-top:8px">'+r.desc+'</div>'+
+      '<div class="tags">'+pill("💶 "+r.price,"y")+pill("📍 "+r.zone,"b")+'</div>'+
+      (r.adv?'<div class="tip"><b>Quando prenotare</b>'+r.adv+'</div>':"")+
+      (r.tips?'<div class="muted small" style="margin-top:7px">💡 '+r.tips+'</div>':"")+
+      '<a class="btn full" style="margin-top:10px" href="'+r.url+'" target="_blank" rel="noopener">🔗 '+r.urlTxt+'</a>'+
+      (r.alt?'<div class="muted small" style="margin-top:9px">↔ '+r.alt+' <a href="'+r.altUrl+'" target="_blank" rel="noopener">Sito</a></div>':"")+
+      '</div>';
+  });
+  h+='<div class="card flat" style="background:#F1ECDF"><h4 style="font-size:14px">Esclusi apposta</h4>'+
+     '<p class="muted small" style="margin-top:5px">Pavyllon ⭐ di Yannick Alléno prende prenotazioni solo al telefono. Chez Louisette non si prenota (si va). Bouillon Chartier non prende prenotazioni per principio dal 1896, e per questo sta a pranzo, quando la fila è corta. Le Chat Noir, Les Indécises e Les Deux Palais sono dentro perché li avete chiesti: per tutti e tre va verificato che la prenotazione online esista davvero, altrimenti si telefona (eccezione concessa) o si va al piano B indicato.</p></div>';
+  document.getElementById("restos").innerHTML=h;
+}
+
+/* -- INFO -- */
+function speak(t){try{var u=new SpeechSynthesisUtterance(t);u.lang="fr-FR";u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){toast("Questo telefono non legge ad alta voce");}}
+function renderInfo(){
+  var h='<div class="card" style="background:linear-gradient(160deg,#E1EBDD,#FFFDF8)"><h3 style="font-size:17px">Da prenotare adesso</h3>'+
+    '<p class="muted small" style="margin-top:5px">In ordine di urgenza. Spunta quello che hai fatto: resta salvato sul telefono.</p></div><div class="card">';
+  var pri=0;
+  TODO.slice().sort(function(a,b){return a.pri-b.pri;}).forEach(function(t){t=vt(t);
+    if(t.pri!==pri){pri=t.pri;h+='<div class="tt" style="margin:14px 0 4px">'+(pri===1?"Subito":pri===2?"Nelle prossime settimane":pri===3?"Prima di partire":"Se vi va")+'</div>';}
+    h+='<div class="ck'+(state.done[t.id]?" done":"")+'" onclick="tick(\''+t.id+'\')"><div class="box">'+(state.done[t.id]?"✓":"")+'</div>'+
+      '<div class="bd"><b>'+t.t+'</b><div class="muted small">'+t.d+'</div>'+
+      (t.u?'<a class="small" href="'+t.u+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 '+(t.uTxt||"apri il link")+'</a>':"")+'</div></div>';
+  });
+  h+='</div>';
+  INFO_CARDS.forEach(function(c,ci){
+    h+='<div class="tt">'+c.ico+' '+c.t+'</div><div class="card" id="info-'+ci+'">';
+    c.h.forEach(function(r,ri){
+      var sp=c.speak&&c.speak[ri]&&("speechSynthesis" in window)?'<button class="say" onclick="speak(\''+c.speak[ri].replace(/'/g,"\\'")+'\')" aria-label="Ascolta">🔊</button>':"";
+      h+='<div class="kv"><b>'+r[0]+'</b><span>'+r[1]+sp+'</span></div>';});
+    if(c.note)h+='<div class="tip" style="margin-top:10px"><b>Nota</b>'+c.note+'</div>';
+    h+='</div>';
+  });
+  h+='<div class="tt">🔔 Avvisi «tra 30 minuti si parte»</div><div class="card">'+
+     (state.notif&&notifSupported()&&Notification.permission==="granted"
+       ?'<div class="pill g" style="margin-bottom:8px">Avvisi attivi su questo telefono</div><p class="small" style="margin:0 0 8px">Nei giorni del viaggio, 30 minuti prima di ogni tappa arriva un avviso con l\'orario e come arrivarci. Funziona finché l\'app è aperta o in secondo piano da poco: su Android va bene, su iPhone solo con l\'app installata sulla schermata Home.</p><button class="btn ghost full" onclick="disableNotif()">Disattiva gli avvisi</button>'
+       :'<p class="small" style="margin:0 0 8px">Attivate gli avvisi e, nei giorni del viaggio, 30 minuti prima di ogni tappa il telefono vi chiama. Limite onesto: funziona quando l\'app è aperta o in secondo piano da poco (Android sì, iPhone solo con l\'app installata). Il metodo che non sbaglia mai è il calendario qui sotto.</p><button class="btn full" onclick="enableNotif()">🔔 Attiva gli avvisi su questo telefono</button>')+
+     '<hr><p class="small" style="margin:0 0 8px"><b>Il metodo sicuro:</b> scaricate il programma come calendario. Ogni tappa diventa un evento con la sveglia 30 minuti prima, nel calendario del telefono (iPhone e Android, anche a telefono bloccato). Si scarica una volta per ciascuna, dopo aver sistemato il programma.</p><button class="btn sec full" onclick="exportIcs()">📅 Scarica il programma nel calendario (.ics)</button></div>';
+  h+='<div class="tt">🎬 L\'intro</div><div class="card"><p class="small" style="margin:0 0 8px">Il video di apertura (il reel «Paris 🤍» di Blanc &amp; Noir) si vede quando c\'è rete: offline parte la Tour Eiffel disegnata.</p><button class="btn sec full" onclick="openIntro(true)">▶️ Rivedi l\'intro</button></div>';
+  h+='<div class="tt">📲 L\'app sul telefono</div><div class="card" id="installCard">'+installBlock()+'</div>';
+  document.getElementById("infoBody").innerHTML=h;
+}
+var deferredInstall=null, IS_HOSTED=(location.protocol==="https:"||location.protocol==="http:");
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstall=e;var c=document.getElementById("installCard");if(c)c.innerHTML=installBlock();});
+function doInstall(){if(deferredInstall){deferredInstall.prompt();deferredInstall=null;}}
+function copyLink(){
+  var u=location.href.split("#")[0];
+  var done=function(){toast("Link copiato: incollalo su WhatsApp");};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(done,function(){prompt("Copia il link:",u);});
+  else prompt("Copia il link:",u);
+}
+function shareLink(){
+  var u=location.href.split("#")[0];
+  if(navigator.share){navigator.share({title:"Parigi 2027 · Rosetta e Concetta",url:u}).catch(function(){});}
+  else copyLink();
+}
+function checkUpdate(){
+  toast("Controllo aggiornamenti…");
+  if(!("serviceWorker" in navigator)||!navigator.serviceWorker.controller){location.reload();return;}
+  navigator.serviceWorker.getRegistration().then(function(r){
+    if(!r){location.reload();return;}
+    return r.update().then(function(){
+      var w=r.installing||r.waiting;
+      if(w){
+        toast("Nuova versione trovata, la installo…");
+        if(w.state==="installed")w.postMessage({type:"SKIP_WAITING"});
+        w.addEventListener("statechange",function(){if(w.state==="installed")w.postMessage({type:"SKIP_WAITING"});});
+        setTimeout(function(){location.reload();},6000);
+      } else {
+        toast("Sei già alla versione più recente ("+APP_VER+")");
+      }
+    });
+  }).catch(function(){location.reload();});
+}
+function installBlock(){
+  var h='<div class="pill y" style="margin-bottom:8px">Versione installata: '+APP_VER+'</div>';
+  if(IS_HOSTED){
+    h+='<p class="small" style="margin:0 0 8px"><b>Questa è l\'app.</b> Condividete questo link su WhatsApp: chi lo apre ha tutto, e può installarla.</p>';
+    h+='<div class="row" style="margin-bottom:10px"><button class="btn" onclick="shareLink()">📤 Condividi link</button><button class="btn sec" onclick="copyLink()">Copia</button></div>';
+    if(deferredInstall)h+='<button class="btn full" style="margin-bottom:10px" onclick="doInstall()">📲 Installa l\'app su questo telefono</button>';
+    h+='<p class="small" style="margin:0"><b>Android</b>: tocca «Installa» qui sopra, oppure menù ⋮ di Chrome → <i>Installa app</i>.<br>'+
+       '<b>iPhone</b>: apri il link in Safari → tasto Condividi → <i>Aggiungi alla schermata Home</i>.<br>'+
+       'Dopo l\'installazione l\'app ha la sua icona, si apre a tutto schermo e <b>funziona anche offline</b>. Spunte, programma, spese e foto restano sul telefono di ognuna.</p>'+
+       '<button class="btn ghost full" style="margin-top:10px" onclick="checkUpdate()">🔄 Cerca aggiornamenti</button>';
+  } else {
+    h+='<p class="small" style="margin:0">Questa copia sta girando da file. Per averla come <b>app installabile con un link da WhatsApp</b> va messa online (GitHub + Render): da lì in poi chiunque apra il link può installarla su Android e iPhone e usarla anche offline.</p>';
+  }
+  return h;
+}
+function tick(id){state.done[id]=!state.done[id];save();renderInfo();}
+function tickEv(id,ev){if(ev)ev.stopPropagation();state.doneEv[id]=!state.doneEv[id];save();renderAll();}
+function printPdf(){buildPrint();setTimeout(function(){window.print();},60);}
+function buildPrint(){
+  var h='<h1>Parigi 2027 · Rosetta e Concetta</h1><div class="phead">17–20 giugno 2027 · Firenze ✈ Parigi · Hôtel de Castiglione, 38 rue du Faubourg Saint-Honoré, 8e</div>';
+  DAYS.forEach(function(D){
+    var sc=schedule(D);
+    h+='<div class="pday"><h2>'+D.dow+' '+D.n+' giugno — '+D.title+'</h2>';
+    sc.rows.forEach(function(r,i){
+      if(r.tr)h+='<div class="ptr">'+(r.tr.mode==="walk"?"a piedi":"metro")+" · "+r.tr.txt.replace(/^a piedi /,"")+'</div>';
+      if(r.gap>20&&i>0)h+='<div class="ptr">tempo libero · '+dur(r.gap)+'</div>';
+      h+='<div class="pit"><span class="pbx">'+(state.doneEv[r.id]?"✓":"")+'</span><span class="pt">'+hhmm(r.st)+'</span><div class="pb"><b>'+r.p.n+'</b>'+
+         '<span class="pm">'+[r.p.sub,r.p.priceTxt,r.p.stop].filter(Boolean).join(" · ")+'</span></div></div>';
+    });
+    if(sc.back)h+='<div class="ptr">rientro in hotel · '+sc.back.txt+'</div>';
+    if((state.diary[D.id]||"").trim())h+='<div class="ptr" style="padding-left:0;margin-top:3mm">Diario: '+esc(state.diary[D.id].trim()).replace(/\n/g,"<br>")+'</div>';
+    h+='</div>';
+  });
+  h+='<div class="pday"><h2>Cene e prenotazioni</h2>';
+  CENE.slice(0,3).forEach(function(r){if(r.id==="cenaVen"&&!revealed())return;h+='<div class="pit"><span class="pbx"></span><span class="pt"></span><div class="pb"><b>'+r.when+' — '+r.n+'</b><span class="pm">'+r.zone+' · '+r.price+' · '+r.url+'</span></div></div>';});
+  h+='</div>';
+  document.getElementById("printDoc").innerHTML=h;
+}
+
+/* =================== ALBUM FOTO =================== */
+var DB=null, MEM=[], useMem=false, photos=[], albumFilter="all", curPhoto=null;
+function openDB(){
+  return new Promise(function(res){
+    try{
+      if(!window.indexedDB){useMem=true;return res();}
+      var rq=indexedDB.open("parigi2027",1);
+      rq.onupgradeneeded=function(){var db=rq.result;
+        if(!db.objectStoreNames.contains("p"))db.createObjectStore("p",{keyPath:"id"});
+        if(!db.objectStoreNames.contains("d"))db.createObjectStore("d",{keyPath:"id"});};
+      rq.onsuccess=function(){DB=rq.result;res();};
+      rq.onerror=function(){useMem=true;res();};
+      setTimeout(function(){if(!DB&&!useMem){useMem=true;res();}},2500);
+    }catch(e){useMem=true;res();}
+  });
+}
+var MEMD=[];
+function dbAll(st){st=st||"p";var mem=st==="d"?MEMD:MEM;
+  return new Promise(function(res){
+    if(useMem||!DB)return res(mem.slice());
+    try{var t=DB.transaction(st,"readonly").objectStore(st).getAll();
+      t.onsuccess=function(){res(t.result||[]);};t.onerror=function(){res([]);};}catch(e){res([]);}
+  });
+}
+function dbPut(o,st){st=st||"p";var mem=st==="d"?MEMD:MEM;
+  return new Promise(function(res){
+    if(useMem||!DB){mem.push(o);return res();}
+    try{var t=DB.transaction(st,"readwrite").objectStore(st).put(o);t.onsuccess=function(){res();};t.onerror=function(){mem.push(o);res();};}
+    catch(e){mem.push(o);res();}
+  });
+}
+function dbDel(id,st){st=st||"p";
+  return new Promise(function(res){
+    if(st==="d")MEMD=MEMD.filter(function(x){return x.id!==id;}); else MEM=MEM.filter(function(x){return x.id!==id;});
+    if(useMem||!DB)return res();
+    try{var t=DB.transaction(st,"readwrite").objectStore(st).delete(id);t.onsuccess=function(){res();};t.onerror=function(){res();};}catch(e){res();}
+  });
+}
+function dayFromTs(ts){
+  var d=new Date(ts), s=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  var m=DAYS.filter(function(D){return D.date===s;})[0];
+  return m?m.id:(albumFilter!=="all"?albumFilter:"gio");
+}
+async function addFiles(list){
+  var n=0;
+  for(var i=0;i<list.length;i++){
+    var f=list[i]; if(!f.type||f.type.indexOf("image")<0)continue;
+    try{
+      var blob=await shrink(f);
+      var ts=f.lastModified||Date.now();
+      await dbPut({id:"p"+ts+"_"+Math.random().toString(36).slice(2,8),blob:blob,day:dayFromTs(ts),
+        who:state.who,cap:"",ts:ts,name:f.name||"foto.jpg"});
+      n++;
+    }catch(e){}
+  }
+  await loadPhotos(); renderAlbum();
+  toast(n+(n===1?" foto aggiunta":" foto aggiunte"));
+}
+function shrink(file){
+  return new Promise(function(res,rej){
+    var done=function(img,w,h){
+      var M=1800,s=Math.min(1,M/Math.max(w,h));
+      var c=document.createElement("canvas");c.width=Math.round(w*s);c.height=Math.round(h*s);
+      c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      c.toBlob(function(b){b?res(b):rej();},"image/jpeg",.85);
+    };
+    if(window.createImageBitmap){
+      createImageBitmap(file,{imageOrientation:"from-image"}).then(function(bm){done(bm,bm.width,bm.height);})
+        .catch(function(){fallback();});
+    } else fallback();
+    function fallback(){
+      var u=URL.createObjectURL(file),im=new Image();
+      im.onload=function(){done(im,im.naturalWidth,im.naturalHeight);URL.revokeObjectURL(u);};
+      im.onerror=function(){URL.revokeObjectURL(u);rej();};
+      im.src=u;
+    }
+  });
+}
+async function loadPhotos(){
+  photos=await dbAll();
+  photos.sort(function(a,b){return a.ts-b.ts;});
+  photos.forEach(function(p){if(!p.url)p.url=URL.createObjectURL(p.blob);});
+}
+function renderAlbum(){
+  var w=document.getElementById("whoRow");
+  w.innerHTML=["Concetta","Rosetta"].map(function(x){
+    return '<button class="btn '+(state.who===x?"":"sec")+'" onclick="state.who=\''+x+'\';save();renderAlbum()">'+x+'</button>';}).join("");
+  var ch='<button class="chip'+(albumFilter==="all"?" on":"")+'" onclick="albumFilter=\'all\';renderAlbum()">Tutte ('+photos.length+')</button>';
+  DAYS.forEach(function(D){var n=photos.filter(function(p){return p.day===D.id;}).length;
+    ch+='<button class="chip'+(albumFilter===D.id?" on":"")+'" onclick="albumFilter=\''+D.id+'\';renderAlbum()">'+D.dow+' ('+n+')</button>';});
+  document.getElementById("albumChips").innerHTML=ch;
+  var list=photos.filter(function(p){return albumFilter==="all"||p.day===albumFilter;});
+  var g=document.getElementById("gallery");
+  if(!list.length){g.innerHTML='<div class="card flat" style="text-align:center;background:#F1ECDF"><div style="font-size:34px">🖼</div><div class="muted small" style="margin-top:6px">Ancora nessuna foto. Comincia tu.</div></div>';}
+  else{
+    g.innerHTML='<div class="grid">'+list.map(function(p){
+      return '<div class="gcell" onclick="openLb(\''+p.id+'\')"><img src="'+p.url+'" alt="" loading="lazy"><span class="who">'+(p.who||"")[0]+'</span></div>';
+    }).join("")+'</div>';
+  }
+  renderDiary();
+  var sw=document.getElementById("storageWarn");
+  sw.innerHTML=useMem?'<div class="warn">⚠️ Questo browser non riesce a salvare le foto in modo permanente (succede se apri il file dall\'anteprima di WhatsApp). Apri il link da Chrome o Safari. Per ora le foto restano solo finché non chiudi la pagina: scarica lo zip prima di uscire.</div>':"";
+}
+function openLb(id){
+  curPhoto=photos.filter(function(p){return p.id===id;})[0]; if(!curPhoto)return;
+  document.getElementById("lbImg").src=curPhoto.url;
+  document.getElementById("lbCap").value=curPhoto.cap||"";
+  document.getElementById("lb").classList.add("on");
+}
+function closeLb(){
+  if(curPhoto){curPhoto.cap=document.getElementById("lbCap").value;dbPut(stripUrl(curPhoto));}
+  document.getElementById("lb").classList.remove("on");curPhoto=null;renderAlbum();
+}
+function stripUrl(p){return {id:p.id,blob:p.blob,day:p.day,who:p.who,cap:p.cap,ts:p.ts,name:p.name};}
+function savePhoto(){
+  if(!curPhoto)return;
+  var D=DAYS.filter(function(d){return d.id===curPhoto.day;})[0]||DAYS[0];
+  dl(curPhoto.blob, "parigi_"+D.date+"_"+(curPhoto.who||"").toLowerCase()+".jpg");
+}
+async function delPhoto(){
+  if(!curPhoto)return;
+  if(!confirm("Elimino questa foto dall'album?"))return;
+  await dbDel(curPhoto.id);
+  document.getElementById("lb").classList.remove("on");curPhoto=null;
+  await loadPhotos();renderAlbum();
+}
+
+/* -- ZIP (store, senza compressione) -- */
+var CRCT=(function(){var t=[],c,n,k;for(n=0;n<256;n++){c=n;for(k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u8){var c=0xFFFFFFFF;for(var i=0;i<u8.length;i++)c=CRCT[(c^u8[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function dosTime(d){return ((d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()/2))&0xFFFF;}
+function dosDate(d){return (((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate())&0xFFFF;}
+function makeZip(files){
+  var parts=[],cd=[],off=0,enc=new TextEncoder();
+  files.forEach(function(f){
+    var name=enc.encode(f.name),c=crc32(f.data),d=f.date||new Date();
+    var lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint16(6,0x0800,true);lh.setUint16(8,0,true);
+    lh.setUint16(10,dosTime(d),true);lh.setUint16(12,dosDate(d),true);
+    lh.setUint32(14,c,true);lh.setUint32(18,f.data.length,true);lh.setUint32(22,f.data.length,true);
+    lh.setUint16(26,name.length,true);lh.setUint16(28,0,true);
+    parts.push(new Uint8Array(lh.buffer),name,f.data);
+    var ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);
+    ch.setUint16(10,0,true);ch.setUint16(12,dosTime(d),true);ch.setUint16(14,dosDate(d),true);
+    ch.setUint32(16,c,true);ch.setUint32(20,f.data.length,true);ch.setUint32(24,f.data.length,true);
+    ch.setUint16(28,name.length,true);ch.setUint16(30,0,true);ch.setUint16(32,0,true);
+    ch.setUint16(34,0,true);ch.setUint16(36,0,true);ch.setUint32(38,0,true);ch.setUint32(42,off,true);
+    cd.push(new Uint8Array(ch.buffer),name);
+    off+=30+name.length+f.data.length;
+  });
+  var cdSize=cd.reduce(function(s,x){return s+x.length;},0);
+  var e=new DataView(new ArrayBuffer(22));
+  e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);
+  e.setUint32(12,cdSize,true);e.setUint32(16,off,true);e.setUint16(20,0,true);
+  return new Blob(parts.concat(cd,[new Uint8Array(e.buffer)]),{type:"application/zip"});
+}
+function dl(blob,name){
+  var u=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(function(){a.remove();URL.revokeObjectURL(u);},1200);
+}
+async function exportZip(){
+  if(!photos.length)return toast("Non ci sono ancora foto");
+  toast("Preparo lo zip…");
+  var files=[],idx={};
+  for(var i=0;i<photos.length;i++){
+    var p=photos[i],D=DAYS.filter(function(d){return d.id===p.day;})[0]||DAYS[0];
+    idx[p.day]=(idx[p.day]||0)+1;
+    var nm=D.date+"_"+String(idx[p.day]).padStart(2,"0")+"_"+D.id+"_"+(p.who||"").toLowerCase().replace(/[^a-z]/g,"")+".jpg";
+    files.push({name:"Parigi2027/"+nm,data:new Uint8Array(await p.blob.arrayBuffer()),date:new Date(p.ts)});
+  }
+  files.push({name:"Parigi2027/didascalie.txt",data:new TextEncoder().encode(storyText()),date:new Date()});
+  dl(makeZip(files),"Parigi2027_Rosetta_Concetta.zip");
+}
+function storyText(){
+  var s="PARIGI 2027 — Rosetta e Concetta\n17–20 giugno 2027\n\n";
+  DAYS.forEach(function(D){
+    s+="\n=== "+D.dow.toUpperCase()+" "+D.n+" GIUGNO — "+D.title.toUpperCase()+" ===\n"+D.intro+"\n\n";
+    s+="Tappe della giornata: "+(state.plan[D.id]||[]).map(function(i){return POI[i]?vp(i).n:"";}).filter(Boolean).join(" · ")+"\n\n";
+    if((state.diary[D.id]||"").trim())s+="Diario della sera:\n"+state.diary[D.id].trim()+"\n\n";
+    var ph=photos.filter(function(p){return p.day===D.id;});
+    if(ph.length){s+="Foto:\n";ph.forEach(function(p,i){s+="  "+String(i+1).padStart(2,"0")+". ["+(p.who||"")+"] "+(p.cap||"(senza didascalia)")+"\n";});}
+    else s+="Foto: nessuna\n";
+  });
+  s+="\n\nPer stampare l'album: carica la cartella su Journi (o Photosì / Cewe / Albumepoca), scegli l'ordine cronologico e incolla questi testi come didascalie dei capitoli.\n";
+  return s;
+}
+function exportStory(){dl(new Blob([storyText()],{type:"text/plain;charset=utf-8"}),"Parigi2027_testi_album.txt");}
+
+/* =================== INTRO =================== */
+function openIntro(force){
+  if(!force&&state.intro)return;
+  var box=document.getElementById("introVid"), fb=document.getElementById("introFb");
+  var old=box.querySelector("iframe"); if(old)old.remove();
+  if(navigator.onLine!==false){
+    var f=document.createElement("iframe"); f.src=INTRO_URL; f.allow="autoplay; encrypted-media"; f.setAttribute("allowfullscreen",""); f.style.opacity="0"; f.style.transition="opacity .5s";
+    f.onload=function(){f.style.opacity="1";};
+    box.appendChild(f);
+  }
+  document.getElementById("intro").classList.add("on");
+}
+function closeIntro(never){
+  document.getElementById("intro").classList.remove("on");
+  var f=document.getElementById("introVid").querySelector("iframe"); if(f)f.remove();
+  if(never){state.intro=1;save();toast("L'intro non si riapre più da sola: la ritrovi in Info.");}
+}
+
+/* =================== NAV + INIT =================== */
+var TABS=[
+ {id:"s-piano",t:"PIANO",i:'<rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7.5 14h4"/>'},
+ {id:"s-giorni",t:"GIORNI",i:'<path d="M4 6h16M4 12h16M4 18h11"/><circle cx="19.5" cy="18" r="1.6"/>'},
+ {id:"s-mappa",t:"MAPPA",i:'<path d="M9 3.5 3.5 6v14.5L9 18l6 2.5 5.5-2.5V3.5L15 6z"/><path d="M9 3.5V18M15 6v14.5"/>'},
+ {id:"s-cene",t:"CENE",i:'<path d="M6 3v8a2.5 2.5 0 0 0 5 0V3M8.5 11v10M18 3c-1.7 1.2-2.5 3-2.5 5.5S16.5 12 18 12v9"/>'},
+ {id:"s-wallet",t:"WALLET",i:'<path d="M3 8.5a2.5 2.5 0 0 1 2.5-2.5h13A2.5 2.5 0 0 1 21 8.5v7a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 15.5z"/><path d="M3 12h4a2 2 0 0 1 0 4H3M17 12h4M3 8.5V12M9 6V4.5h9"/>'},
+ {id:"s-album",t:"ALBUM",i:'<rect x="2.5" y="6.5" width="19" height="14" rx="3"/><circle cx="12" cy="13.5" r="3.6"/><path d="M8 6.5l1.4-2.6h5.2L16 6.5"/>'},
+ {id:"s-info",t:"INFO",i:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.6"/>'}
+];
+function go(id){
+  document.querySelectorAll("section").forEach(function(s){s.classList.toggle("on",s.id===id);});
+  document.querySelectorAll("#nav button").forEach(function(b){b.classList.toggle("on",b.dataset.t===id);});
+  var sc=document.getElementById("scroll");if(sc)sc.scrollTo(0,0);
+  if(id==="s-mappa")renderMap();
+  if(id==="s-album")renderAlbum();
+  if(id==="s-wallet")renderWallet();
+}
+function renderNav(){
+  document.getElementById("nav").innerHTML=TABS.map(function(t,i){
+    return '<button data-t="'+t.id+'" class="'+(i===0?"on":"")+'" onclick="go(\''+t.id+'\')">'+
+      '<svg viewBox="0 0 24 24">'+t.i+'</svg>'+t.t+'</button>';}).join("");
+}
+function countdown(){
+  var now=new Date(), dep=new Date(2027,5,17,7,15,0), ret=new Date(2027,5,20,19,40,0);
+  var h="";
+  if(now<dep){
+    var d=Math.ceil((dep-now)/86400000);
+    h='<div>⏳ tra <b>'+d+'</b> giorn'+(d===1?"o":"i")+'</div>';
+  } else if(now<ret){
+    var di=todayDay();
+    h='<div>📍 <b>'+(di>=0?DAYS[di].dow+" "+DAYS[di].n:"Siete a Parigi")+'</b></div>';
+  } else h='<div>💛 <b>Ci siamo state</b></div>';
+  h+='<div>✈️ <b>07:15</b> FLR→ORY</div><div>🛏 <b>Faubourg Saint-Honoré</b></div>';
+  document.getElementById("cd").innerHTML=h;
+}
+function renderAll(){renderPlan();renderChips();renderDay();renderMap();}
+
+/* -- service worker: registrazione e aggiornamento automatico -- */
+function setupSW(){
+  if(!("serviceWorker" in navigator))return;
+  if(!(location.protocol==="https:"||location.hostname==="localhost")||location.hostname.indexOf("claude.ai")>=0)return;
+  var hadController=!!navigator.serviceWorker.controller, reloaded=false;
+  navigator.serviceWorker.addEventListener("controllerchange",function(){
+    if(reloaded||!hadController)return; reloaded=true;
+    toast("App aggiornata alla versione nuova!");
+    setTimeout(function(){location.reload();},800);
+  });
+  navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(reg){
+    function promote(w){ if(!w)return; if(w.state==="installed")w.postMessage({type:"SKIP_WAITING"});
+      w.addEventListener("statechange",function(){if(w.state==="installed")w.postMessage({type:"SKIP_WAITING"});}); }
+    promote(reg.waiting);
+    reg.addEventListener("updatefound",function(){promote(reg.installing);});
+    var last=0;
+    function poke(){var now=Date.now(); if(now-last<60000)return; last=now; reg.update().catch(function(){});}
+    document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")poke();});
+    window.addEventListener("focus",poke);
+    window.addEventListener("online",poke);
+    setInterval(poke,30*60*1000);
+  }).catch(function(){});
+}
+
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return; if(document.getElementById("intro").classList.contains("on"))closeIntro(); else if(document.getElementById("dv").classList.contains("on"))closeDoc(); else if(document.getElementById("srch").classList.contains("on"))closeSearch();});
+document.addEventListener("DOMContentLoaded",async function(){
+  load(); renderNav(); countdown(); renderAll(); renderCene(); renderInfo();
+  var vt=document.getElementById("verTag"); if(vt)vt.textContent="Versione "+APP_VER;
+  try{setupSW();}catch(e){}
+  try{openIntro(false);}catch(e){}
+  document.getElementById("fileIn").addEventListener("change",function(e){
+    var arr=e.target.files?Array.prototype.slice.call(e.target.files):[];
+    e.target.value="";
+    if(arr.length)addFiles(arr);
+  });
+  document.getElementById("docIn").addEventListener("change",function(e){
+    var arr=e.target.files?Array.prototype.slice.call(e.target.files):[];
+    var poi=e.target.dataset.poi||document.getElementById("docPoi").value||"_altro";
+    e.target.value=""; e.target.dataset.poi="";
+    if(arr.length)addDocs(arr,poi);
+  });
+  try{ await openDB(); await loadPhotos(); await loadDocs(); }catch(e){}
+  renderAlbum(); renderPlan(); renderDay();
+  try{loadWx();}catch(e){}
+  try{notifTick();}catch(e){}
+  setInterval(function(){renderNow();countdown();try{notifTick();}catch(e){}},60000);
+  setInterval(function(){try{loadWx();}catch(e){}},30*60*1000);
+  window.addEventListener("online",function(){try{loadWx();}catch(e){}});
+});
+</script>
+</body>
+</html>
